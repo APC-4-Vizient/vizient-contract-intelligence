@@ -2,6 +2,12 @@
 
 Releases of this source package, newest first. The handoff guide has its own version number, shown on its cover.
 
+## 1.6
+
+- The handoff guide's second page now fits on one page in Word. It ran a few lines over, which left the last paragraph alone on a nearly empty page
+  and made the guide 12 pages instead of 11. Page 2's spacing was tightened and one sentence (what is not included, and how to keep the source) was
+  shortened. Nothing else in the guide changed.
+
 ## 1.5
 
 Made the repository ready for a team to pick up and own.
