@@ -1,0 +1,320 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "vz_dataverse"
+        },
+        "impersonation": {},
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+        "Catch_question": {
+          "actions": {
+            "Fail_question_flow": {
+              "inputs": {
+                "authentication": "@parameters('$authentication')",
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "UpdateOnlyRecord"
+                },
+                "parameters": {
+                  "entityName": "vz_contractquestions",
+                  "item/vz_context": "",
+                  "item/vz_error": "The question flow failed. Try a new question.",
+                  "item/vz_history": "",
+                  "item/vz_status": 651200002,
+                  "recordId": "@triggerOutputs()?['body/vz_contractquestionid']"
+                }
+              },
+              "runAfter": {},
+              "runtimeConfiguration": {
+                "secureData": {
+                  "properties": [
+                    "inputs",
+                    "outputs"
+                  ]
+                }
+              },
+              "type": "OpenApiConnection"
+            }
+          },
+          "runAfter": {
+            "Try_question": [
+              "Failed",
+              "TimedOut"
+            ]
+          },
+          "type": "Scope"
+        },
+        "Init_qaOperation": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "qaOperation",
+                "type": "object",
+                "value": {}
+              }
+            ]
+          },
+          "runAfter": {
+            "Init_qaStatus": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable"
+        },
+        "Init_qaStatus": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "qaStatus",
+                "type": "integer",
+                "value": 202
+              }
+            ]
+          },
+          "runAfter": {},
+          "type": "InitializeVariable"
+        },
+        "Try_question": {
+          "actions": {
+            "Finish_question": {
+              "actions": {
+                "Save_grounded_answer": {
+                  "inputs": {
+                    "authentication": "@parameters('$authentication')",
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "UpdateOnlyRecord"
+                    },
+                    "parameters": {
+                      "entityName": "vz_contractquestions",
+                      "item/vz_answer": "@string(body('Ask_Foundry'))",
+                      "item/vz_context": "",
+                      "item/vz_history": "",
+                      "item/vz_status": 651200001,
+                      "recordId": "@triggerOutputs()?['body/vz_contractquestionid']"
+                    }
+                  },
+                  "runAfter": {},
+                  "runtimeConfiguration": {
+                    "secureData": {
+                      "properties": [
+                        "inputs",
+                        "outputs"
+                      ]
+                    }
+                  },
+                  "type": "OpenApiConnection"
+                }
+              },
+              "else": {
+                "actions": {
+                  "Save_question_failure": {
+                    "inputs": {
+                      "authentication": "@parameters('$authentication')",
+                      "host": {
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                        "connectionName": "shared_commondataserviceforapps",
+                        "operationId": "UpdateOnlyRecord"
+                      },
+                      "parameters": {
+                        "entityName": "vz_contractquestions",
+                        "item/vz_context": "",
+                        "item/vz_error": "@coalesce(body('Ask_Foundry')?['error']?['message'], 'The contract agent timed out. Try a new question.')",
+                        "item/vz_history": "",
+                        "item/vz_status": 651200002,
+                        "recordId": "@triggerOutputs()?['body/vz_contractquestionid']"
+                      }
+                    },
+                    "runAfter": {},
+                    "runtimeConfiguration": {
+                      "secureData": {
+                        "properties": [
+                          "inputs",
+                          "outputs"
+                        ]
+                      }
+                    },
+                    "type": "OpenApiConnection"
+                  }
+                }
+              },
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@variables('qaStatus')",
+                      200
+                    ]
+                  }
+                ]
+              },
+              "runAfter": {
+                "Poll_contract_question": [
+                  "Succeeded",
+                  "Failed",
+                  "TimedOut"
+                ]
+              },
+              "type": "If"
+            },
+            "Poll_contract_question": {
+              "actions": {
+                "Ask_Foundry": {
+                  "inputs": {
+                    "body": {
+                      "context": "@triggerOutputs()?['body/vz_context']",
+                      "contractId": "@triggerOutputs()?['body/_vz_contract_value']",
+                      "history": "@coalesce(triggerOutputs()?['body/vz_history'], '[]')",
+                      "operation": "@variables('qaOperation')",
+                      "question": "@triggerOutputs()?['body/vz_question']",
+                      "questionId": "@triggerOutputs()?['body/vz_contractquestionid']"
+                    },
+                    "headers": {
+                      "Content-Type": "application/json",
+                      "x-functions-key": "@parameters('Function Key (vz_FunctionKey)')"
+                    },
+                    "method": "POST",
+                    "retryPolicy": {
+                      "type": "none"
+                    },
+                    "uri": "@{parameters('Function Base URL (vz_FunctionBaseUrl)')}/api/contracts/questions"
+                  },
+                  "operationOptions": "DisableAsyncPattern",
+                  "runAfter": {},
+                  "runtimeConfiguration": {
+                    "secureData": {
+                      "properties": [
+                        "inputs",
+                        "outputs"
+                      ]
+                    }
+                  },
+                  "type": "Http"
+                },
+                "Pause_question_poll": {
+                  "inputs": {
+                    "interval": {
+                      "count": 5,
+                      "unit": "Second"
+                    }
+                  },
+                  "runAfter": {
+                    "Record_question_operation": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "Wait"
+                },
+                "Record_question_operation": {
+                  "inputs": {
+                    "name": "qaOperation",
+                    "value": "@coalesce(body('Ask_Foundry')?['operation'], json('{}'))"
+                  },
+                  "runAfter": {
+                    "Record_question_status": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "SetVariable"
+                },
+                "Record_question_status": {
+                  "inputs": {
+                    "name": "qaStatus",
+                    "value": "@int(coalesce(actions('Ask_Foundry')?['outputs']?['statusCode'], 502))"
+                  },
+                  "runAfter": {
+                    "Ask_Foundry": [
+                      "Succeeded",
+                      "Failed",
+                      "TimedOut"
+                    ]
+                  },
+                  "type": "SetVariable"
+                }
+              },
+              "expression": "@not(equals(variables('qaStatus'), 202))",
+              "limit": {
+                "count": 120,
+                "timeout": "PT15M"
+              },
+              "runAfter": {},
+              "type": "Until"
+            }
+          },
+          "runAfter": {
+            "Init_qaOperation": [
+              "Succeeded"
+            ]
+          },
+          "type": "Scope"
+        }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "Function Base URL (vz_FunctionBaseUrl)": {
+          "defaultValue": "",
+          "metadata": {
+            "schemaName": "vz_FunctionBaseUrl"
+          },
+          "type": "String"
+        },
+        "Function Key (vz_FunctionKey)": {
+          "defaultValue": "",
+          "metadata": {
+            "schemaName": "vz_FunctionKey"
+          },
+          "type": "String"
+        }
+      },
+      "triggers": {
+        "When_a_question_is_created": {
+          "inputs": {
+            "authentication": "@parameters('$authentication')",
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger"
+            },
+            "parameters": {
+              "subscriptionRequest/entityname": "vz_contractquestion",
+              "subscriptionRequest/filterexpression": "vz_status eq 651200000",
+              "subscriptionRequest/message": 1,
+              "subscriptionRequest/scope": 4
+            }
+          },
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "inputs",
+                "outputs"
+              ]
+            }
+          },
+          "type": "OpenApiConnectionWebhook"
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

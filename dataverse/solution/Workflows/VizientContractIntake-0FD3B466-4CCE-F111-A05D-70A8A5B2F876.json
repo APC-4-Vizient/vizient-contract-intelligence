@@ -1,0 +1,273 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "vz_dataverse"
+        },
+        "impersonation": {},
+        "runtimeSource": "embedded"
+      },
+      "shared_sharepointonline": {
+        "api": {
+          "name": "shared_sharepointonline"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "vz_sharepointonline"
+        },
+        "impersonation": {},
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+        "Is_a_PDF": {
+          "actions": {
+            "Add_contract": {
+              "inputs": {
+                "authentication": "@parameters('$authentication')",
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "CreateRecord"
+                },
+                "parameters": {
+                  "entityName": "vz_contracts",
+                  "item/vz_name": "@triggerOutputs()?['body/{FilenameWithExtension}']",
+                  "item/vz_sharepointitemid": "@string(triggerOutputs()?['body/ID'])",
+                  "item/vz_sharepointurl": "@if(startsWith(toLower(string(triggerOutputs()?['body/{Link}'])), 'http'), replace(string(triggerOutputs()?['body/{Link}']), ' ', '%20'), null)"
+                }
+              },
+              "runAfter": {
+                "Get_file_content": [
+                  "Succeeded"
+                ]
+              },
+              "type": "OpenApiConnection"
+            },
+            "Attach_and_queue": {
+              "actions": {
+                "Queue_analysis": {
+                  "inputs": {
+                    "authentication": "@parameters('$authentication')",
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "UpdateOnlyRecord"
+                    },
+                    "parameters": {
+                      "entityName": "vz_contracts",
+                      "item/vz_status": 651200001,
+                      "recordId": "@outputs('Add_contract')?['body/vz_contractid']"
+                    }
+                  },
+                  "runAfter": {
+                    "Upload_document": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "OpenApiConnection"
+                },
+                "Upload_document": {
+                  "inputs": {
+                    "authentication": "@parameters('$authentication')",
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "UpdateEntityFileImageFieldContent"
+                    },
+                    "parameters": {
+                      "entityName": "vz_contracts",
+                      "fileImageFieldName": "vz_document",
+                      "item": "@body('Get_file_content')",
+                      "recordId": "@outputs('Add_contract')?['body/vz_contractid']",
+                      "x-ms-file-name": "@triggerOutputs()?['body/{FilenameWithExtension}']"
+                    }
+                  },
+                  "runAfter": {},
+                  "type": "OpenApiConnection"
+                }
+              },
+              "runAfter": {
+                "Add_contract": [
+                  "Succeeded"
+                ]
+              },
+              "type": "Scope"
+            },
+            "Get_file_content": {
+              "inputs": {
+                "authentication": "@parameters('$authentication')",
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+                  "connectionName": "shared_sharepointonline",
+                  "operationId": "GetFileContent"
+                },
+                "parameters": {
+                  "dataset": "@parameters('SharePoint Site URL (vz_SharePointSiteUrl)')",
+                  "id": "@triggerOutputs()?['body/{Identifier}']",
+                  "inferContentType": true
+                }
+              },
+              "runAfter": {},
+              "type": "OpenApiConnection"
+            },
+            "Handle_failure": {
+              "actions": {
+                "Fail_the_run": {
+                  "inputs": {
+                    "runError": {
+                      "code": "ContractFlowFailed",
+                      "message": "@outputs('Failure_text')"
+                    },
+                    "runStatus": "Failed"
+                  },
+                  "runAfter": {
+                    "Mark_contract_failed": [
+                      "Succeeded",
+                      "Failed",
+                      "TimedOut"
+                    ]
+                  },
+                  "type": "Terminate"
+                },
+                "Failed_steps": {
+                  "inputs": {
+                    "from": "@result('Attach_and_queue')",
+                    "where": "@equals(item()?['status'], 'Failed')"
+                  },
+                  "runAfter": {},
+                  "type": "Query"
+                },
+                "Failure_detail": {
+                  "inputs": "@concat('The document could not be attached or queued for analysis. Step: ', coalesce(first(body('Failed_steps'))?['name'], 'unknown'), '. ', coalesce(first(body('Failed_steps'))?['error']?['message'], ''), ' ', string(coalesce(first(body('Failed_steps'))?['outputs'], '')), ' (flow run ', workflow()?['run']?['name'], ')')",
+                  "runAfter": {
+                    "Failed_steps": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "Compose"
+                },
+                "Failure_text": {
+                  "inputs": "@substring(outputs('Failure_detail'), 0, min(length(outputs('Failure_detail')), 9500))",
+                  "runAfter": {
+                    "Failure_detail": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "Compose"
+                },
+                "Mark_contract_failed": {
+                  "inputs": {
+                    "authentication": "@parameters('$authentication')",
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "UpdateOnlyRecord"
+                    },
+                    "parameters": {
+                      "entityName": "vz_contracts",
+                      "item/vz_errormessage": "@outputs('Failure_text')",
+                      "item/vz_status": 651200005,
+                      "recordId": "@outputs('Add_contract')?['body/vz_contractid']"
+                    }
+                  },
+                  "runAfter": {
+                    "Failure_text": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "OpenApiConnection"
+                }
+              },
+              "runAfter": {
+                "Attach_and_queue": [
+                  "Failed",
+                  "TimedOut"
+                ]
+              },
+              "type": "Scope"
+            }
+          },
+          "else": {
+            "actions": {}
+          },
+          "expression": {
+            "and": [
+              {
+                "endsWith": [
+                  "@toLower(triggerOutputs()?['body/{FilenameWithExtension}'])",
+                  ".pdf"
+                ]
+              }
+            ]
+          },
+          "runAfter": {},
+          "type": "If"
+        }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "Intake Folder Path (vz_IntakeFolderPath)": {
+          "defaultValue": "",
+          "metadata": {
+            "schemaName": "vz_IntakeFolderPath"
+          },
+          "type": "String"
+        },
+        "SharePoint Library ID (vz_SharePointLibraryId)": {
+          "defaultValue": "",
+          "metadata": {
+            "schemaName": "vz_SharePointLibraryId"
+          },
+          "type": "String"
+        },
+        "SharePoint Site URL (vz_SharePointSiteUrl)": {
+          "defaultValue": "",
+          "metadata": {
+            "schemaName": "vz_SharePointSiteUrl"
+          },
+          "type": "String"
+        }
+      },
+      "triggers": {
+        "When_a_file_is_added_to_Contract_Intake": {
+          "inputs": {
+            "authentication": "@parameters('$authentication')",
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_sharepointonline",
+              "connectionName": "shared_sharepointonline",
+              "operationId": "GetOnNewFileItems"
+            },
+            "parameters": {
+              "dataset": "@parameters('SharePoint Site URL (vz_SharePointSiteUrl)')",
+              "folderPath": "@parameters('Intake Folder Path (vz_IntakeFolderPath)')",
+              "table": "@parameters('SharePoint Library ID (vz_SharePointLibraryId)')"
+            }
+          },
+          "recurrence": {
+            "frequency": "Minute",
+            "interval": 1
+          },
+          "splitOn": "@triggerOutputs()?['body/value']",
+          "type": "OpenApiConnection"
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

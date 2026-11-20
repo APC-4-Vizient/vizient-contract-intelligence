@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<optionset Name="vz_judgment" localizedName="Judgment" description="Outcome of a data right or contract term, shared by the AI judgment and the reviewer judgment." xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <OptionSetType>picklist</OptionSetType>
+  <IsGlobal>1</IsGlobal>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <displaynames>
+    <displayname description="Judgment" languagecode="1033" />
+  </displaynames>
+  <Descriptions>
+    <Description description="Outcome of a data right or contract term, shared by the AI judgment and the reviewer judgment." languagecode="1033" />
+  </Descriptions>
+  <options>
+    <option value="651200000" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="Permitted" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="651200001" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="Prohibited" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="651200002" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="Conditional" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="651200003" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="Not Addressed" languagecode="1033" />
+      </labels>
+    </option>
+    <option value="651200004" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="N/A" languagecode="1033" />
+      </labels>
+    </option>
+  </options>
+</optionset>

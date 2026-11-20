@@ -1,0 +1,916 @@
+/*
+  The "How it works" and "Time and cost" pages. Colors come from the Vizient theme tokens; the 3D stage is the one dark
+  surface, so the text on it uses its own light values. Motion is written as keyframes with the visible state as the
+  base, so turning animation off (reduced motion) leaves the finished page.
+*/
+
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  max-inline-size: 80rem;
+  margin-inline: auto;
+  padding: 1rem 1.5rem 3.5rem;
+}
+
+.about__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-inline-size: 72rem;
+}
+.about__intro .vz-eyebrow,
+.about__intro h1 {
+  margin: 0;
+}
+.about__lead {
+  margin: 0;
+  max-inline-size: 92ch;
+  font-size: 1.125rem;
+  line-height: 1.55;
+}
+
+.about__section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+.about__prose p {
+  margin: 0;
+  max-inline-size: 70ch;
+  font-size: var(--vz-text-base);
+  line-height: 1.6;
+}
+.about__note {
+  margin: 0;
+  color: var(--vz-text-muted);
+}
+.about__list {
+  display: grid;
+  gap: 0.75rem;
+  max-inline-size: 76ch;
+  margin: 0;
+  padding-inline-start: 1.25rem;
+  font-size: var(--vz-text-base);
+  line-height: 1.55;
+}
+
+.about__table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--vz-border-card);
+  border-radius: var(--vz-radius-lg);
+}
+.about__table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-size: var(--vz-text-sm);
+}
+.about__table th,
+.about__table td {
+  padding: 0.625rem 1rem;
+  border-block-end: 1px solid var(--vz-border-card);
+  text-align: start;
+  vertical-align: top;
+}
+.about__table thead th {
+  background: var(--vz-bg-subtle);
+  color: var(--vz-text-muted);
+  font-size: var(--vz-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.about__table tbody th {
+  color: var(--vz-heading);
+  font-weight: 600;
+}
+.about__table tbody tr:last-child > * {
+  border-block-end: 0;
+}
+.about__table--numbers td,
+.about__table--numbers thead th:not(:first-child) {
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+/* The diagram */
+.arch {
+  overflow: hidden;
+}
+.arch__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-block-end: 1px solid var(--vz-border-card);
+}
+.arch__toolbar-spacer {
+  flex: 1;
+}
+.arch__zoom {
+  display: inline-flex;
+  gap: 0.25rem;
+}
+.arch .vz-icon-btn {
+  inline-size: 2rem;
+  block-size: 2rem;
+}
+.arch .vz-icon-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.arch .vz-btn[aria-pressed='true'] {
+  background: var(--vz-mulberry-100);
+}
+
+.arch__stage {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  block-size: clamp(26rem, 60vh, 42rem);
+  background: radial-gradient(ellipse at 50% 30%, #4a1029 0%, #2c0a19 48%, #0f0308 100%);
+  color: var(--vz-eggshell);
+}
+.arch__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  touch-action: pan-y;
+}
+.arch__labels {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.arch__stage[data-state='loading'] .arch__labels {
+  visibility: hidden;
+}
+.arch__note {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  color: var(--vz-mulberry-200);
+}
+
+/* Labels are placed by the engine, which writes their transform and stacking order. */
+.arch__label,
+.arch__zone,
+.arch__edge,
+.arch__status {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  will-change: transform;
+}
+/* A label that would be cut by the edge of the stage fades out, set by the engine. */
+.arch__zone,
+.arch__edge,
+.arch__status {
+  transition: opacity 0.2s var(--vz-ease);
+}
+.arch__label[data-clipped],
+.arch__zone[data-clipped],
+.arch__edge[data-clipped],
+.arch__status[data-clipped] {
+  opacity: 0;
+  pointer-events: none;
+}
+.arch__label[data-clipped]:focus-visible {
+  opacity: 1;
+}
+
+.arch__label,
+.arch-flat__part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.0625rem;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--tone) 55%, transparent);
+  border-radius: var(--vz-radius-md);
+  background: rgb(15 3 8 / 0.72);
+  color: var(--vz-eggshell);
+  font: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+  pointer-events: auto;
+  backdrop-filter: blur(4px);
+  transition:
+    background var(--vz-duration) var(--vz-ease),
+    border-color var(--vz-duration) var(--vz-ease),
+    box-shadow 0.25s var(--vz-ease),
+    opacity 0.2s var(--vz-ease);
+}
+.arch__label[data-lit='true'],
+.arch-flat__part[data-lit='true'] {
+  border-color: var(--tone);
+  background: rgb(15 3 8 / 0.9);
+  box-shadow:
+    0 0 0 1px var(--tone),
+    0 0 18px color-mix(in srgb, var(--tone) 55%, transparent);
+}
+.arch__label:focus-visible,
+.arch-flat__part:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+.arch__label-name {
+  font-size: var(--vz-text-sm);
+  font-weight: 600;
+}
+.arch__label-kicker {
+  color: var(--vz-mulberry-200);
+  font-size: var(--vz-text-xs);
+}
+.arch__zone {
+  color: var(--tone);
+  font-size: var(--vz-text-xs);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.arch__edge {
+  padding: 0.15rem 0.625rem;
+  border-radius: var(--vz-radius-pill);
+  background: var(--vz-eggshell);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.45);
+  color: var(--vz-ink);
+  font-size: var(--vz-text-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  animation: arch-pop 0.4s var(--vz-ease) backwards;
+}
+.arch__status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  animation: arch-pop 0.4s var(--vz-ease) backwards;
+}
+.arch__status-label {
+  color: var(--vz-mulberry-200);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+/* The brand chip is dark, which would vanish into the stage. */
+.arch__status .vz-chip--brand {
+  --chip-bg: var(--vz-mulberry-100);
+  --chip-fg: var(--vz-mulberry-500);
+  --chip-border: var(--vz-mulberry-200);
+}
+
+.arch__info {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  padding: 1rem 1.25rem 1.25rem;
+}
+.arch__caption .vz-eyebrow {
+  margin: 0;
+}
+.arch__caption-title {
+  margin: 0.125rem 0 0.375rem;
+  color: var(--vz-heading);
+  font: 400 1.5rem / 1.2 var(--vz-font-heading);
+}
+.arch__caption-text {
+  min-block-size: 3em;
+  max-inline-size: 60ch;
+  margin: 0;
+  font-size: var(--vz-text-base);
+  line-height: 1.5;
+}
+.arch__steps {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-block-start: 1rem;
+}
+.arch__dots {
+  display: flex;
+  gap: 0.625rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.arch__dot {
+  position: relative;
+  inline-size: 0.875rem;
+  block-size: 0.875rem;
+  padding: 0;
+  border: 2px solid var(--vz-mulberry-500);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: transform var(--vz-duration) var(--vz-ease);
+}
+.arch__dot::before {
+  position: absolute;
+  inset: -0.5rem;
+  content: '';
+}
+.arch__dot[data-done='true'] {
+  background: var(--vz-mulberry-300);
+}
+.arch__dot[aria-current='step'] {
+  background: var(--vz-orange-500);
+  transform: scale(1.3);
+}
+.arch__dot:focus-visible {
+  outline: 2px solid var(--vz-focus);
+  outline-offset: 3px;
+}
+
+.arch__detail {
+  padding: 0.875rem 1rem;
+  border: 1px solid var(--vz-border-card);
+  border-inline-start: 4px solid var(--tone, var(--vz-mulberry-300));
+  border-radius: var(--vz-radius-md);
+  background: var(--vz-bg-subtle);
+}
+.arch__detail[data-empty='true'] {
+  border-style: dashed;
+  border-inline-start-width: 1px;
+}
+.arch__detail-hint {
+  margin: 0;
+  color: var(--vz-text-muted);
+}
+.arch__detail-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.arch__detail-title {
+  margin: 0;
+  color: var(--vz-heading);
+  font: 600 var(--vz-text-base) / 1.3 var(--vz-font-sans);
+}
+.arch__detail .vz-icon-btn {
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+}
+.arch__detail p {
+  margin: 0.375rem 0 0;
+}
+.arch__detail p.arch__detail-hint {
+  margin: 0;
+}
+.arch__bullets {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0.5rem 0 0;
+  padding-inline-start: 1.1rem;
+}
+.arch__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem 1rem;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  color: var(--vz-text-muted);
+  font-size: var(--vz-text-xs);
+  list-style: none;
+}
+.arch__swatch {
+  display: inline-block;
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  margin-inline-end: 0.375rem;
+  border-radius: 0.2rem;
+  background: var(--tone);
+  vertical-align: -1px;
+}
+
+/* The same diagram without 3D */
+.arch-flat {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--vz-mulberry-800);
+}
+.arch-flat__zone {
+  padding: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--tone) 60%, transparent);
+  border-radius: var(--vz-radius-md);
+}
+.arch-flat__zone-name {
+  margin: 0 0 0.625rem;
+  color: var(--tone);
+  font-size: var(--vz-text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.arch-flat__parts {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.arch-flat__part {
+  inline-size: 100%;
+  align-items: flex-start;
+}
+
+/* Step cards */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px solid var(--vz-border-card);
+  border-radius: var(--vz-radius-lg);
+  background: var(--vz-bg);
+  transition:
+    border-color var(--vz-duration) var(--vz-ease),
+    box-shadow var(--vz-duration) var(--vz-ease);
+}
+.step[data-active='true'] {
+  border-color: var(--vz-mulberry-500);
+  box-shadow:
+    inset 0 3px 0 var(--vz-orange-500),
+    var(--vz-shadow-sm);
+}
+.step__head {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--vz-heading);
+  font: 600 var(--vz-text-base) / 1.25 var(--vz-font-sans);
+  text-align: start;
+  cursor: pointer;
+}
+.step__head:hover .step__title {
+  text-decoration: underline;
+}
+.step__head:focus-visible {
+  border-radius: var(--vz-radius-sm);
+  outline: 2px solid var(--vz-focus);
+  outline-offset: 3px;
+}
+.step__number {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: 1.75rem;
+  block-size: 1.75rem;
+  border-radius: 50%;
+  background: var(--vz-surface-primary);
+  color: var(--vz-on-primary);
+  font-size: var(--vz-text-sm);
+  font-weight: 600;
+}
+.step[data-active='true'] .step__number {
+  background: var(--vz-orange-500);
+  color: var(--vz-mulberry-900);
+}
+.step__text {
+  margin: 0;
+  font-weight: 500;
+}
+.step__detail {
+  margin: 0;
+  color: var(--vz-text-muted);
+  font-size: var(--vz-text-sm);
+  line-height: 1.5;
+}
+
+.choices {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.choice {
+  padding: 1rem 1.125rem;
+}
+.choice__title {
+  margin: 0 0 0.375rem;
+  color: var(--vz-heading);
+  font: 600 var(--vz-text-base) / 1.3 var(--vz-font-sans);
+}
+.choice p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+.checklist {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1.25rem;
+}
+.checklist__name {
+  margin: 0 0 0.5rem;
+  color: var(--vz-heading);
+  font: 600 var(--vz-text-base) / 1.3 var(--vz-font-sans);
+}
+.checklist__items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Time and cost */
+.cost-hero[data-vz-theme] {
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 2.25rem 1.75rem;
+  border-radius: var(--vz-radius-lg);
+  background:
+    radial-gradient(ellipse at 88% 0%, rgb(246 115 24 / 0.32), transparent 55%),
+    var(--vz-mulberry-500);
+}
+.cost-hero .vz-eyebrow,
+.cost-hero h1 {
+  margin: 0;
+}
+.cost-hero__meta {
+  margin: 0.75rem 0 0;
+  font-size: var(--vz-text-sm);
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 1.125rem 1.25rem;
+  animation: arch-rise 0.6s var(--vz-ease) backwards;
+}
+.kpi:nth-child(2) {
+  animation-delay: 80ms;
+}
+.kpi:nth-child(3) {
+  animation-delay: 160ms;
+}
+.kpi:nth-child(4) {
+  animation-delay: 240ms;
+}
+.kpi__label {
+  margin: 0;
+  color: var(--vz-text-muted);
+  font-size: var(--vz-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.kpi__value {
+  margin: 0;
+  color: var(--vz-heading);
+  font: 400 2.25rem / 1.1 var(--vz-font-heading);
+  font-variant-numeric: tabular-nums;
+}
+.kpi__note {
+  margin: 0;
+  color: var(--vz-text-muted);
+  font-size: var(--vz-text-sm);
+}
+
+/* Time and cost to process one contract */
+.cost-jump {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+.cost-jump__label {
+  margin-inline-end: 0.25rem;
+  color: var(--vz-text-muted);
+  font-size: var(--vz-text-sm);
+}
+
+.about__subhead {
+  margin: 0.75rem 0 0;
+  color: var(--vz-heading);
+  font: 600 var(--vz-text-lg) / 1.3 var(--vz-font-sans);
+}
+.about__table-sub {
+  display: block;
+  color: var(--vz-text-muted);
+  font-size: var(--vz-text-xs);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.about__table tfoot th,
+.about__table tfoot td {
+  border-block-end: 0;
+  background: var(--vz-bg-subtle);
+  color: var(--vz-heading);
+  font-weight: 600;
+}
+.about__table tfoot tr:first-child > * {
+  border-block-start: 2px solid var(--vz-border-card);
+}
+
+.ptl {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 1.25rem 1.5rem 1rem;
+}
+.ptl__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ptl__row {
+  display: grid;
+  grid-template-columns: minmax(9rem, 13rem) minmax(0, 1fr) 4.75rem;
+  gap: 1rem;
+  align-items: center;
+}
+.ptl__name {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+.ptl__title {
+  color: var(--vz-heading);
+  font-weight: 600;
+}
+.ptl__note {
+  color: var(--vz-text-muted);
+  font-size: var(--vz-text-xs);
+}
+.ptl__track {
+  block-size: 3rem;
+  border-radius: var(--vz-radius-sm);
+  background:
+    repeating-linear-gradient(to right, var(--vz-border-card) 0 1px, transparent 1px calc(100% / var(--steps))),
+    var(--vz-bg-subtle);
+  box-shadow: inset -1px 0 0 var(--vz-border-card);
+}
+.ptl__bar {
+  display: flex;
+  inline-size: var(--w);
+  block-size: 100%;
+  overflow: hidden;
+  border-radius: var(--vz-radius-sm);
+  transform-origin: left;
+  animation: arch-grow 0.9s var(--vz-ease) calc(var(--i) * 120ms + 150ms) backwards;
+}
+.ptl__seg {
+  display: flex;
+  flex: var(--s) 1 0%;
+  align-items: center;
+  min-inline-size: 3px;
+  overflow: hidden;
+}
+.ptl__seg-text {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+  padding-inline: 0.5rem;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.ptl__seg-name {
+  overflow: hidden;
+  font-size: var(--vz-text-xs);
+  text-overflow: ellipsis;
+  opacity: 0.85;
+}
+.ptl__seg-value {
+  overflow: hidden;
+  font-size: var(--vz-text-sm);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  text-overflow: ellipsis;
+}
+.ptl__total {
+  margin: 0;
+  color: var(--vz-heading);
+  font: 400 1.375rem / 1 var(--vz-font-heading);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
+
+/* What each colour means. The same colours mark a stage or a part wherever it appears. */
+.ptl__seg[data-kind='wait'],
+.ptl__swatch[data-kind='wait'] {
+  background: repeating-linear-gradient(135deg, var(--vz-mulberry-200) 0 4px, var(--vz-mulberry-100) 4px 8px);
+  color: var(--vz-mulberry-800);
+}
+.ptl__seg[data-kind='work'],
+.ptl__swatch[data-kind='work'],
+.ptl__seg[data-kind='pages'],
+.ptl__swatch[data-kind='pages'] {
+  background: var(--vz-mulberry-500);
+  color: var(--vz-on-primary);
+}
+.ptl__seg[data-kind='ai'],
+.ptl__swatch[data-kind='ai'],
+.ptl__seg[data-kind='output'],
+.ptl__swatch[data-kind='output'] {
+  background: var(--vz-orange-500);
+  color: var(--vz-mulberry-900);
+}
+.ptl__seg[data-kind='input'],
+.ptl__swatch[data-kind='input'] {
+  background: var(--vz-orange-700);
+  color: var(--vz-on-primary);
+}
+
+/* The stage of the step on show comes forward and the others fade back. */
+.ptl[data-focus='true'] .ptl__seg {
+  transition: opacity var(--vz-duration) var(--vz-ease);
+}
+.ptl[data-focus='true'] .ptl__seg:not([data-active='true']) {
+  opacity: 0.3;
+}
+.ptl__seg[data-active='true'] {
+  outline: 2px solid var(--vz-heading);
+  outline-offset: -2px;
+}
+
+.ptl__ticks {
+  position: relative;
+  block-size: 1.125rem;
+}
+.ptl__tick {
+  position: absolute;
+  inset-inline-start: var(--x);
+  transform: translateX(-50%);
+  color: var(--vz-text-muted);
+  font-size: var(--vz-text-xs);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ptl__tick[data-edge='start'] {
+  transform: none;
+}
+.ptl__tick[data-edge='end'] {
+  transform: translateX(-100%);
+}
+.ptl__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem 1.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--vz-text-sm);
+}
+.ptl__legend li {
+  display: inline-flex;
+  align-items: center;
+}
+.ptl__swatch {
+  display: inline-block;
+  flex: none;
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  margin-inline-end: 0.5rem;
+  border-radius: 3px;
+  vertical-align: -1px;
+}
+.ptl__foot {
+  margin: 0;
+  color: var(--vz-text-muted);
+  font-size: var(--vz-text-xs);
+}
+
+/* The stopwatch under the diagram, and the lines on the step cards */
+.arch__clock {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  margin-block-start: 1rem;
+  padding-block: 0.625rem;
+  border-block: 1px solid var(--vz-border-card);
+}
+.arch__clock-face {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--vz-heading);
+}
+.arch__clock-time {
+  min-inline-size: 3.5ch;
+  font: 400 1.75rem / 1 var(--vz-font-heading);
+  font-variant-numeric: tabular-nums;
+}
+.arch__clock-note {
+  flex: 1 1 12rem;
+  margin: 0;
+  color: var(--vz-text-muted);
+  font-size: var(--vz-text-sm);
+}
+.arch__runs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+.step__takes {
+  display: grid;
+  gap: 0.25rem;
+  margin: auto 0 0;
+  padding: 0.5rem 0 0;
+  border-block-start: 1px dashed var(--vz-border-card);
+  color: var(--vz-heading);
+  font-size: var(--vz-text-sm);
+  font-weight: 600;
+  list-style: none;
+}
+.step__takes li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.375rem;
+}
+.step__takes svg {
+  flex: none;
+  color: var(--vz-text-muted);
+}
+
+@keyframes arch-pop {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes arch-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}
+@keyframes arch-grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@media (max-width: 1100px) {
+  .steps,
+  .kpis {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .choices {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .arch__info {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ptl__row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.375rem 1rem;
+  }
+  .ptl__track {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .ptl__row--axis {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ptl__row--axis > span {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about *,
+  .about *::before,
+  .about *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

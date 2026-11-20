@@ -1,0 +1,13 @@
+<environmentvariabledefinition schemaname="vz_FunctionKey">
+  <description default="Host key of the contract analysis Function app, sent as x-functions-key.">
+    <label description="Host key of the contract analysis Function app, sent as x-functions-key." languagecode="1033" />
+  </description>
+  <displayname default="Function Key">
+    <label description="Function Key" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

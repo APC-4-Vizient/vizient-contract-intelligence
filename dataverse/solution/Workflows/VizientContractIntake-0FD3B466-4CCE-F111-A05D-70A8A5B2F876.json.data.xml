@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{0fd3b466-4cce-f111-a05d-70a8a5b2f876}" Name="Vizient Contract Intake" Description="Adds a contract row and its PDF when a file arrives in the SharePoint intake folder, then queues the analysis. Built by scripts/provision-flow.py; do not edit by hand. [definition 2cced1a98c2c]" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <JsonFileName>/Workflows/VizientContractIntake-0FD3B466-4CCE-F111-A05D-70A8A5B2F876.json</JsonFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>5</Category>
+  <Mode>0</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+  <ModernFlowType>0</ModernFlowType>
+  <PrimaryEntity>none</PrimaryEntity>
+  <LocalizedNames>
+    <LocalizedName languagecode="1033" description="Vizient Contract Intake" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description languagecode="1033" description="Adds a contract row and its PDF when a file arrives in the SharePoint intake folder, then queues the analysis. Built by scripts/provision-flow.py; do not edit by hand. [definition 2cced1a98c2c]" />
+  </Descriptions>
+</Workflow>

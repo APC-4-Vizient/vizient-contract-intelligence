@@ -1,0 +1,491 @@
+{
+  "description": "Vizient third-party data contract checklist (POC Lite)",
+  "baseAnalyzerId": "prebuilt-document",
+  "models": {
+    "completion": "prebuilt-analyzer-completion",
+    "embedding": "prebuilt-analyzer-embedding"
+  },
+  "config": {
+    "returnDetails": true,
+    "estimateFieldSourceAndConfidence": true,
+    "enableOcr": true,
+    "enableLayout": true,
+    "enableFormula": false
+  },
+  "fieldSchema": {
+    "name": "VizientContractChecklist",
+    "fields": {
+      "Vendor": {
+        "type": "string",
+        "method": "extract",
+        "description": "Legal name of the counterparty providing data or services to Vizient or its affiliate.",
+        "estimateSourceAndConfidence": true
+      },
+      "VizientEntity": {
+        "type": "string",
+        "method": "extract",
+        "description": "The Vizient entity or affiliate that is a party, for example Vizient Inc. or Sg2, LLC.",
+        "estimateSourceAndConfidence": true
+      },
+      "DocumentType": {
+        "type": "string",
+        "method": "classify",
+        "description": "Type of this document.",
+        "enum": [
+          "MSA",
+          "SOW",
+          "Amendment",
+          "Order Form",
+          "DUA",
+          "BAA",
+          "NDA",
+          "Other"
+        ],
+        "enumDescriptions": {
+          "MSA": "Master services agreement: umbrella terms that govern later statements of work or orders.",
+          "SOW": "Statement of work: scope, deliverables, term and fees for specific work.",
+          "Amendment": "Amendment: changes, extends or restates an earlier agreement or statement of work.",
+          "Order Form": "Order form: an ordering document for specific products, data or subscriptions.",
+          "DUA": "Data use agreement: terms for access to or use of data.",
+          "BAA": "Business associate agreement: HIPAA terms for handling protected health information.",
+          "NDA": "Non-disclosure or confidentiality agreement.",
+          "Other": "None of the other document types."
+        },
+        "estimateSourceAndConfidence": true
+      },
+      "ContractIdentifier": {
+        "type": "string",
+        "method": "extract",
+        "description": "Agreement, SOW, opportunity or contract number of THIS document.",
+        "estimateSourceAndConfidence": true
+      },
+      "EffectiveDate": {
+        "type": "date",
+        "method": "extract",
+        "description": "Date this document takes effect.",
+        "estimateSourceAndConfidence": true
+      },
+      "ExpirationDate": {
+        "type": "date",
+        "method": "extract",
+        "description": "Date the term or license period ends. Leave empty if evergreen or not stated.",
+        "estimateSourceAndConfidence": true
+      },
+      "RenewalTermination": {
+        "type": "string",
+        "method": "generate",
+        "description": "Summary of renewal terms, notice periods and termination-for-convenience rights. Empty if not stated. A one-time extension or change of the end date is not a renewal term.",
+        "estimateSourceAndConfidence": true
+      },
+      "Signatories": {
+        "type": "string",
+        "method": "extract",
+        "description": "Names, titles and signature dates of all signers.",
+        "estimateSourceAndConfidence": true
+      },
+      "ParentAgreementReference": {
+        "type": "string",
+        "method": "extract",
+        "description": "Any other agreement this document incorporates by reference, amends or is governed by, with number and date. Empty if none. Only a specific agreement the document names counts; a statement that the document is stand-alone is not a reference.",
+        "estimateSourceAndConfidence": true
+      },
+      "Right_InternalAnalytics": {
+        "type": "object",
+        "description": "Internal Analytics: May the data be used for internal reporting and analysis? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+        "properties": {
+          "Judgment": {
+            "type": "string",
+            "method": "classify",
+            "description": "Judgment for 'Internal Analytics': May the data be used for internal reporting and analysis? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+            "enum": [
+              "Permitted",
+              "Prohibited",
+              "Conditional",
+              "Not Addressed"
+            ],
+            "enumDescriptions": {
+              "Permitted": "The document explicitly allows this without material conditions.",
+              "Prohibited": "The document explicitly forbids this.",
+              "Conditional": "The document allows or requires this only under stated conditions, limits or approvals.",
+              "Not Addressed": "The document does not explicitly address this. Never infer from silence."
+            },
+            "estimateSourceAndConfidence": true
+          },
+          "Conditions": {
+            "type": "string",
+            "method": "generate",
+            "description": "Conditions, limits or approvals that apply to 'Internal Analytics'. Empty if none.",
+            "estimateSourceAndConfidence": true
+          },
+          "Clause": {
+            "type": "string",
+            "method": "extract",
+            "description": "Verbatim text of the clause that governs 'Internal Analytics'. Prefer the clause that states the rule over a sentence that only refers to it. Empty if Not Addressed.",
+            "estimateSourceAndConfidence": true
+          }
+        }
+      },
+      "Right_AIML": {
+        "type": "object",
+        "description": "AI / Machine Learning: May the data be used for AI/ML model training or inference? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+        "properties": {
+          "Judgment": {
+            "type": "string",
+            "method": "classify",
+            "description": "Judgment for 'AI / Machine Learning': May the data be used for AI/ML model training or inference? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+            "enum": [
+              "Permitted",
+              "Prohibited",
+              "Conditional",
+              "Not Addressed"
+            ],
+            "enumDescriptions": {
+              "Permitted": "The document explicitly allows this without material conditions.",
+              "Prohibited": "The document explicitly forbids this.",
+              "Conditional": "The document allows or requires this only under stated conditions, limits or approvals.",
+              "Not Addressed": "The document does not explicitly address this. Never infer from silence."
+            },
+            "estimateSourceAndConfidence": true
+          },
+          "Conditions": {
+            "type": "string",
+            "method": "generate",
+            "description": "Conditions, limits or approvals that apply to 'AI / Machine Learning'. Empty if none.",
+            "estimateSourceAndConfidence": true
+          },
+          "Clause": {
+            "type": "string",
+            "method": "extract",
+            "description": "Verbatim text of the clause that governs 'AI / Machine Learning'. Prefer the clause that states the rule over a sentence that only refers to it. Empty if Not Addressed.",
+            "estimateSourceAndConfidence": true
+          }
+        }
+      },
+      "Right_ProductDevelopment": {
+        "type": "object",
+        "description": "Product Development: May the data be used in commercial products, solutions, or derivative works? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+        "properties": {
+          "Judgment": {
+            "type": "string",
+            "method": "classify",
+            "description": "Judgment for 'Product Development': May the data be used in commercial products, solutions, or derivative works? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+            "enum": [
+              "Permitted",
+              "Prohibited",
+              "Conditional",
+              "Not Addressed"
+            ],
+            "enumDescriptions": {
+              "Permitted": "The document explicitly allows this without material conditions.",
+              "Prohibited": "The document explicitly forbids this.",
+              "Conditional": "The document allows or requires this only under stated conditions, limits or approvals.",
+              "Not Addressed": "The document does not explicitly address this. Never infer from silence."
+            },
+            "estimateSourceAndConfidence": true
+          },
+          "Conditions": {
+            "type": "string",
+            "method": "generate",
+            "description": "Conditions, limits or approvals that apply to 'Product Development'. Empty if none.",
+            "estimateSourceAndConfidence": true
+          },
+          "Clause": {
+            "type": "string",
+            "method": "extract",
+            "description": "Verbatim text of the clause that governs 'Product Development'. Prefer the clause that states the rule over a sentence that only refers to it. Empty if Not Addressed.",
+            "estimateSourceAndConfidence": true
+          }
+        }
+      },
+      "Right_BAARequired": {
+        "type": "object",
+        "description": "BAA Required: Does the contract require or reference a Business Associate Agreement? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+        "properties": {
+          "Judgment": {
+            "type": "string",
+            "method": "classify",
+            "description": "Judgment for 'BAA Required': Does the contract require or reference a Business Associate Agreement? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+            "enum": [
+              "Conditional",
+              "Not Addressed"
+            ],
+            "enumDescriptions": {
+              "Conditional": "The contract requires or references a Business Associate Agreement.",
+              "Not Addressed": "The contract does not mention a Business Associate Agreement."
+            },
+            "estimateSourceAndConfidence": true
+          },
+          "Conditions": {
+            "type": "string",
+            "method": "generate",
+            "description": "Conditions, limits or approvals that apply to 'BAA Required'. Empty if none.",
+            "estimateSourceAndConfidence": true
+          },
+          "Clause": {
+            "type": "string",
+            "method": "extract",
+            "description": "Verbatim text of the clause that governs 'BAA Required'. Prefer the clause that states the rule over a sentence that only refers to it. Empty if Not Addressed.",
+            "estimateSourceAndConfidence": true
+          }
+        }
+      },
+      "Right_Retention": {
+        "type": "object",
+        "description": "Retention Requirements: How long may data be retained? What retention obligations apply? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+        "properties": {
+          "Judgment": {
+            "type": "string",
+            "method": "classify",
+            "description": "Judgment for 'Retention Requirements': How long may data be retained? What retention obligations apply? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+            "enum": [
+              "Permitted",
+              "Prohibited",
+              "Conditional",
+              "Not Addressed"
+            ],
+            "enumDescriptions": {
+              "Permitted": "The document explicitly allows this without material conditions.",
+              "Prohibited": "The document explicitly forbids this.",
+              "Conditional": "The document allows or requires this only under stated conditions, limits or approvals.",
+              "Not Addressed": "The document does not explicitly address this. Never infer from silence."
+            },
+            "estimateSourceAndConfidence": true
+          },
+          "Conditions": {
+            "type": "string",
+            "method": "generate",
+            "description": "Conditions, limits or approvals that apply to 'Retention Requirements'. Empty if none.",
+            "estimateSourceAndConfidence": true
+          },
+          "Clause": {
+            "type": "string",
+            "method": "extract",
+            "description": "Verbatim text of the clause that governs 'Retention Requirements'. Prefer the clause that states the rule over a sentence that only refers to it. Empty if Not Addressed.",
+            "estimateSourceAndConfidence": true
+          }
+        }
+      },
+      "Right_AffiliateSharing": {
+        "type": "object",
+        "description": "Affiliate Sharing: May data be shared with corporate affiliates? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+        "properties": {
+          "Judgment": {
+            "type": "string",
+            "method": "classify",
+            "description": "Judgment for 'Affiliate Sharing': May data be shared with corporate affiliates? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+            "enum": [
+              "Permitted",
+              "Prohibited",
+              "Conditional",
+              "Not Addressed"
+            ],
+            "enumDescriptions": {
+              "Permitted": "The document explicitly allows this without material conditions.",
+              "Prohibited": "The document explicitly forbids this.",
+              "Conditional": "The document allows or requires this only under stated conditions, limits or approvals.",
+              "Not Addressed": "The document does not explicitly address this. Never infer from silence."
+            },
+            "estimateSourceAndConfidence": true
+          },
+          "Conditions": {
+            "type": "string",
+            "method": "generate",
+            "description": "Conditions, limits or approvals that apply to 'Affiliate Sharing'. Empty if none.",
+            "estimateSourceAndConfidence": true
+          },
+          "Clause": {
+            "type": "string",
+            "method": "extract",
+            "description": "Verbatim text of the clause that governs 'Affiliate Sharing'. Prefer the clause that states the rule over a sentence that only refers to it. Empty if Not Addressed.",
+            "estimateSourceAndConfidence": true
+          }
+        }
+      },
+      "Right_ThirdPartySharing": {
+        "type": "object",
+        "description": "Third-Party Sharing: May data be distributed or disclosed to external parties/clients? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+        "properties": {
+          "Judgment": {
+            "type": "string",
+            "method": "classify",
+            "description": "Judgment for 'Third-Party Sharing': May data be distributed or disclosed to external parties/clients? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+            "enum": [
+              "Permitted",
+              "Prohibited",
+              "Conditional",
+              "Not Addressed"
+            ],
+            "enumDescriptions": {
+              "Permitted": "The document explicitly allows this without material conditions.",
+              "Prohibited": "The document explicitly forbids this.",
+              "Conditional": "The document allows or requires this only under stated conditions, limits or approvals.",
+              "Not Addressed": "The document does not explicitly address this. Never infer from silence."
+            },
+            "estimateSourceAndConfidence": true
+          },
+          "Conditions": {
+            "type": "string",
+            "method": "generate",
+            "description": "Conditions, limits or approvals that apply to 'Third-Party Sharing'. Empty if none.",
+            "estimateSourceAndConfidence": true
+          },
+          "Clause": {
+            "type": "string",
+            "method": "extract",
+            "description": "Verbatim text of the clause that governs 'Third-Party Sharing'. Prefer the clause that states the rule over a sentence that only refers to it. Empty if Not Addressed.",
+            "estimateSourceAndConfidence": true
+          }
+        }
+      },
+      "Right_DataLinking": {
+        "type": "object",
+        "description": "Data Linking: May data be combined/linked with other datasets? Any limits on identifiers/linkages? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+        "properties": {
+          "Judgment": {
+            "type": "string",
+            "method": "classify",
+            "description": "Judgment for 'Data Linking': May data be combined/linked with other datasets? Any limits on identifiers/linkages? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+            "enum": [
+              "Permitted",
+              "Prohibited",
+              "Conditional",
+              "Not Addressed"
+            ],
+            "enumDescriptions": {
+              "Permitted": "The document explicitly allows this without material conditions.",
+              "Prohibited": "The document explicitly forbids this.",
+              "Conditional": "The document allows or requires this only under stated conditions, limits or approvals.",
+              "Not Addressed": "The document does not explicitly address this. Never infer from silence."
+            },
+            "estimateSourceAndConfidence": true
+          },
+          "Conditions": {
+            "type": "string",
+            "method": "generate",
+            "description": "Conditions, limits or approvals that apply to 'Data Linking'. Empty if none.",
+            "estimateSourceAndConfidence": true
+          },
+          "Clause": {
+            "type": "string",
+            "method": "extract",
+            "description": "Verbatim text of the clause that governs 'Data Linking'. Prefer the clause that states the rule over a sentence that only refers to it. Empty if Not Addressed.",
+            "estimateSourceAndConfidence": true
+          }
+        }
+      },
+      "Right_DeIdentification": {
+        "type": "object",
+        "description": "De-Identification Rights: May data be anonymized, aggregated, or de-identified, and used afterward? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+        "properties": {
+          "Judgment": {
+            "type": "string",
+            "method": "classify",
+            "description": "Judgment for 'De-Identification Rights': May data be anonymized, aggregated, or de-identified, and used afterward? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+            "enum": [
+              "Permitted",
+              "Prohibited",
+              "Conditional",
+              "Not Addressed"
+            ],
+            "enumDescriptions": {
+              "Permitted": "The document explicitly allows this without material conditions.",
+              "Prohibited": "The document explicitly forbids this.",
+              "Conditional": "The document allows or requires this only under stated conditions, limits or approvals.",
+              "Not Addressed": "The document does not explicitly address this. Never infer from silence."
+            },
+            "estimateSourceAndConfidence": true
+          },
+          "Conditions": {
+            "type": "string",
+            "method": "generate",
+            "description": "Conditions, limits or approvals that apply to 'De-Identification Rights'. Empty if none.",
+            "estimateSourceAndConfidence": true
+          },
+          "Clause": {
+            "type": "string",
+            "method": "extract",
+            "description": "Verbatim text of the clause that governs 'De-Identification Rights'. Prefer the clause that states the rule over a sentence that only refers to it. Empty if Not Addressed.",
+            "estimateSourceAndConfidence": true
+          }
+        }
+      },
+      "Right_Destruction": {
+        "type": "object",
+        "description": "Destruction Requirements: What must happen to the data at termination/expiration (return, destroy, archive)? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+        "properties": {
+          "Judgment": {
+            "type": "string",
+            "method": "classify",
+            "description": "Judgment for 'Destruction Requirements': What must happen to the data at termination/expiration (return, destroy, archive)? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+            "enum": [
+              "Permitted",
+              "Prohibited",
+              "Conditional",
+              "Not Addressed"
+            ],
+            "enumDescriptions": {
+              "Permitted": "The document explicitly allows this without material conditions.",
+              "Prohibited": "The document explicitly forbids this.",
+              "Conditional": "The document allows or requires this only under stated conditions, limits or approvals.",
+              "Not Addressed": "The document does not explicitly address this. Never infer from silence."
+            },
+            "estimateSourceAndConfidence": true
+          },
+          "Conditions": {
+            "type": "string",
+            "method": "generate",
+            "description": "Conditions, limits or approvals that apply to 'Destruction Requirements'. Empty if none.",
+            "estimateSourceAndConfidence": true
+          },
+          "Clause": {
+            "type": "string",
+            "method": "extract",
+            "description": "Verbatim text of the clause that governs 'Destruction Requirements'. Prefer the clause that states the rule over a sentence that only refers to it. Empty if Not Addressed.",
+            "estimateSourceAndConfidence": true
+          }
+        }
+      },
+      "Right_Geographic": {
+        "type": "object",
+        "description": "Geographic / Offshore: Does the contract limit where the data may be stored or accessed from, for example data residency, United States-only storage or access, or an offshore access rule? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+        "properties": {
+          "Judgment": {
+            "type": "string",
+            "method": "classify",
+            "description": "Judgment for 'Geographic / Offshore': Does the contract limit where the data may be stored or accessed from, for example data residency, United States-only storage or access, or an offshore access rule? Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+            "enum": [
+              "Permitted",
+              "Prohibited",
+              "Conditional",
+              "Not Addressed"
+            ],
+            "enumDescriptions": {
+              "Permitted": "The contract expressly allows the data to be stored or accessed from any location, including offshore.",
+              "Prohibited": "The contract itself limits storage or access to the United States or another named location, or forbids offshore storage or access.",
+              "Conditional": "The contract allows storage or access outside the stated location only with approval or under stated conditions.",
+              "Not Addressed": "The contract states no rule on where the data is stored or accessed from. Never infer from silence."
+            },
+            "estimateSourceAndConfidence": true
+          },
+          "Conditions": {
+            "type": "string",
+            "method": "generate",
+            "description": "Conditions, limits or approvals that apply to 'Geographic / Offshore'. Empty if none.",
+            "estimateSourceAndConfidence": true
+          },
+          "Clause": {
+            "type": "string",
+            "method": "extract",
+            "description": "Verbatim text of the clause that governs 'Geographic / Offshore'. Prefer the clause that states the rule over a sentence that only refers to it. Empty if Not Addressed.",
+            "estimateSourceAndConfidence": true
+          }
+        }
+      }
+    }
+  },
+  "tags": {
+    "checklistVersion": "1",
+    "layout": "nested",
+    "definitionHash": "68e554973e62"
+  }
+}

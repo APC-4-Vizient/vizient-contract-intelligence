@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntityRelationships xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <EntityRelationship Name="business_unit_vz_contract" />
+  <EntityRelationship Name="business_unit_vz_contractquestion" />
+  <EntityRelationship Name="business_unit_vz_finding" />
+  <EntityRelationship Name="FileAttachment_vz_contract_vz_document" />
+  <EntityRelationship Name="lk_vz_checklistitem_createdby" />
+  <EntityRelationship Name="lk_vz_checklistitem_modifiedby" />
+  <EntityRelationship Name="lk_vz_contract_createdby" />
+  <EntityRelationship Name="lk_vz_contract_modifiedby" />
+  <EntityRelationship Name="lk_vz_contractquestion_createdby" />
+  <EntityRelationship Name="lk_vz_contractquestion_modifiedby" />
+  <EntityRelationship Name="lk_vz_finding_createdby" />
+  <EntityRelationship Name="lk_vz_finding_modifiedby" />
+  <EntityRelationship Name="organization_vz_checklistitem" />
+  <EntityRelationship Name="owner_vz_contract" />
+  <EntityRelationship Name="owner_vz_contractquestion" />
+  <EntityRelationship Name="owner_vz_finding" />
+  <EntityRelationship Name="team_vz_contract" />
+  <EntityRelationship Name="team_vz_contractquestion" />
+  <EntityRelationship Name="team_vz_finding" />
+  <EntityRelationship Name="user_vz_contract" />
+  <EntityRelationship Name="user_vz_contractquestion" />
+  <EntityRelationship Name="user_vz_finding" />
+  <EntityRelationship Name="vz_contract_contractowner" />
+  <EntityRelationship Name="vz_contract_legalreviewer" />
+  <EntityRelationship Name="vz_contract_parentcontract" />
+  <EntityRelationship Name="vz_contractquestion_contract" />
+  <EntityRelationship Name="vz_finding_checklistitem" />
+  <EntityRelationship Name="vz_finding_contract" />
+  <EntityRelationship Name="vz_finding_reviewedby" />
+</EntityRelationships>

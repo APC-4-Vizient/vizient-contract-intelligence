@@ -1,0 +1,85 @@
+{
+  "_meta": {
+    "id": "bluepine-amendment",
+    "pdf": "bluepine-amendment.pdf",
+    "synthetic": true,
+    "pages": 3,
+    "generator": "eval/generate_contracts.py"
+  },
+  "Vendor": {
+    "value": "Bluepine Health Data, Inc.",
+    "page": 1,
+    "quote": "Bluepine Health Data, Inc., a Delaware corporation with its principal office at 410 Harbor Point Road, Suite 300, Wilmington, Delaware 19801 (\"Provider\")"
+  },
+  "VizientEntity": {
+    "value": "Vizient, Inc.",
+    "page": 1,
+    "quote": "Vizient, Inc., a Delaware corporation with offices in Irving, Texas (\"Client\")"
+  },
+  "DocumentType": {
+    "value": "Amendment",
+    "page": 1,
+    "quote": "AMENDMENT NO. 1 TO STATEMENT OF WORK NO. BP-2025-0417"
+  },
+  "ContractIdentifier": {
+    "value": "Amendment No. 1 to Statement of Work No. BP-2025-0417",
+    "page": 1,
+    "quote": "This Amendment No. 1 to Statement of Work No. BP-2025-0417 (this \"Amendment\")"
+  },
+  "EffectiveDate": {
+    "value": "2025-09-02",
+    "page": 1,
+    "quote": "This Amendment No. 1 to Statement of Work No. BP-2025-0417 (this \"Amendment\") is entered into as of September 2, 2025 (the \"Amendment Effective Date\")"
+  },
+  "ExpirationDate": {
+    "value": "2029-01-14",
+    "page": 1,
+    "quote": "The Initial License Period stated in Schedule 1 to the SOW is extended so that it runs from January 15, 2025 through January 14, 2029."
+  },
+  "RenewalTermination": {
+    "value": ""
+  },
+  "Signatories": {
+    "value": "Maren Okafor (President, Data and Analytics, 09/09/2025); Priya Raman (Senior Director, Product and Strategy, 09/08/2025)",
+    "page": 3,
+    "quote": "Maren Okafor"
+  },
+  "ParentAgreementReference": {
+    "value": "Statement of Work No. BP-2025-0417 dated January 15, 2025",
+    "page": 1,
+    "quote": "Provider and Client are parties to Statement of Work No. BP-2025-0417 dated January 15, 2025 (the \"SOW\")"
+  },
+  "Right_InternalAnalytics": {
+    "judgment": "Not Addressed"
+  },
+  "Right_AIML": {
+    "judgment": "Not Addressed"
+  },
+  "Right_ProductDevelopment": {
+    "judgment": "Not Addressed"
+  },
+  "Right_BAARequired": {
+    "judgment": "Not Addressed"
+  },
+  "Right_Retention": {
+    "judgment": "Not Addressed"
+  },
+  "Right_AffiliateSharing": {
+    "judgment": "Not Addressed"
+  },
+  "Right_ThirdPartySharing": {
+    "judgment": "Not Addressed"
+  },
+  "Right_DataLinking": {
+    "judgment": "Not Addressed"
+  },
+  "Right_DeIdentification": {
+    "judgment": "Not Addressed"
+  },
+  "Right_Destruction": {
+    "judgment": "Not Addressed"
+  },
+  "Right_Geographic": {
+    "judgment": "Not Addressed"
+  }
+}

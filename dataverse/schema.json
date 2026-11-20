@@ -1,0 +1,129 @@
+{
+  "$comment": "Source of truth for the Dataverse schema (plan section 5). scripts/provision-dataverse.py creates it inside the solution; scripts/verify-solution.py proves it. Option values are option_value_prefix * 10000 + position, so only ever append options, never reorder.",
+  "solution": "VizientContractPOC",
+  "publisher_prefix": "vz",
+  "option_value_prefix": 65120,
+  "global_choices": [
+    {
+      "name": "vz_judgment",
+      "display": "Judgment",
+      "description": "Outcome of a data right or contract term, shared by the AI judgment and the reviewer judgment.",
+      "options": ["Permitted", "Prohibited", "Conditional", "Not Addressed", "N/A"]
+    }
+  ],
+  "tables": [
+    {
+      "name": "vz_contractquestion",
+      "display": "Vizient Contract Question",
+      "plural": "Vizient Contract Questions",
+      "description": "User-owned asynchronous questions about one contract. Never updates extraction or reviewer fields.",
+      "ownership": "UserOwned",
+      "primary": {"name": "vz_name", "display": "Name", "max_length": 400, "description": "Question about a single contract."},
+      "columns": [
+        {"name": "vz_question", "display": "Question", "type": "memo", "max_length": 4000, "required": true},
+        {"name": "vz_context", "display": "Authorized Contract Text", "type": "memo", "max_length": 1048576, "description": "Extraction read through the asking user's data service; the flow never fetches contract text as its admin."},
+        {"name": "vz_history", "display": "Conversation History", "type": "memo", "max_length": 100000},
+        {"name": "vz_answer", "display": "Grounded Answer", "type": "memo", "max_length": 100000},
+        {"name": "vz_error", "display": "Question Error", "type": "memo", "max_length": 4000},
+        {"name": "vz_status", "display": "Question Status", "type": "choice", "options": ["Queued", "Answered", "Failed"], "default": "Queued"}
+      ]
+    },
+    {
+      "name": "vz_contract",
+      "display": "Vizient Contract",
+      "plural": "Vizient Contracts",
+      "description": "A contract document that is analyzed against the review checklist.",
+      "ownership": "UserOwned",
+      "primary": {
+        "name": "vz_name",
+        "display": "Name",
+        "description": "File name of the contract document.",
+        "max_length": 400
+      },
+      "columns": [
+        {"name": "vz_vendor", "display": "Vendor", "type": "string", "max_length": 200, "description": "Vendor or counterparty. Promoted from findings for views."},
+        {"name": "vz_viziententity", "display": "Vizient Entity", "type": "string", "max_length": 200, "description": "Vizient contracting entity. Promoted from findings for views."},
+        {"name": "vz_contractidentifier", "display": "Contract Identifier", "type": "string", "max_length": 200, "description": "Contract or agreement number. Promoted from findings for views."},
+        {"name": "vz_documenttype", "display": "Document Type", "type": "choice", "options": ["MSA", "SOW", "Amendment", "Order Form", "DUA", "BAA", "NDA", "Other"]},
+        {"name": "vz_effectivedate", "display": "Effective Date", "type": "date"},
+        {"name": "vz_expirationdate", "display": "Expiration Date", "type": "date"},
+        {"name": "vz_status", "display": "Status", "type": "choice", "options": ["Received", "Extracting", "Ready for Review", "In Review", "Approved", "Failed"], "default": "Received"},
+        {"name": "vz_document", "display": "Document", "type": "file", "max_size_kb": 32768, "description": "Copy of the PDF. The evidence viewer reads this."},
+        {"name": "vz_sharepointurl", "display": "SharePoint URL", "type": "url", "max_length": 2000, "description": "Link to the source document."},
+        {"name": "vz_sharepointitemid", "display": "SharePoint Item ID", "type": "string", "max_length": 200, "description": "SharePoint item or file id. The Code App reads the PDF through the SharePoint connector."},
+        {"name": "vz_hasparentreference", "display": "Has Parent Reference", "type": "bool", "default": false, "description": "True if the AI found a parent or related agreement reference."},
+        {"name": "vz_foundcount", "display": "Found Count", "type": "int", "min": 0, "max": 100},
+        {"name": "vz_totalcount", "display": "Total Count", "type": "int", "min": 0, "max": 100},
+        {"name": "vz_completeness", "display": "Completeness (%)", "type": "decimal", "precision": 2, "min": 0, "max": 100, "description": "Found count divided by total count, times 100."},
+        {"name": "vz_rawresult", "display": "Raw Result", "type": "memo", "max_length": 1048576, "description": "Raw analyzer JSON for debugging and re-processing."},
+        {"name": "vz_documenttext", "display": "Full Document Text", "type": "memo", "max_length": 1048576, "description": "Complete synthetic document extraction with verified page boundaries. Separate from the reduced debugging result."},
+        {"name": "vz_indexstatus", "display": "Q&A Index Status", "type": "choice", "options": ["Not Indexed", "Queued", "Ready", "Failed"], "default": "Not Indexed"},
+        {"name": "vz_indexversion", "display": "Q&A Document Version", "type": "string", "max_length": 64, "description": "SHA-256 of the complete page-marked document indexed for Q&A."},
+        {"name": "vz_indexerror", "display": "Q&A Index Error", "type": "memo", "max_length": 4000},
+        {"name": "vz_errormessage", "display": "Error Message", "type": "memo", "max_length": 10000},
+        {"name": "vz_processedon", "display": "Processed On", "type": "datetime"}
+      ]
+    },
+    {
+      "name": "vz_checklistitem",
+      "display": "Vizient Checklist Item",
+      "plural": "Vizient Checklist Items",
+      "description": "Configuration: one row per item on the contract review checklist.",
+      "ownership": "OrganizationOwned",
+      "primary": {
+        "name": "vz_name",
+        "display": "Name",
+        "description": "Checklist item label.",
+        "max_length": 400
+      },
+      "columns": [
+        {"name": "vz_key", "display": "Key", "type": "string", "max_length": 100, "required": true, "description": "Stable key that matches the analyzer field, for example Right_AIML."},
+        {"name": "vz_group", "display": "Group", "type": "choice", "options": ["Contract Detail", "Data Right", "Manual"]},
+        {"name": "vz_definition", "display": "Definition", "type": "memo", "max_length": 4000, "description": "Shown as a tooltip in the viewer."},
+        {"name": "vz_hasjudgment", "display": "Has Judgment", "type": "bool", "default": false, "description": "True for data rights."},
+        {"name": "vz_sortorder", "display": "Sort Order", "type": "int", "min": 0, "max": 10000},
+        {"name": "vz_isactive", "display": "Is Active", "type": "bool", "default": true}
+      ]
+    },
+    {
+      "name": "vz_finding",
+      "display": "Vizient Finding",
+      "plural": "Vizient Findings",
+      "description": "One row per contract and checklist item: what the AI found and what the reviewer decided.",
+      "ownership": "UserOwned",
+      "primary": {
+        "name": "vz_name",
+        "display": "Name",
+        "description": "Contract name and checklist item label.",
+        "max_length": 400
+      },
+      "columns": [
+        {"name": "vz_presence", "display": "Presence", "type": "choice", "options": ["Found", "Not Found", "Unclear"]},
+        {"name": "vz_aivalue", "display": "AI Value", "type": "memo", "max_length": 10000, "description": "Extracted value or summary."},
+        {"name": "vz_aijudgment", "display": "AI Judgment", "type": "globalchoice", "global": "vz_judgment"},
+        {"name": "vz_aiconditions", "display": "AI Conditions", "type": "memo", "max_length": 10000},
+        {"name": "vz_clause", "display": "Clause", "type": "memo", "max_length": 10000, "description": "Verbatim quote from the contract."},
+        {"name": "vz_page", "display": "Page", "type": "int", "min": 0, "max": 100000, "description": "First page of the source."},
+        {"name": "vz_sourceregions", "display": "Source Regions", "type": "memo", "max_length": 100000, "description": "JSON array of page and polygon regions, in the units the analyzer returns (inches for PDF)."},
+        {"name": "vz_confidence", "display": "Confidence", "type": "decimal", "precision": 4, "min": 0, "max": 1},
+        {"name": "vz_reviewstatus", "display": "Review Status", "type": "choice", "options": ["Pending", "Accepted", "Corrected", "Rejected"], "default": "Pending"},
+        {"name": "vz_reviewervalue", "display": "Reviewer Value", "type": "memo", "max_length": 10000, "description": "Reviewer correction. The original AI value is never overwritten."},
+        {"name": "vz_reviewerjudgment", "display": "Reviewer Judgment", "type": "globalchoice", "global": "vz_judgment"},
+        {"name": "vz_reviewernotes", "display": "Reviewer Notes", "type": "memo", "max_length": 10000},
+        {"name": "vz_reviewedon", "display": "Reviewed On", "type": "datetime"}
+      ]
+    }
+  ],
+  "keys": [
+    {"table": "vz_checklistitem", "name": "vz_checklistitem_key", "display": "Checklist item key", "columns": ["vz_key"]}
+  ],
+  "relationships": [
+    {"name": "vz_contractquestion_contract", "referenced": "vz_contract", "referencing": "vz_contractquestion", "lookup": "vz_contract", "display": "Contract", "description": "Only this contract is in scope. Dataverse enforces append-to access on the parent.", "required": true, "cascade": "parental"},
+    {"name": "vz_contract_parentcontract", "referenced": "vz_contract", "referencing": "vz_contract", "lookup": "vz_parentcontract", "display": "Parent Contract", "description": "Manual link: amendment to SOW to MSA.", "cascade": "removelink"},
+    {"name": "vz_contract_contractowner", "referenced": "systemuser", "referencing": "vz_contract", "lookup": "vz_contractowner", "display": "Contract Owner", "description": "Manually assigned business owner.", "cascade": "removelink"},
+    {"name": "vz_contract_legalreviewer", "referenced": "systemuser", "referencing": "vz_contract", "lookup": "vz_legalreviewer", "display": "Legal Reviewer", "description": "Manually assigned legal reviewer.", "cascade": "removelink"},
+    {"name": "vz_finding_contract", "referenced": "vz_contract", "referencing": "vz_finding", "lookup": "vz_contract", "display": "Contract", "description": "Parent contract. Deleting the contract deletes its findings.", "required": true, "cascade": "parental"},
+    {"name": "vz_finding_checklistitem", "referenced": "vz_checklistitem", "referencing": "vz_finding", "lookup": "vz_checklistitem", "display": "Checklist Item", "description": "The checklist item this finding answers.", "cascade": "restrict"},
+    {"name": "vz_finding_reviewedby", "referenced": "systemuser", "referencing": "vz_finding", "lookup": "vz_reviewedby", "display": "Reviewed By", "description": "User who reviewed this finding.", "cascade": "removelink"}
+  ]
+}

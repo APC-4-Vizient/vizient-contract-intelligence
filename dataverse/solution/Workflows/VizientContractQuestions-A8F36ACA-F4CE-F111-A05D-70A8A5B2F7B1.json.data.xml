@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Workflow WorkflowId="{a8f36aca-f4ce-f111-a05d-70a8a5b2f7b1}" Name="Vizient Contract Questions" Description="Answers a user's question from only the authorized text of the open contract using Foundry. Built by scripts/provision-flow.py; do not edit by hand. [definition d17a418bfe86]" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <JsonFileName>/Workflows/VizientContractQuestions-A8F36ACA-F4CE-F111-A05D-70A8A5B2F7B1.json</JsonFileName>
+  <Type>1</Type>
+  <Subprocess>0</Subprocess>
+  <Category>5</Category>
+  <Mode>0</Mode>
+  <Scope>4</Scope>
+  <OnDemand>0</OnDemand>
+  <TriggerOnCreate>0</TriggerOnCreate>
+  <TriggerOnDelete>0</TriggerOnDelete>
+  <AsyncAutodelete>0</AsyncAutodelete>
+  <SyncWorkflowLogOnFailure>0</SyncWorkflowLogOnFailure>
+  <StateCode>1</StateCode>
+  <StatusCode>2</StatusCode>
+  <RunAs>1</RunAs>
+  <IsTransacted>1</IsTransacted>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <BusinessProcessType>0</BusinessProcessType>
+  <IsCustomProcessingStepAllowedForOtherPublishers>1</IsCustomProcessingStepAllowedForOtherPublishers>
+  <ModernFlowType>0</ModernFlowType>
+  <PrimaryEntity>none</PrimaryEntity>
+  <LocalizedNames>
+    <LocalizedName languagecode="1033" description="Vizient Contract Questions" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description languagecode="1033" description="Answers a user's question from only the authorized text of the open contract using Foundry. Built by scripts/provision-flow.py; do not edit by hand. [definition d17a418bfe86]" />
+  </Descriptions>
+</Workflow>

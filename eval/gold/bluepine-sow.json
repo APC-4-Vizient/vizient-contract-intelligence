@@ -1,0 +1,101 @@
+{
+  "_meta": {
+    "id": "bluepine-sow",
+    "pdf": "bluepine-sow.pdf",
+    "synthetic": true,
+    "pages": 14,
+    "generator": "eval/generate_contracts.py"
+  },
+  "Vendor": {
+    "value": "Bluepine Health Data, Inc.",
+    "page": 1,
+    "quote": "Bluepine Health Data, Inc., a Delaware corporation with its principal office at 410 Harbor Point Road, Suite 300, Wilmington, Delaware 19801 (\"Provider\")"
+  },
+  "VizientEntity": {
+    "value": "Vizient, Inc.",
+    "page": 1,
+    "quote": "Vizient, Inc., a Delaware corporation with offices in Irving, Texas (\"Client\")"
+  },
+  "DocumentType": {
+    "value": "SOW",
+    "page": 1,
+    "quote": "STATEMENT OF WORK NO. BP-2025-0417"
+  },
+  "ContractIdentifier": {
+    "value": "Statement of Work No. BP-2025-0417",
+    "page": 1,
+    "quote": "This Statement of Work No. BP-2025-0417 (this \"SOW\")"
+  },
+  "EffectiveDate": {
+    "value": "2025-01-15",
+    "page": 1,
+    "quote": "This Statement of Work No. BP-2025-0417 (this \"SOW\") is entered into as of January 15, 2025 (the \"Effective Date\")"
+  },
+  "ExpirationDate": {
+    "value": "2028-01-14",
+    "page": 12,
+    "quote": "Initial License Period: January 15, 2025 through January 14, 2028"
+  },
+  "RenewalTermination": {
+    "value": "Client may terminate at the end of any Annual License Period on at least 60 days' written notice; no refund of fees paid; no automatic renewal",
+    "page": 8,
+    "quote": "Client may terminate this SOW for convenience effective at the end of any Annual License Period by giving Provider at least sixty (60) days' prior written notice; fees paid are non-refundable. This SOW does not renew automatically; any renewal requires a written amendment signed by both parties."
+  },
+  "Signatories": {
+    "value": "Maren Okafor (President, Data and Analytics, 01/22/2025); Tobias Lindqvist (Vice President and General Manager, 01/21/2025)",
+    "page": 14,
+    "quote": "Maren Okafor"
+  },
+  "ParentAgreementReference": {
+    "value": "Master Data License Agreement No. 70418822 dated March 3, 2021",
+    "page": 1,
+    "quote": "This SOW is issued under, and is governed by, Master Data License Agreement No. 70418822 dated March 3, 2021 (the \"Master Agreement\"), between Provider and Client."
+  },
+  "Right_InternalAnalytics": {
+    "judgment": "Permitted",
+    "page": 3,
+    "quote": "Client may use the Licensed Data for its internal analytics, reporting and benchmarking for its own direct benefit."
+  },
+  "Right_AIML": {
+    "judgment": "Prohibited",
+    "page": 4,
+    "quote": "Client shall not use the Licensed Data to train, fine-tune or validate any machine learning or artificial intelligence model."
+  },
+  "Right_ProductDevelopment": {
+    "judgment": "Conditional",
+    "page": 3,
+    "quote": "Client may incorporate analytical outputs derived from the Licensed Data into Client's commercial products and services only with Provider's prior written consent, which shall not be unreasonably withheld."
+  },
+  "Right_BAARequired": {
+    "judgment": "Not Addressed"
+  },
+  "Right_Retention": {
+    "judgment": "Conditional",
+    "page": 6,
+    "quote": "Client's right to use the Licensed Data continues for twelve (12) months after the final delivery of Licensed Data under this SOW, after which Client shall cease all use of the Licensed Data. Client may keep one (1) archival copy of the Licensed Data solely for audit and legal-compliance purposes."
+  },
+  "Right_AffiliateSharing": {
+    "judgment": "Not Addressed"
+  },
+  "Right_ThirdPartySharing": {
+    "judgment": "Prohibited",
+    "page": 4,
+    "quote": "Client shall not sell, license, distribute or disclose the Licensed Data to any third party."
+  },
+  "Right_DataLinking": {
+    "judgment": "Conditional",
+    "page": 4,
+    "quote": "Client may link the Licensed Data to its own datasets provided it does not append Provider's record identifiers to any data supplied by a third party and does not attempt to identify any individual."
+  },
+  "Right_DeIdentification": {
+    "judgment": "Not Addressed"
+  },
+  "Right_Destruction": {
+    "judgment": "Conditional",
+    "page": 6,
+    "quote": "Within thirty (30) days after expiration or termination of this SOW, Client shall destroy all Licensed Data and certify the destruction in writing, except for the one (1) archival copy described in Section 9.1."
+  },
+  "Right_Geographic": {
+    "judgment": "Not Addressed"
+  }
+}

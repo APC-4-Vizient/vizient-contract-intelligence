@@ -1,0 +1,105 @@
+{
+  "_meta": {
+    "id": "tessera-dua",
+    "pdf": "tessera-dua.pdf",
+    "synthetic": true,
+    "pages": 13,
+    "generator": "eval/generate_contracts.py"
+  },
+  "Vendor": {
+    "value": "Tessera Clinical Research Analytics, LLC",
+    "page": 1,
+    "quote": "Tessera Clinical Research Analytics, LLC, a Delaware limited liability company with its principal office at 88 Meadowlark Lane, Suite 12, Cambridge, Massachusetts 02139 (\"Provider\")"
+  },
+  "VizientEntity": {
+    "value": "Meridian Care Analytics, LLC",
+    "page": 1,
+    "quote": "Meridian Care Analytics, LLC, a Texas limited liability company with offices in Irving, Texas (\"Client\")"
+  },
+  "DocumentType": {
+    "value": "DUA",
+    "page": 1,
+    "quote": "DATA USE AGREEMENT NO. TCR-DUA-2025-118"
+  },
+  "ContractIdentifier": {
+    "value": "Data Use Agreement No. TCR-DUA-2025-118",
+    "page": 1,
+    "quote": "This Data Use Agreement No. TCR-DUA-2025-118 (this \"Agreement\")"
+  },
+  "EffectiveDate": {
+    "value": "2025-04-01",
+    "page": 1,
+    "quote": "This Data Use Agreement No. TCR-DUA-2025-118 (this \"Agreement\") is entered into as of April 1, 2025 (the \"Effective Date\")"
+  },
+  "ExpirationDate": {
+    "value": "2027-03-31",
+    "page": 8,
+    "quote": "The initial term of this Agreement is two (2) years, beginning on the Effective Date and ending on March 31, 2027 (the \"Initial Term\")."
+  },
+  "RenewalTermination": {
+    "value": "Renews automatically for successive one-year terms unless either party gives at least 90 days' written notice of non-renewal; either party may terminate for uncured material breach after 30 days' notice; Client may terminate for convenience on 30 days' notice",
+    "page": 8,
+    "quote": "This Agreement renews automatically for successive one-year terms unless either party gives at least ninety (90) days' written non-renewal notice. Either party may terminate for uncured material breach after thirty (30) days' notice; Client may terminate for convenience on thirty (30) days' notice."
+  },
+  "Signatories": {
+    "value": "Dr. Helena Voss (Chief Executive Officer, 04/03/2025); Marcus Adeyemi (Chief Data Officer, 04/02/2025)",
+    "page": 11,
+    "quote": "Dr. Helena Voss"
+  },
+  "ParentAgreementReference": {
+    "value": ""
+  },
+  "Right_InternalAnalytics": {
+    "judgment": "Permitted",
+    "page": 3,
+    "quote": "Client may use the Licensed Data for its internal research, reporting, benchmarking and analytics."
+  },
+  "Right_AIML": {
+    "judgment": "Conditional",
+    "page": 3,
+    "quote": "Client may use the Licensed Data to develop, train and validate machine learning models solely within Client's secure environment, provided that no Licensed Data and no model that embodies Licensed Data is disclosed outside Client without Provider's prior written approval."
+  },
+  "Right_ProductDevelopment": {
+    "judgment": "Not Addressed"
+  },
+  "Right_BAARequired": {
+    "judgment": "Conditional",
+    "page": 5,
+    "quote": "Before Provider delivers any Protected Health Information to Client, the parties shall enter into a Business Associate Agreement."
+  },
+  "Right_Retention": {
+    "judgment": "Conditional",
+    "page": 5,
+    "quote": "Client may retain the Licensed Data during the Term, and shall retain audit logs of all access to the Licensed Data for six (6) years."
+  },
+  "Right_AffiliateSharing": {
+    "judgment": "Conditional",
+    "page": 3,
+    "quote": "Client may share the Licensed Data with its wholly owned Affiliates that have agreed in writing to be bound by this Agreement."
+  },
+  "Right_ThirdPartySharing": {
+    "judgment": "Prohibited",
+    "page": 4,
+    "quote": "Client shall not disclose, sell, sublicense or otherwise make the Licensed Data available to any third party."
+  },
+  "Right_DataLinking": {
+    "judgment": "Prohibited",
+    "page": 4,
+    "quote": "Client shall not link, merge or combine the Licensed Data with any other dataset or data source."
+  },
+  "Right_DeIdentification": {
+    "judgment": "Permitted",
+    "page": 3,
+    "quote": "Client may de-identify, anonymize or aggregate the Licensed Data in accordance with applicable law and may use the resulting de-identified data for its internal research and analytics without further obligation to Provider."
+  },
+  "Right_Destruction": {
+    "judgment": "Conditional",
+    "page": 8,
+    "quote": "Within thirty (30) days after expiration or termination of this Agreement, Client shall return or destroy all Licensed Data and certify the destruction in writing, except for copies that Client is required by law to retain."
+  },
+  "Right_Geographic": {
+    "judgment": "Prohibited",
+    "page": 4,
+    "quote": "Licensed Data shall be stored and accessed only within the United States, and Client shall not permit access to Licensed Data from outside the United States."
+  }
+}

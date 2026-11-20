@@ -1,0 +1,13 @@
+<environmentvariabledefinition schemaname="vz_SharePointLibraryId">
+  <description default="GUID of the document library that holds the intake folder.">
+    <label description="GUID of the document library that holds the intake folder." languagecode="1033" />
+  </description>
+  <displayname default="SharePoint Library ID">
+    <label description="SharePoint Library ID" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

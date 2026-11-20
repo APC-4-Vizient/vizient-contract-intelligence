@@ -1,0 +1,390 @@
+/*
+  Vizient theme for the Contract Review Code App.
+
+  Source: vizient.com compiled CSS custom properties (eggshell and mulberry themes) and
+  computed styles on live elements, captured 2026-10-21. Values marked "derived" were
+  calculated here and are not published by Vizient.
+
+  Not bundled (licensed or trademarked): the Vizient logo and the Haffer and Freight
+  Display Pro fonts. The font stacks below list them first, then fall back to system fonts.
+
+  Rule: orange #f67318 is a fill only (2.78:1 on eggshell). Orange-toned text must use
+  --vz-orange-700 or --vz-link.
+*/
+
+:root {
+  /* Palette (names follow vizient.com --color-*) */
+  --vz-mulberry-900: #0f0308;
+  --vz-mulberry-800: #2c0a19;
+  --vz-mulberry-500: #4a1029;
+  --vz-mulberry-400: #6e3a52;
+  --vz-mulberry-300: #9c546b;
+  --vz-mulberry-200: #cfc0c8;
+  --vz-mulberry-150: #e2d8dc;
+  --vz-mulberry-100: #eee8ec;
+  --vz-eggshell: #fefcf8;
+  --vz-ink: #1d160a;
+  --vz-ink-muted: #666458;
+  --vz-orange-500: #f67318;
+  --vz-orange-700: #a24300;
+  --vz-rust-600: #c0420e;
+  --vz-rust-700: #983514;
+  --vz-oyster-100: #f7f7f7;
+  --vz-oyster-200: #efefef;
+  --vz-oyster-300: #e6e6e6;
+  --vz-oyster-600: #cececd;
+  --vz-oyster-700: #c3c3c2;
+  --vz-oyster-dark: #4b4a40;
+  --vz-oyster-accent: #727062;
+  --vz-cobalt-700: #123856;
+  --vz-cobalt-500: #33516a;
+  --vz-cobalt-200: #759ebb;
+  --vz-mist-600: #cbd9e0;
+  --vz-emerald-700: #1d3e28;
+  --vz-emerald-300: #9aaca0;
+  --vz-emerald-100: #e3e6e4;
+  --vz-bark-800: #56401a;
+  --vz-yellow-500: #ffcc12;
+  --vz-yellow-100: #fff5cc;
+  --vz-red-700: #c10007;
+  --vz-red-tint: #f8e3e0; /* derived: red-700 at 10% over eggshell */
+  --vz-red-border: #e9a4a4; /* derived */
+  --vz-green-focus: #1a9a59;
+
+  /* Semantic tokens, eggshell theme (the app default; names follow vizient.com --theme-*) */
+  --vz-bg: var(--vz-eggshell);
+  --vz-bg-subtle: var(--vz-oyster-100);
+  --vz-bg-inset: var(--vz-oyster-200);
+  --vz-bg-viewer: var(--vz-oyster-300);
+  --vz-text: var(--vz-ink);
+  --vz-text-muted: var(--vz-ink-muted);
+  --vz-heading: var(--vz-mulberry-500);
+  --vz-link: var(--vz-rust-600);
+  --vz-link-hover: var(--vz-rust-700);
+  --vz-surface-primary: var(--vz-mulberry-500);
+  --vz-on-primary: var(--vz-eggshell);
+  --vz-cta: var(--vz-orange-500);
+  --vz-on-cta: var(--vz-mulberry-900);
+  --vz-tint: var(--vz-mulberry-200);
+  --vz-tint-text: var(--vz-mulberry-500);
+  --vz-border: #c9c3b8;
+  --vz-border-card: var(--vz-oyster-600);
+  --vz-border-card-hover: var(--vz-mulberry-300);
+  --vz-border-control: var(--vz-ink-muted); /* derived choice: >= 3:1, unlike the 1.7:1 site divider */
+  --vz-selected-bg: var(--vz-mulberry-100);
+  --vz-focus: var(--vz-green-focus);
+  --vz-highlight-fill: rgb(246 115 24 / 0.35);
+  --vz-highlight-stroke: var(--vz-orange-700);
+  --vz-pulse-on: rgb(246 115 24 / 0.55);
+  --vz-pulse-off: rgb(246 115 24 / 0);
+
+  /* Typography */
+  --vz-font-sans: "Haffer", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --vz-font-heading: "freight-display-pro", Georgia, "Times New Roman", serif;
+  --vz-text-xs: 0.75rem;
+  --vz-text-sm: 0.875rem;
+  --vz-text-base: 1rem;
+  --vz-text-lg: 1.25rem;
+  --vz-h1: 2rem;
+  --vz-h2: 1.5rem;
+
+  /* Shape and motion */
+  --vz-radius-sm: 0.25rem;
+  --vz-radius-md: 0.5rem;
+  --vz-radius-lg: 0.75rem;
+  --vz-radius-pill: 9999px;
+  --vz-radius-nav: 32px;
+  --vz-shadow-sm: 0 1px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+  --vz-shadow-nav: 0 0 4px 0 #0003;
+  --vz-ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --vz-duration: 150ms;
+}
+
+/* Dark band, for example a summary strip. Mirrors vizient.com data-theme="mulberry". */
+[data-vz-theme="mulberry"] {
+  --vz-bg: var(--vz-mulberry-500);
+  --vz-text: var(--vz-eggshell);
+  --vz-text-muted: #f4f3f1;
+  --vz-heading: var(--vz-eggshell);
+  --vz-link: #fbba76;
+  --vz-link-hover: #f9923e;
+  --vz-surface-primary: var(--vz-orange-500);
+  --vz-on-primary: var(--vz-mulberry-900);
+  --vz-tint: var(--vz-mulberry-800);
+  --vz-tint-text: var(--vz-eggshell);
+  --vz-border: #6e3a52;
+  --vz-border-card: #6e3a52;
+  --vz-border-card-hover: var(--vz-mulberry-300);
+  --vz-border-control: var(--vz-mulberry-200);
+  background: var(--vz-bg);
+  color: var(--vz-text);
+}
+
+body {
+  margin: 0;
+  background: var(--vz-bg);
+  color: var(--vz-text);
+  font: 400 var(--vz-text-sm) / 1.43 var(--vz-font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headings are opt-in classes so Fluent components keep their own typography. */
+.vz-heading,
+.vz-h1,
+.vz-h2 {
+  margin: 0;
+  color: var(--vz-heading);
+  font-family: var(--vz-font-heading);
+  font-weight: 400;
+  line-height: 1.15;
+}
+.vz-h1 { font-size: var(--vz-h1); }
+.vz-h2 { font-size: var(--vz-h2); }
+
+.vz-eyebrow {
+  color: var(--vz-text-muted);
+  font-size: var(--vz-text-xs);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.vz-link { color: var(--vz-link); }
+.vz-link:hover { color: var(--vz-link-hover); }
+
+/* App bar: the floating pill navigation from vizient.com */
+.vz-appbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 1rem;
+  min-height: 4rem;
+  padding: 0.5rem 0.75rem 0.5rem 2rem;
+  background: var(--vz-bg);
+  border-radius: var(--vz-radius-nav);
+  box-shadow: var(--vz-shadow-nav);
+  backdrop-filter: blur(8px);
+  color: var(--vz-heading);
+}
+.vz-appbar__title {
+  font: 400 1.5rem / 1 var(--vz-font-heading);
+  white-space: nowrap;
+}
+.vz-appbar__spacer { flex: 1; }
+@media (max-width: 480px) {
+  .vz-appbar { padding-inline-start: 1rem; }
+}
+
+/* Buttons: pill shaped; hover and press fade the button, as on vizient.com */
+.vz-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.25rem;
+  padding: 0.375rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: var(--vz-radius-pill);
+  background: var(--vz-surface-primary);
+  color: var(--vz-on-primary);
+  font: 500 var(--vz-text-sm) / 1.25rem var(--vz-font-sans);
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity var(--vz-duration) var(--vz-ease);
+}
+.vz-btn:hover:not(:disabled) { opacity: 0.9; }
+.vz-btn:active:not(:disabled) { opacity: 0.8; }
+.vz-btn:focus-visible,
+.vz-icon-btn:focus-visible,
+.vz-card:focus-visible,
+.vz-row:focus-visible {
+  outline: 2px solid var(--vz-focus);
+  outline-offset: 2px;
+}
+.vz-btn:disabled {
+  background: var(--vz-oyster-200);
+  color: var(--vz-ink-muted);
+  cursor: not-allowed;
+}
+.vz-btn--cta { background: var(--vz-cta); color: var(--vz-on-cta); }
+.vz-btn--outline {
+  background: transparent;
+  border-color: var(--vz-surface-primary);
+  color: var(--vz-heading);
+}
+.vz-btn--tint { background: var(--vz-tint); color: var(--vz-tint-text); }
+.vz-btn--sm {
+  min-height: 2rem;
+  padding: 0.25rem 0.875rem;
+}
+.vz-btn--lg {
+  min-height: 3.25rem;
+  padding: 0.5rem 1rem 0.5rem 1.5rem;
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+.vz-icon-btn {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  border: 0;
+  border-radius: 50%;
+  background: var(--vz-surface-primary);
+  color: var(--vz-on-primary);
+  cursor: pointer;
+}
+
+/* Cards: outlined on the page background */
+.vz-card {
+  background: var(--vz-bg);
+  border: 1px solid var(--vz-border-card);
+  border-radius: var(--vz-radius-lg);
+  transition: border-color var(--vz-duration) var(--vz-ease);
+}
+.vz-card:hover { border-color: var(--vz-border-card-hover); }
+
+/* Status chips. Tone names are mapped from Dataverse labels in vizient-fluent-theme.ts. */
+.vz-chip,
+.vz-chip--neutral {
+  --chip-bg: var(--vz-oyster-200);
+  --chip-fg: var(--vz-oyster-dark);
+  --chip-border: var(--vz-oyster-700);
+  --chip-dot: var(--vz-oyster-accent);
+}
+.vz-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  min-height: 1.5rem;
+  padding: 0 0.625rem;
+  border: 1px solid var(--chip-border);
+  border-radius: var(--vz-radius-pill);
+  background: var(--chip-bg);
+  color: var(--chip-fg);
+  font: 500 var(--vz-text-xs) / 1 var(--vz-font-sans);
+  white-space: nowrap;
+}
+.vz-chip::before {
+  content: "";
+  flex: none;
+  inline-size: 0.5rem;
+  block-size: 0.5rem;
+  border-radius: 50%;
+  background: var(--chip-dot);
+}
+.vz-chip--success {
+  --chip-bg: var(--vz-emerald-100);
+  --chip-fg: var(--vz-emerald-700);
+  --chip-border: var(--vz-emerald-300);
+  --chip-dot: var(--vz-green-focus);
+}
+.vz-chip--warning {
+  --chip-bg: var(--vz-yellow-100);
+  --chip-fg: var(--vz-bark-800);
+  --chip-border: var(--vz-yellow-500);
+  --chip-dot: var(--vz-yellow-500);
+}
+.vz-chip--danger {
+  --chip-bg: var(--vz-red-tint);
+  --chip-fg: var(--vz-red-700);
+  --chip-border: var(--vz-red-border);
+  --chip-dot: var(--vz-red-700);
+}
+.vz-chip--info {
+  --chip-bg: var(--vz-mist-600);
+  --chip-fg: var(--vz-cobalt-700);
+  --chip-border: var(--vz-cobalt-200);
+  --chip-dot: var(--vz-cobalt-500);
+}
+.vz-chip--outline {
+  --chip-bg: transparent;
+  --chip-fg: var(--vz-text);
+  --chip-border: var(--vz-border-control);
+  --chip-dot: var(--vz-border-control);
+}
+.vz-chip--outline::before {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--chip-dot);
+}
+.vz-chip--brand {
+  --chip-bg: var(--vz-mulberry-500);
+  --chip-fg: var(--vz-eggshell);
+  --chip-border: var(--vz-mulberry-500);
+  --chip-dot: var(--vz-orange-500);
+}
+/* Swaps the dot for a warning glyph, so a state is not carried by color alone (Not Addressed). */
+.vz-chip--flag::before {
+  content: "\26A0\FE0E";
+  inline-size: auto;
+  block-size: auto;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: var(--chip-fg);
+  font-size: var(--vz-text-xs);
+  line-height: 1;
+}
+.vz-confidence {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  min-height: 1.25rem;
+  border-radius: var(--vz-radius-pill);
+  background: var(--vz-mist-600);
+  color: var(--vz-cobalt-700);
+  font: 600 var(--vz-text-xs) / 1 var(--vz-font-sans);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Progress, for example extraction completeness */
+.vz-progress {
+  block-size: 0.5rem;
+  overflow: hidden;
+  border-radius: var(--vz-radius-pill);
+  background: var(--vz-mulberry-150);
+}
+.vz-progress > span {
+  display: block;
+  block-size: 100%;
+  border-radius: inherit;
+  background: var(--vz-mulberry-500);
+}
+
+/* Review list rows and the PDF viewer */
+.vz-row {
+  padding: 0.75rem 1rem;
+  border-inline-start: 3px solid transparent;
+  border-block-end: 1px solid var(--vz-border);
+  cursor: pointer;
+}
+.vz-row:hover { background: var(--vz-bg-subtle); }
+.vz-row[aria-selected="true"],
+.vz-row[aria-current="true"] {
+  background: var(--vz-selected-bg);
+  border-inline-start-color: var(--vz-mulberry-500);
+}
+.vz-viewer {
+  padding: 1rem;
+  border-radius: var(--vz-radius-lg);
+  background: var(--vz-bg-viewer);
+}
+.vz-highlight {
+  background: var(--vz-highlight-fill);
+  outline: 2px solid var(--vz-highlight-stroke);
+  border-radius: 2px;
+}
+.vz-highlight--pulse { animation: vz-pulse 900ms var(--vz-ease) 2; }
+@keyframes vz-pulse {
+  0%,
+  100% { box-shadow: 0 0 0 0 var(--vz-pulse-on); }
+  50% { box-shadow: 0 0 0 8px var(--vz-pulse-off); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vz-highlight--pulse { animation: none; }
+  .vz-btn,
+  .vz-card { transition: none; }
+}

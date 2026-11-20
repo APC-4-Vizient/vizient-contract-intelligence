@@ -1,0 +1,263 @@
+{
+  "$comment": "Single source of truth for the review checklist (brief sections 3a-3c). analyzer/build_schema.py generates the Content Understanding analyzer from it, scripts/seed-checklist.py seeds vz_checklistitem from it, and the Function maps analyzer results back to findings with it. A key is the analyzer field name and the vz_key alternate key, so never rename one. Add new items at the end.",
+  "version": 1,
+  "rightSuffix": "Use 'Not Addressed' if the document does not explicitly address this. Never infer from silence.",
+  "defaultJudgments": {
+    "Permitted": "The document explicitly allows this without material conditions.",
+    "Prohibited": "The document explicitly forbids this.",
+    "Conditional": "The document allows or requires this only under stated conditions, limits or approvals.",
+    "Not Addressed": "The document does not explicitly address this. Never infer from silence."
+  },
+  "items": [
+    {
+      "key": "Vendor",
+      "label": "Client / Vendor",
+      "group": "Contract Detail",
+      "source": "analyzer",
+      "type": "string",
+      "method": "extract",
+      "definition": "Legal name of the counterparty providing data or services to Vizient or its affiliate.",
+      "sortOrder": 1,
+      "isActive": true
+    },
+    {
+      "key": "VizientEntity",
+      "label": "Vizient contracting entity",
+      "group": "Contract Detail",
+      "source": "analyzer",
+      "type": "string",
+      "method": "extract",
+      "definition": "The Vizient entity or affiliate that is a party, for example Vizient Inc. or Sg2, LLC.",
+      "sortOrder": 2,
+      "isActive": true
+    },
+    {
+      "key": "DocumentType",
+      "label": "Document type",
+      "group": "Contract Detail",
+      "source": "analyzer",
+      "type": "string",
+      "method": "classify",
+      "enum": ["MSA", "SOW", "Amendment", "Order Form", "DUA", "BAA", "NDA", "Other"],
+      "enumDescriptions": {
+        "MSA": "Master services agreement: umbrella terms that govern later statements of work or orders.",
+        "SOW": "Statement of work: scope, deliverables, term and fees for specific work.",
+        "Amendment": "Amendment: changes, extends or restates an earlier agreement or statement of work.",
+        "Order Form": "Order form: an ordering document for specific products, data or subscriptions.",
+        "DUA": "Data use agreement: terms for access to or use of data.",
+        "BAA": "Business associate agreement: HIPAA terms for handling protected health information.",
+        "NDA": "Non-disclosure or confidentiality agreement.",
+        "Other": "None of the other document types."
+      },
+      "definition": "Type of this document.",
+      "sortOrder": 3,
+      "isActive": true
+    },
+    {
+      "key": "ContractIdentifier",
+      "label": "Contract identifier",
+      "group": "Contract Detail",
+      "source": "analyzer",
+      "type": "string",
+      "method": "extract",
+      "definition": "Agreement, SOW, opportunity or contract number of THIS document.",
+      "sortOrder": 4,
+      "isActive": true
+    },
+    {
+      "key": "EffectiveDate",
+      "label": "Effective date",
+      "group": "Contract Detail",
+      "source": "analyzer",
+      "type": "date",
+      "method": "extract",
+      "definition": "Date this document takes effect.",
+      "sortOrder": 5,
+      "isActive": true
+    },
+    {
+      "key": "ExpirationDate",
+      "label": "Expiration / end date",
+      "group": "Contract Detail",
+      "source": "analyzer",
+      "type": "date",
+      "method": "extract",
+      "definition": "Date the term or license period ends. Leave empty if evergreen or not stated.",
+      "sortOrder": 6,
+      "isActive": true
+    },
+    {
+      "key": "RenewalTermination",
+      "label": "Renewal & termination terms",
+      "group": "Contract Detail",
+      "source": "analyzer",
+      "type": "string",
+      "method": "generate",
+      "definition": "Summary of renewal terms, notice periods and termination-for-convenience rights. Empty if not stated. A one-time extension or change of the end date is not a renewal term.",
+      "sortOrder": 7,
+      "isActive": true
+    },
+    {
+      "key": "Signatories",
+      "label": "Signatories",
+      "group": "Contract Detail",
+      "source": "analyzer",
+      "type": "string",
+      "method": "extract",
+      "definition": "Names, titles and signature dates of all signers.",
+      "sortOrder": 8,
+      "isActive": true
+    },
+    {
+      "key": "ParentAgreementReference",
+      "label": "Parent / related agreement",
+      "group": "Contract Detail",
+      "source": "analyzer",
+      "type": "string",
+      "method": "extract",
+      "definition": "Any other agreement this document incorporates by reference, amends or is governed by, with number and date. Empty if none. Only a specific agreement the document names counts; a statement that the document is stand-alone is not a reference.",
+      "sortOrder": 9,
+      "isActive": true
+    },
+    {
+      "key": "Right_InternalAnalytics",
+      "label": "Internal Analytics",
+      "group": "Data Right",
+      "source": "analyzer",
+      "hasJudgment": true,
+      "definition": "May the data be used for internal reporting and analysis?",
+      "sortOrder": 10,
+      "isActive": true
+    },
+    {
+      "key": "Right_AIML",
+      "label": "AI / Machine Learning",
+      "group": "Data Right",
+      "source": "analyzer",
+      "hasJudgment": true,
+      "definition": "May the data be used for AI/ML model training or inference?",
+      "sortOrder": 11,
+      "isActive": true
+    },
+    {
+      "key": "Right_ProductDevelopment",
+      "label": "Product Development",
+      "group": "Data Right",
+      "source": "analyzer",
+      "hasJudgment": true,
+      "definition": "May the data be used in commercial products, solutions, or derivative works?",
+      "sortOrder": 12,
+      "isActive": true
+    },
+    {
+      "key": "Right_BAARequired",
+      "label": "BAA Required",
+      "group": "Data Right",
+      "source": "analyzer",
+      "hasJudgment": true,
+      "definition": "Does the contract require or reference a Business Associate Agreement?",
+      "judgments": {
+        "Conditional": "The contract requires or references a Business Associate Agreement.",
+        "Not Addressed": "The contract does not mention a Business Associate Agreement."
+      },
+      "sortOrder": 13,
+      "isActive": true
+    },
+    {
+      "key": "Right_Retention",
+      "label": "Retention Requirements",
+      "group": "Data Right",
+      "source": "analyzer",
+      "hasJudgment": true,
+      "definition": "How long may data be retained? What retention obligations apply?",
+      "sortOrder": 14,
+      "isActive": true
+    },
+    {
+      "key": "Right_AffiliateSharing",
+      "label": "Affiliate Sharing",
+      "group": "Data Right",
+      "source": "analyzer",
+      "hasJudgment": true,
+      "definition": "May data be shared with corporate affiliates?",
+      "sortOrder": 15,
+      "isActive": true
+    },
+    {
+      "key": "Right_ThirdPartySharing",
+      "label": "Third-Party Sharing",
+      "group": "Data Right",
+      "source": "analyzer",
+      "hasJudgment": true,
+      "definition": "May data be distributed or disclosed to external parties/clients?",
+      "sortOrder": 16,
+      "isActive": true
+    },
+    {
+      "key": "Right_DataLinking",
+      "label": "Data Linking",
+      "group": "Data Right",
+      "source": "analyzer",
+      "hasJudgment": true,
+      "definition": "May data be combined/linked with other datasets? Any limits on identifiers/linkages?",
+      "sortOrder": 17,
+      "isActive": true
+    },
+    {
+      "key": "Right_DeIdentification",
+      "label": "De-Identification Rights",
+      "group": "Data Right",
+      "source": "analyzer",
+      "hasJudgment": true,
+      "definition": "May data be anonymized, aggregated, or de-identified, and used afterward?",
+      "sortOrder": 18,
+      "isActive": true
+    },
+    {
+      "key": "Right_Destruction",
+      "label": "Destruction Requirements",
+      "group": "Data Right",
+      "source": "analyzer",
+      "hasJudgment": true,
+      "definition": "What must happen to the data at termination/expiration (return, destroy, archive)?",
+      "sortOrder": 19,
+      "isActive": true
+    },
+    {
+      "key": "Right_Geographic",
+      "label": "Geographic / Offshore",
+      "group": "Data Right",
+      "source": "analyzer",
+      "hasJudgment": true,
+      "definition": "Does the contract limit where the data may be stored or accessed from, for example data residency, United States-only storage or access, or an offshore access rule?",
+      "judgments": {
+        "Permitted": "The contract expressly allows the data to be stored or accessed from any location, including offshore.",
+        "Prohibited": "The contract itself limits storage or access to the United States or another named location, or forbids offshore storage or access.",
+        "Conditional": "The contract allows storage or access outside the stated location only with approval or under stated conditions.",
+        "Not Addressed": "The contract states no rule on where the data is stored or accessed from. Never infer from silence."
+      },
+      "sortOrder": 20,
+      "isActive": true
+    },
+    {
+      "key": "ContractOwner",
+      "label": "Contract Owner",
+      "group": "Manual",
+      "source": "manual",
+      "lookup": "vz_contractowner",
+      "definition": "Vizient business owner of this contract. Assigned by a person, not read from the document.",
+      "sortOrder": 21,
+      "isActive": true
+    },
+    {
+      "key": "LegalReviewer",
+      "label": "Legal Reviewer",
+      "group": "Manual",
+      "source": "manual",
+      "lookup": "vz_legalreviewer",
+      "definition": "Legal reviewer assigned to this contract. Assigned by a person, not read from the document.",
+      "sortOrder": 22,
+      "isActive": true
+    }
+  ]
+}

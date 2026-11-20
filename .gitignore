@@ -1,0 +1,47 @@
+.env
+.env.*
+!.env.example
+.azure/*
+!.azure/deployment-plan.md
+.azd-config/
+.mcp.json
+.vscode/
+.dataverse/
+# Playwright MCP writes snapshots and screenshots here while a browser check runs.
+.playwright-mcp/
+.token_cache.bin
+local.settings.json
+*.snk
+*.pem
+*.pfx
+*.pdf
+samples/
+# Gold labels quote a contract verbatim, so only the synthetic sets are tracked. Anything else in eval/gold, such as
+# labels for a real contract, is ignored. For a new synthetic set, add an "!eval/gold/<id>.json" line.
+eval/gold/*
+!eval/gold/bluepine-amendment.json
+!eval/gold/bluepine-sow.json
+!eval/gold/tessera-dua.json
+*.zip
+# The one zip that is committed: the importable solution export that scripts/pull-solution.py writes, without its
+# environment variable values.
+!dataverse/VizientContractPOC_unmanaged.zip
+# Customer source snapshots cut by scripts/make-snapshot.py.
+snapshot/
+# Environment variable values hold the Function key and tenant-specific addresses; scripts/pull-solution.py deletes them.
+**/environmentvariablevalues.json
+# The brief as received; the repository carries a redacted copy.
+*.original.md
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+node_modules/
+dist/
+coverage/
+# Code App: environment and app ids are written here by `pa app init` and the data-source commands.
+contract-review/power.config.json
+contract-review/.power/
+# The solution export carries the pushed Code App bundle; contract-review/ is its source, so it is not committed.
+dataverse/solution/CanvasApps/*_CodeAppPackages/
+

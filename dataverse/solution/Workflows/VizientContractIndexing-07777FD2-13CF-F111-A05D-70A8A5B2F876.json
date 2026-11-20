@@ -1,0 +1,319 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "vz_dataverse"
+        },
+        "impersonation": {},
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+        "Index_until_complete": {
+          "actions": {
+            "Index_document": {
+              "inputs": {
+                "body": {
+                  "context": "@triggerOutputs()?['body/vz_documenttext']",
+                  "contractId": "@triggerOutputs()?['body/vz_contractid']",
+                  "operation": "@variables('indexOperation')"
+                },
+                "headers": {
+                  "Content-Type": "application/json",
+                  "x-functions-key": "@parameters('Function Key (vz_FunctionKey)')"
+                },
+                "method": "POST",
+                "retryPolicy": {
+                  "type": "none"
+                },
+                "uri": "@{parameters('Function Base URL (vz_FunctionBaseUrl)')}/api/contracts/index"
+              },
+              "operationOptions": "DisableAsyncPattern",
+              "runAfter": {},
+              "runtimeConfiguration": {
+                "secureData": {
+                  "properties": [
+                    "inputs",
+                    "outputs"
+                  ]
+                }
+              },
+              "type": "Http"
+            },
+            "Index_pause": {
+              "inputs": {
+                "interval": {
+                  "count": 3,
+                  "unit": "Second"
+                }
+              },
+              "runAfter": {
+                "Record_index_operation": [
+                  "Succeeded"
+                ]
+              },
+              "type": "Wait"
+            },
+            "Record_index_operation": {
+              "inputs": {
+                "name": "indexOperation",
+                "value": "@coalesce(body('Index_document')?['operation'], json('{}'))"
+              },
+              "runAfter": {
+                "Record_index_status": [
+                  "Succeeded"
+                ]
+              },
+              "type": "SetVariable"
+            },
+            "Record_index_status": {
+              "inputs": {
+                "name": "indexHttp",
+                "value": "@int(coalesce(actions('Index_document')?['outputs']?['statusCode'], 502))"
+              },
+              "runAfter": {
+                "Index_document": [
+                  "Succeeded",
+                  "Failed",
+                  "TimedOut"
+                ]
+              },
+              "type": "SetVariable"
+            }
+          },
+          "expression": "@not(equals(variables('indexHttp'), 202))",
+          "limit": {
+            "count": 180,
+            "timeout": "PT25M"
+          },
+          "runAfter": {
+            "Init_index_operation": [
+              "Succeeded"
+            ]
+          },
+          "type": "Until"
+        },
+        "Init_index_http": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "indexHttp",
+                "type": "integer",
+                "value": 0
+              }
+            ]
+          },
+          "runAfter": {},
+          "type": "InitializeVariable"
+        },
+        "Init_index_operation": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "indexOperation",
+                "type": "object",
+                "value": {}
+              }
+            ]
+          },
+          "runAfter": {
+            "Init_index_http": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable"
+        },
+        "Only_update_the_indexed_document": {
+          "actions": {
+            "Record_index_outcome": {
+              "actions": {
+                "Mark_index_ready": {
+                  "inputs": {
+                    "authentication": "@parameters('$authentication')",
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "UpdateOnlyRecord"
+                    },
+                    "parameters": {
+                      "entityName": "vz_contracts",
+                      "item/vz_indexerror": "",
+                      "item/vz_indexstatus": 651200002,
+                      "item/vz_indexversion": "@body('Index_document')?['version']",
+                      "recordId": "@triggerOutputs()?['body/vz_contractid']"
+                    }
+                  },
+                  "runAfter": {},
+                  "runtimeConfiguration": {
+                    "secureData": {
+                      "properties": [
+                        "inputs",
+                        "outputs"
+                      ]
+                    }
+                  },
+                  "type": "OpenApiConnection"
+                }
+              },
+              "else": {
+                "actions": {
+                  "Mark_index_failed": {
+                    "inputs": {
+                      "authentication": "@parameters('$authentication')",
+                      "host": {
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                        "connectionName": "shared_commondataserviceforapps",
+                        "operationId": "UpdateOnlyRecord"
+                      },
+                      "parameters": {
+                        "entityName": "vz_contracts",
+                        "item/vz_indexerror": "@coalesce(body('Index_document')?['error']?['message'], 'Document indexing timed out or failed. Retry Q&A indexing.')",
+                        "item/vz_indexstatus": 651200003,
+                        "item/vz_indexversion": "",
+                        "recordId": "@triggerOutputs()?['body/vz_contractid']"
+                      }
+                    },
+                    "runAfter": {},
+                    "runtimeConfiguration": {
+                      "secureData": {
+                        "properties": [
+                          "inputs",
+                          "outputs"
+                        ]
+                      }
+                    },
+                    "type": "OpenApiConnection"
+                  }
+                }
+              },
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@variables('indexHttp')",
+                      200
+                    ]
+                  }
+                ]
+              },
+              "runAfter": {},
+              "type": "If"
+            }
+          },
+          "else": {
+            "actions": {}
+          },
+          "expression": {
+            "and": [
+              {
+                "equals": [
+                  "@body('Read_current_document_version')?['vz_documenttext']",
+                  "@triggerOutputs()?['body/vz_documenttext']"
+                ]
+              }
+            ]
+          },
+          "runAfter": {
+            "Read_current_document_version": [
+              "Succeeded"
+            ]
+          },
+          "type": "If"
+        },
+        "Read_current_document_version": {
+          "inputs": {
+            "authentication": "@parameters('$authentication')",
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItem"
+            },
+            "parameters": {
+              "$select": "vz_documenttext",
+              "entityName": "vz_contracts",
+              "recordId": "@triggerOutputs()?['body/vz_contractid']"
+            }
+          },
+          "runAfter": {
+            "Index_until_complete": [
+              "Succeeded",
+              "Failed",
+              "TimedOut"
+            ]
+          },
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "inputs",
+                "outputs"
+              ]
+            }
+          },
+          "type": "OpenApiConnection"
+        }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "Function Base URL (vz_FunctionBaseUrl)": {
+          "defaultValue": "",
+          "metadata": {
+            "schemaName": "vz_FunctionBaseUrl"
+          },
+          "type": "String"
+        },
+        "Function Key (vz_FunctionKey)": {
+          "defaultValue": "",
+          "metadata": {
+            "schemaName": "vz_FunctionKey"
+          },
+          "type": "String"
+        }
+      },
+      "triggers": {
+        "When_document_indexing_is_queued": {
+          "inputs": {
+            "authentication": "@parameters('$authentication')",
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger"
+            },
+            "parameters": {
+              "subscriptionRequest/entityname": "vz_contract",
+              "subscriptionRequest/filterexpression": "vz_indexstatus eq 651200001",
+              "subscriptionRequest/filteringattributes": "vz_indexstatus",
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/scope": 4
+            }
+          },
+          "runtimeConfiguration": {
+            "secureData": {
+              "properties": [
+                "inputs",
+                "outputs"
+              ]
+            }
+          },
+          "type": "OpenApiConnectionWebhook"
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

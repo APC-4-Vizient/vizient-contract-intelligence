@@ -1,0 +1,13 @@
+<environmentvariabledefinition schemaname="vz_SharePointSiteUrl">
+  <description default="Address of the SharePoint site that holds the intake library.">
+    <label description="Address of the SharePoint site that holds the intake library." languagecode="1033" />
+  </description>
+  <displayname default="SharePoint Site URL">
+    <label description="SharePoint Site URL" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

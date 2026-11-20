@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>vz_vizientcontractreview_8e465</Name>
+  <AppVersion>2026-11-19T01:59:56Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>0.0.0.0</CreatedByClientVersion>
+  <MinClientVersion>0.0.0.0</MinClientVersion>
+  <Tags>{}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>RGBA(255,255,255,1)</BackgroundColor>
+  <DisplayName>Vizient Contract Review</DisplayName>
+  <Description></Description>
+  <CommitMessage xsi:nil="true"></CommitMessage>
+  <Publisher xsi:nil="true"></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{}</ConnectionReferences>
+  <DatabaseReferences>{"default.cds":{"databaseDetails":{"referenceType":"Environmental","environmentName":"default.cds","overrideValues":{"status":"NotSpecified","environmentVariableName":""}},"dataSources":{"vizientcontracts":{"entitySetName":"vz_contracts","logicalName":"vz_contract"},"vizientfindings":{"entitySetName":"vz_findings","logicalName":"vz_finding"},"vizientchecklistitems":{"entitySetName":"vz_checklistitems","logicalName":"vz_checklistitem"},"users":{"entitySetName":"systemusers","logicalName":"systemuser"},"vizientcontractquestions":{"entitySetName":"vz_contractquestions","logicalName":"vz_contractquestion"}}}}</DatabaseReferences>
+  <AppComponents>[]</AppComponents>
+  <AppComponentDependencies>[]</AppComponentDependencies>
+  <CanConsumeAppPass>1</CanConsumeAppPass>
+  <CanvasAppType>4</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <AdminControlBypassConsent>0</AdminControlBypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"logicalname":"vz_contract","componenttype":1},{"logicalname":"vz_finding","componenttype":1},{"logicalname":"vz_checklistitem","componenttype":1},{"logicalname":"systemuser","componenttype":1},{"logicalname":"vz_contractquestion","componenttype":1}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <CodeAppPackageUris>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/index.html_ContentType_text/html</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/CostScreen-C-2C9kj3.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/HowItWorksScreen-CwgCLy_9.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/about-DvAPclMI.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/about-Dx-95mwh.css_ContentType_text/css</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/dataverseRepo-BbgHNsBd.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/engine-SlTVRoje.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/index-CS6EXFId.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/index-y-yHGkGn.css_ContentType_text/css</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/pdf-CfhDiWmk.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/pdf.worker.min-DPZ1Y1U-.js_ContentType_application/javascript</CodeAppPackageUri>
+  </CodeAppPackageUris>
+</CanvasApp>

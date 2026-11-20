@@ -1,0 +1,13 @@
+<environmentvariabledefinition schemaname="vz_IntakeFolderPath">
+  <description default="Folder that is watched for new contracts, such as /Shared Documents/Contract Intake.">
+    <label description="Folder that is watched for new contracts, such as /Shared Documents/Contract Intake." languagecode="1033" />
+  </description>
+  <displayname default="Intake Folder Path">
+    <label description="Intake Folder Path" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.0</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

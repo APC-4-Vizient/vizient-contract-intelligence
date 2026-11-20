@@ -1,0 +1,936 @@
+{
+ "id": "0f8fad5b-d9cb-469f-a165-70867728950e",
+ "status": "Succeeded",
+ "usage": {
+  "documentPagesStandard": 2,
+  "contextualizationTokens": 2000,
+  "tokens": {
+   "gpt-5.5-input": 7325,
+   "gpt-5.5-output": 1209
+  }
+ },
+ "result": {
+  "analyzerId": "vizientContractChecklist",
+  "apiVersion": "2025-11-01",
+  "createdAt": "2026-10-22T14:37:51Z",
+  "stringEncoding": "codePoint",
+  "warnings": [],
+  "contents": [
+   {
+    "kind": "document",
+    "mimeType": "application/pdf",
+    "startPageNumber": 1,
+    "endPageNumber": 2,
+    "unit": "inch",
+    "markdown": "STATEMENT OF WORK NO. BP-2025-0417\n\nThis Statement of Work is entered into as of January 15, 2025 (the Effective Date) between\nVizient, Inc. (Vizient) and Bluepine Health Data, Inc. (Vendor).\n\nThis SOW is issued under Master Data License Agreement No. 70418822 dated March 3, 2021.\n\n1\\. Term. This SOW expires on January 14, 2028 unless terminated earlier under the Agreement.\n\n2\\. Permitted Use. Vizient may use the Data for its own internal analytics and benchmarking.\n\n3\\. Artificial Intelligence. Vizient shall not use the Data to train, fine-tune, or improve any\nartificial intelligence or machine learning model.\n\n<!-- PageFooter: SYNTHETIC SAMPLE - FICTIONAL PARTIES - NOT A REAL AGREEMENT -->\n<!-- PageBreak -->\n\n4\\. Third Parties. Vizient shall not disclose the Data to any third party.\n\n5\\. Retention. Vizient may retain the Data for the term of this SOW and for ninety (90) days after\nexpiration, after which Vizient shall destroy it upon written request.\n\nIN WITNESS WHEREOF, the parties have executed this SOW.\n\nVIZIENT, INC.\nBLUEPINE HEALTH DATA, INC.\n\nBy: Maren Okafor Date: 01/22/2025\n\nBy: Tobias Lindqvist Date: 01/21/2025\n\n<!-- PageFooter: SYNTHETIC SAMPLE - FICTIONAL PARTIES - NOT A REAL AGREEMENT -->\n",
+    "pages": [
+     {
+      "pageNumber": 1,
+      "width": 8.5,
+      "height": 11,
+      "angle": 0.0236704,
+      "spans": [
+       {
+        "offset": 0,
+        "length": 721
+       }
+      ]
+     },
+     {
+      "pageNumber": 2,
+      "width": 8.5,
+      "height": 11,
+      "angle": 0,
+      "spans": [
+       {
+        "offset": 721,
+        "length": 501
+       }
+      ]
+     }
+    ],
+    "fields": {
+     "Vendor": {
+      "type": "string",
+      "valueString": "Bluepine Health Data, Inc.",
+      "spans": [
+       {
+        "offset": 155,
+        "length": 26
+       }
+      ],
+      "confidence": 0.953,
+      "source": "D(1,2.5612,1.5368,4.1229,1.5377,4.1228,1.7104,2.5611,1.7096)"
+     },
+     "VizientEntity": {
+      "type": "string",
+      "valueString": "Vizient, Inc.",
+      "spans": [
+       {
+        "offset": 127,
+        "length": 13
+       }
+      ],
+      "confidence": 0.964,
+      "source": "D(1,0.9883,1.5361,1.7091,1.5363,1.7091,1.7098,0.9883,1.7096)"
+     },
+     "DocumentType": {
+      "type": "string",
+      "valueString": "SOW",
+      "spans": [
+       {
+        "offset": 0,
+        "length": 34
+       },
+       {
+        "offset": 36,
+        "length": 90
+       },
+       {
+        "offset": 127,
+        "length": 64
+       },
+       {
+        "offset": 193,
+        "length": 88
+       },
+       {
+        "offset": 283,
+        "length": 93
+       }
+      ],
+      "confidence": 0.874,
+      "source": "D(1,0.9852,0.8697,3.7582,0.8688,3.7583,1.0278,0.9853,1.0287);D(1,0.9904,1.3105,6.3420,1.3168,6.3418,1.4869,0.9902,1.4806);D(1,0.9883,1.5361,4.7356,1.5371,4.7356,1.7106,0.9883,1.7096);D(1,0.9883,1.7547,6.6034,1.7567,6.6033,1.9295,0.9882,1.9275);D(1,0.9987,2.1956,6.6076,2.2025,6.6074,2.3741,0.9985,2.3671)"
+     },
+     "ContractIdentifier": {
+      "type": "string",
+      "valueString": "BP-2025-0417",
+      "spans": [
+       {
+        "offset": 22,
+        "length": 12
+       }
+      ],
+      "confidence": 0.961,
+      "source": "D(1,2.8864,0.8693,3.7582,0.8688,3.7583,1.0278,2.8865,1.0283)"
+     },
+     "EffectiveDate": {
+      "type": "date",
+      "valueDate": "2025-01-15",
+      "spans": [
+       {
+        "offset": 81,
+        "length": 16
+       }
+      ],
+      "confidence": 0.947,
+      "source": "D(1,3.6080,1.3142,4.6092,1.3154,4.6090,1.4849,3.6078,1.4837)"
+     },
+     "ExpirationDate": {
+      "type": "date",
+      "valueDate": "2028-01-14",
+      "spans": [
+       {
+        "offset": 313,
+        "length": 16
+       }
+      ],
+      "confidence": 0.953,
+      "source": "D(1,2.8164,2.1977,3.8207,2.1991,3.8205,2.3708,2.8162,2.3694)"
+     },
+     "RenewalTermination": {
+      "type": "string",
+      "valueString": "This SOW expires on January 14, 2028 unless terminated earlier under the Agreement.",
+      "spans": [
+       {
+        "offset": 283,
+        "length": 93
+       }
+      ],
+      "confidence": 0.892,
+      "source": "D(1,0.9987,2.1956,6.6076,2.2025,6.6074,2.3741,0.9985,2.3671)"
+     },
+     "Signatories": {
+      "type": "string",
+      "valueString": "Maren Okafor Date: 01/22/2025; Tobias Lindqvist Date: 01/21/2025",
+      "spans": [
+       {
+        "offset": 1071,
+        "length": 29
+       },
+       {
+        "offset": 1106,
+        "length": 33
+       }
+      ],
+      "confidence": 0.705,
+      "source": "D(2,1.2342,2.6519,3.2062,2.6458,3.2067,2.8119,1.2347,2.8180);D(2,3.8766,2.6516,6.0139,2.6479,6.0142,2.8161,3.8769,2.8198)"
+     },
+     "ParentAgreementReference": {
+      "type": "string",
+      "valueString": "Master Data License Agreement No. 70418822 dated March 3, 2021",
+      "spans": [
+       {
+        "offset": 218,
+        "length": 62
+       }
+      ],
+      "confidence": 0.904,
+      "source": "D(1,2.5477,1.7567,6.5410,1.7567,6.5410,1.9288,2.5477,1.9288)"
+     },
+     "Right_InternalAnalytics": {
+      "type": "object",
+      "valueObject": {
+       "Judgment": {
+        "type": "string",
+        "valueString": "Permitted",
+        "spans": [
+         {
+          "offset": 378,
+          "length": 92
+         }
+        ],
+        "confidence": 0.943,
+        "source": "D(1,0.9836,2.6463,6.3794,2.6539,6.3792,2.8276,0.9834,2.8200)"
+       },
+       "Conditions": {
+        "type": "string",
+        "valueString": "Vizient may use the Data for its own internal analytics and benchmarking.",
+        "spans": [
+         {
+          "offset": 378,
+          "length": 92
+         }
+        ],
+        "confidence": 0.897,
+        "source": "D(1,0.9836,2.6463,6.3794,2.6539,6.3792,2.8276,0.9834,2.8200)"
+       },
+       "Clause": {
+        "type": "string",
+        "valueString": "Vizient may use the Data for its own internal analytics and benchmarking.",
+        "spans": [
+         {
+          "offset": 397,
+          "length": 73
+         }
+        ],
+        "confidence": 0.927,
+        "source": "D(1,2.0439,2.6488,6.3794,2.6539,6.3792,2.8271,2.0437,2.8220)"
+       }
+      }
+     },
+     "Right_AIML": {
+      "type": "object",
+      "valueObject": {
+       "Judgment": {
+        "type": "string",
+        "valueString": "Prohibited",
+        "spans": [
+         {
+          "offset": 472,
+          "length": 95
+         },
+         {
+          "offset": 568,
+          "length": 50
+         }
+        ],
+        "confidence": 0.892,
+        "source": "D(1,0.9883,3.0897,6.2257,3.0916,6.2256,3.2689,0.9882,3.2670);D(1,0.9852,3.3073,3.8517,3.3084,3.8516,3.4913,0.9851,3.4901)"
+       },
+       "Conditions": {
+        "type": "string",
+        "valueString": "Vizient shall not use the Data to train, fine-tune, or improve any artificial intelligence or machine learning model.",
+        "spans": [
+         {
+          "offset": 472,
+          "length": 95
+         },
+         {
+          "offset": 568,
+          "length": 50
+         }
+        ],
+        "confidence": 0.892,
+        "source": "D(1,0.9883,3.0897,6.2257,3.0916,6.2256,3.2689,0.9882,3.2670);D(1,0.9852,3.3073,3.8517,3.3084,3.8516,3.4913,0.9851,3.4901)"
+       },
+       "Clause": {
+        "type": "string",
+        "valueString": "Vizient shall not use the Data to train, fine-tune, or improve any artificial intelligence or machine learning model.",
+        "spans": [
+         {
+          "offset": 501,
+          "length": 66
+         },
+         {
+          "offset": 568,
+          "length": 50
+         }
+        ],
+        "confidence": 0.883,
+        "source": "D(1,2.4685,3.0916,6.2256,3.0916,6.2256,3.2682,2.4685,3.2682);D(1,0.9852,3.3073,3.8517,3.3084,3.8516,3.4913,0.9851,3.4901)"
+       }
+      }
+     },
+     "Right_ProductDevelopment": {
+      "type": "object",
+      "valueObject": {
+       "Judgment": {
+        "type": "string",
+        "valueString": "Not Addressed",
+        "spans": [
+         {
+          "offset": 0,
+          "length": 34
+         },
+         {
+          "offset": 36,
+          "length": 90
+         },
+         {
+          "offset": 127,
+          "length": 64
+         },
+         {
+          "offset": 193,
+          "length": 88
+         },
+         {
+          "offset": 283,
+          "length": 93
+         },
+         {
+          "offset": 378,
+          "length": 92
+         },
+         {
+          "offset": 472,
+          "length": 95
+         },
+         {
+          "offset": 568,
+          "length": 50
+         },
+         {
+          "offset": 721,
+          "length": 74
+         },
+         {
+          "offset": 797,
+          "length": 98
+         },
+         {
+          "offset": 896,
+          "length": 70
+         },
+         {
+          "offset": 968,
+          "length": 55
+         },
+         {
+          "offset": 1025,
+          "length": 13
+         },
+         {
+          "offset": 1039,
+          "length": 26
+         },
+         {
+          "offset": 1067,
+          "length": 33
+         },
+         {
+          "offset": 1102,
+          "length": 37
+         }
+        ],
+        "confidence": 0.728,
+        "source": "D(1,0.9852,0.8697,3.7582,0.8688,3.7583,1.0278,0.9853,1.0287);D(1,0.9904,1.3105,6.3420,1.3168,6.3418,1.4869,0.9902,1.4806);D(1,0.9883,1.5361,4.7356,1.5371,4.7356,1.7106,0.9883,1.7096);D(1,0.9883,1.7547,6.6034,1.7567,6.6033,1.9295,0.9882,1.9275);D(1,0.9987,2.1956,6.6076,2.2025,6.6074,2.3741,0.9985,2.3671);D(1,0.9836,2.6463,6.3794,2.6539,6.3792,2.8276,0.9834,2.8200);D(1,0.9883,3.0897,6.2257,3.0916,6.2256,3.2689,0.9882,3.2670);D(1,0.9852,3.3073,3.8517,3.3084,3.8516,3.4913,0.9851,3.4901);D(2,0.9852,0.8685,5.0557,0.8810,5.0552,1.0444,0.9847,1.0319);D(2,0.9904,1.3164,6.6366,1.3185,6.6365,1.4844,0.9903,1.4822);D(2,0.9842,1.5406,4.9598,1.5438,4.9597,1.7095,0.9841,1.7063);D(2,0.9816,1.9754,4.7523,1.9774,4.7522,2.1480,0.9815,2.1460);D(2,0.9862,2.4265,1.9369,2.4307,1.9362,2.5955,0.9855,2.5914);D(2,3.1605,2.4244,5.3043,2.4255,5.3042,2.5893,3.1604,2.5882);D(2,0.9836,2.6524,3.2062,2.6456,3.2067,2.8125,0.9841,2.8193);D(2,3.6188,2.6519,6.0139,2.6477,6.0142,2.8164,3.6191,2.8206)"
+       },
+       "Conditions": {
+        "type": "string",
+        "confidence": 0.614
+       },
+       "Clause": {
+        "type": "string",
+        "confidence": 0.614
+       }
+      }
+     },
+     "Right_BAARequired": {
+      "type": "object",
+      "valueObject": {
+       "Judgment": {
+        "type": "string",
+        "valueString": "Not Addressed",
+        "spans": [
+         {
+          "offset": 0,
+          "length": 34
+         },
+         {
+          "offset": 36,
+          "length": 90
+         },
+         {
+          "offset": 127,
+          "length": 64
+         },
+         {
+          "offset": 193,
+          "length": 88
+         },
+         {
+          "offset": 283,
+          "length": 93
+         },
+         {
+          "offset": 378,
+          "length": 92
+         },
+         {
+          "offset": 472,
+          "length": 95
+         },
+         {
+          "offset": 568,
+          "length": 50
+         },
+         {
+          "offset": 721,
+          "length": 74
+         },
+         {
+          "offset": 797,
+          "length": 98
+         },
+         {
+          "offset": 896,
+          "length": 70
+         },
+         {
+          "offset": 968,
+          "length": 55
+         },
+         {
+          "offset": 1025,
+          "length": 13
+         },
+         {
+          "offset": 1039,
+          "length": 26
+         },
+         {
+          "offset": 1067,
+          "length": 33
+         },
+         {
+          "offset": 1102,
+          "length": 37
+         }
+        ],
+        "confidence": 0.728,
+        "source": "D(1,0.9852,0.8697,3.7582,0.8688,3.7583,1.0278,0.9853,1.0287);D(1,0.9904,1.3105,6.3420,1.3168,6.3418,1.4869,0.9902,1.4806);D(1,0.9883,1.5361,4.7356,1.5371,4.7356,1.7106,0.9883,1.7096);D(1,0.9883,1.7547,6.6034,1.7567,6.6033,1.9295,0.9882,1.9275);D(1,0.9987,2.1956,6.6076,2.2025,6.6074,2.3741,0.9985,2.3671);D(1,0.9836,2.6463,6.3794,2.6539,6.3792,2.8276,0.9834,2.8200);D(1,0.9883,3.0897,6.2257,3.0916,6.2256,3.2689,0.9882,3.2670);D(1,0.9852,3.3073,3.8517,3.3084,3.8516,3.4913,0.9851,3.4901);D(2,0.9852,0.8685,5.0557,0.8810,5.0552,1.0444,0.9847,1.0319);D(2,0.9904,1.3164,6.6366,1.3185,6.6365,1.4844,0.9903,1.4822);D(2,0.9842,1.5406,4.9598,1.5438,4.9597,1.7095,0.9841,1.7063);D(2,0.9816,1.9754,4.7523,1.9774,4.7522,2.1480,0.9815,2.1460);D(2,0.9862,2.4265,1.9369,2.4307,1.9362,2.5955,0.9855,2.5914);D(2,3.1605,2.4244,5.3043,2.4255,5.3042,2.5893,3.1604,2.5882);D(2,0.9836,2.6524,3.2062,2.6456,3.2067,2.8125,0.9841,2.8193);D(2,3.6188,2.6519,6.0139,2.6477,6.0142,2.8164,3.6191,2.8206)"
+       },
+       "Conditions": {
+        "type": "string",
+        "confidence": 0.614
+       },
+       "Clause": {
+        "type": "string",
+        "confidence": 0.614
+       }
+      }
+     },
+     "Right_Retention": {
+      "type": "object",
+      "valueObject": {
+       "Judgment": {
+        "type": "string",
+        "valueString": "Conditional",
+        "spans": [
+         {
+          "offset": 797,
+          "length": 98
+         },
+         {
+          "offset": 896,
+          "length": 70
+         }
+        ],
+        "confidence": 0.874,
+        "source": "D(2,0.9904,1.3164,6.6366,1.3185,6.6365,1.4844,0.9903,1.4822);D(2,0.9842,1.5406,4.9598,1.5438,4.9597,1.7095,0.9841,1.7063)"
+       },
+       "Conditions": {
+        "type": "string",
+        "valueString": "Vizient may retain the Data for the term of this SOW and for ninety (90) days after expiration, after which Vizient shall destroy it upon written request.",
+        "spans": [
+         {
+          "offset": 797,
+          "length": 98
+         },
+         {
+          "offset": 896,
+          "length": 70
+         }
+        ],
+        "confidence": 0.874,
+        "source": "D(2,0.9904,1.3164,6.6366,1.3185,6.6365,1.4844,0.9903,1.4822);D(2,0.9842,1.5406,4.9598,1.5438,4.9597,1.7095,0.9841,1.7063)"
+       },
+       "Clause": {
+        "type": "string",
+        "valueString": "Vizient may retain the Data for the term of this SOW and for ninety (90) days after expiration, after which Vizient shall destroy it upon written request.",
+        "spans": [
+         {
+          "offset": 812,
+          "length": 83
+         },
+         {
+          "offset": 896,
+          "length": 70
+         }
+        ],
+        "confidence": 0.875,
+        "source": "D(2,1.7803,1.3167,6.6366,1.3185,6.6365,1.4844,1.7802,1.4825);D(2,0.9842,1.5406,4.9598,1.5438,4.9597,1.7095,0.9841,1.7063)"
+       }
+      }
+     },
+     "Right_AffiliateSharing": {
+      "type": "object",
+      "valueObject": {
+       "Judgment": {
+        "type": "string",
+        "valueString": "Not Addressed",
+        "spans": [
+         {
+          "offset": 0,
+          "length": 34
+         },
+         {
+          "offset": 36,
+          "length": 90
+         },
+         {
+          "offset": 127,
+          "length": 64
+         },
+         {
+          "offset": 193,
+          "length": 88
+         },
+         {
+          "offset": 283,
+          "length": 93
+         },
+         {
+          "offset": 378,
+          "length": 92
+         },
+         {
+          "offset": 472,
+          "length": 95
+         },
+         {
+          "offset": 568,
+          "length": 50
+         },
+         {
+          "offset": 721,
+          "length": 74
+         },
+         {
+          "offset": 797,
+          "length": 98
+         },
+         {
+          "offset": 896,
+          "length": 70
+         },
+         {
+          "offset": 968,
+          "length": 55
+         },
+         {
+          "offset": 1025,
+          "length": 13
+         },
+         {
+          "offset": 1039,
+          "length": 26
+         },
+         {
+          "offset": 1067,
+          "length": 33
+         },
+         {
+          "offset": 1102,
+          "length": 37
+         }
+        ],
+        "confidence": 0.728,
+        "source": "D(1,0.9852,0.8697,3.7582,0.8688,3.7583,1.0278,0.9853,1.0287);D(1,0.9904,1.3105,6.3420,1.3168,6.3418,1.4869,0.9902,1.4806);D(1,0.9883,1.5361,4.7356,1.5371,4.7356,1.7106,0.9883,1.7096);D(1,0.9883,1.7547,6.6034,1.7567,6.6033,1.9295,0.9882,1.9275);D(1,0.9987,2.1956,6.6076,2.2025,6.6074,2.3741,0.9985,2.3671);D(1,0.9836,2.6463,6.3794,2.6539,6.3792,2.8276,0.9834,2.8200);D(1,0.9883,3.0897,6.2257,3.0916,6.2256,3.2689,0.9882,3.2670);D(1,0.9852,3.3073,3.8517,3.3084,3.8516,3.4913,0.9851,3.4901);D(2,0.9852,0.8685,5.0557,0.8810,5.0552,1.0444,0.9847,1.0319);D(2,0.9904,1.3164,6.6366,1.3185,6.6365,1.4844,0.9903,1.4822);D(2,0.9842,1.5406,4.9598,1.5438,4.9597,1.7095,0.9841,1.7063);D(2,0.9816,1.9754,4.7523,1.9774,4.7522,2.1480,0.9815,2.1460);D(2,0.9862,2.4265,1.9369,2.4307,1.9362,2.5955,0.9855,2.5914);D(2,3.1605,2.4244,5.3043,2.4255,5.3042,2.5893,3.1604,2.5882);D(2,0.9836,2.6524,3.2062,2.6456,3.2067,2.8125,0.9841,2.8193);D(2,3.6188,2.6519,6.0139,2.6477,6.0142,2.8164,3.6191,2.8206)"
+       },
+       "Conditions": {
+        "type": "string",
+        "confidence": 0.614
+       },
+       "Clause": {
+        "type": "string",
+        "confidence": 0.614
+       }
+      }
+     },
+     "Right_ThirdPartySharing": {
+      "type": "object",
+      "valueObject": {
+       "Judgment": {
+        "type": "string",
+        "valueString": "Prohibited",
+        "spans": [
+         {
+          "offset": 721,
+          "length": 74
+         }
+        ],
+        "confidence": 0.922,
+        "source": "D(2,0.9852,0.8685,5.0557,0.8810,5.0552,1.0444,0.9847,1.0319)"
+       },
+       "Conditions": {
+        "type": "string",
+        "valueString": "Vizient shall not disclose the Data to any third party.",
+        "spans": [
+         {
+          "offset": 721,
+          "length": 74
+         }
+        ],
+        "confidence": 0.922,
+        "source": "D(2,0.9852,0.8685,5.0557,0.8810,5.0552,1.0444,0.9847,1.0319)"
+       },
+       "Clause": {
+        "type": "string",
+        "valueString": "Vizient shall not disclose the Data to any third party.",
+        "spans": [
+         {
+          "offset": 740,
+          "length": 55
+         }
+        ],
+        "confidence": 0.947,
+        "source": "D(2,1.9706,0.8726,5.0556,0.8810,5.0552,1.0440,1.9702,1.0356)"
+       }
+      }
+     },
+     "Right_DataLinking": {
+      "type": "object",
+      "valueObject": {
+       "Judgment": {
+        "type": "string",
+        "valueString": "Not Addressed",
+        "spans": [
+         {
+          "offset": 0,
+          "length": 34
+         },
+         {
+          "offset": 36,
+          "length": 90
+         },
+         {
+          "offset": 127,
+          "length": 64
+         },
+         {
+          "offset": 193,
+          "length": 88
+         },
+         {
+          "offset": 283,
+          "length": 93
+         },
+         {
+          "offset": 378,
+          "length": 92
+         },
+         {
+          "offset": 472,
+          "length": 95
+         },
+         {
+          "offset": 568,
+          "length": 50
+         },
+         {
+          "offset": 721,
+          "length": 74
+         },
+         {
+          "offset": 797,
+          "length": 98
+         },
+         {
+          "offset": 896,
+          "length": 70
+         },
+         {
+          "offset": 968,
+          "length": 55
+         },
+         {
+          "offset": 1025,
+          "length": 13
+         },
+         {
+          "offset": 1039,
+          "length": 26
+         },
+         {
+          "offset": 1067,
+          "length": 33
+         },
+         {
+          "offset": 1102,
+          "length": 37
+         }
+        ],
+        "confidence": 0.728,
+        "source": "D(1,0.9852,0.8697,3.7582,0.8688,3.7583,1.0278,0.9853,1.0287);D(1,0.9904,1.3105,6.3420,1.3168,6.3418,1.4869,0.9902,1.4806);D(1,0.9883,1.5361,4.7356,1.5371,4.7356,1.7106,0.9883,1.7096);D(1,0.9883,1.7547,6.6034,1.7567,6.6033,1.9295,0.9882,1.9275);D(1,0.9987,2.1956,6.6076,2.2025,6.6074,2.3741,0.9985,2.3671);D(1,0.9836,2.6463,6.3794,2.6539,6.3792,2.8276,0.9834,2.8200);D(1,0.9883,3.0897,6.2257,3.0916,6.2256,3.2689,0.9882,3.2670);D(1,0.9852,3.3073,3.8517,3.3084,3.8516,3.4913,0.9851,3.4901);D(2,0.9852,0.8685,5.0557,0.8810,5.0552,1.0444,0.9847,1.0319);D(2,0.9904,1.3164,6.6366,1.3185,6.6365,1.4844,0.9903,1.4822);D(2,0.9842,1.5406,4.9598,1.5438,4.9597,1.7095,0.9841,1.7063);D(2,0.9816,1.9754,4.7523,1.9774,4.7522,2.1480,0.9815,2.1460);D(2,0.9862,2.4265,1.9369,2.4307,1.9362,2.5955,0.9855,2.5914);D(2,3.1605,2.4244,5.3043,2.4255,5.3042,2.5893,3.1604,2.5882);D(2,0.9836,2.6524,3.2062,2.6456,3.2067,2.8125,0.9841,2.8193);D(2,3.6188,2.6519,6.0139,2.6477,6.0142,2.8164,3.6191,2.8206)"
+       },
+       "Conditions": {
+        "type": "string",
+        "confidence": 0.614
+       },
+       "Clause": {
+        "type": "string",
+        "confidence": 0.614
+       }
+      }
+     },
+     "Right_DeIdentification": {
+      "type": "object",
+      "valueObject": {
+       "Judgment": {
+        "type": "string",
+        "valueString": "Not Addressed",
+        "spans": [
+         {
+          "offset": 0,
+          "length": 34
+         },
+         {
+          "offset": 36,
+          "length": 90
+         },
+         {
+          "offset": 127,
+          "length": 64
+         },
+         {
+          "offset": 193,
+          "length": 88
+         },
+         {
+          "offset": 283,
+          "length": 93
+         },
+         {
+          "offset": 378,
+          "length": 92
+         },
+         {
+          "offset": 472,
+          "length": 95
+         },
+         {
+          "offset": 568,
+          "length": 50
+         },
+         {
+          "offset": 721,
+          "length": 74
+         },
+         {
+          "offset": 797,
+          "length": 98
+         },
+         {
+          "offset": 896,
+          "length": 70
+         },
+         {
+          "offset": 968,
+          "length": 55
+         },
+         {
+          "offset": 1025,
+          "length": 13
+         },
+         {
+          "offset": 1039,
+          "length": 26
+         },
+         {
+          "offset": 1067,
+          "length": 33
+         },
+         {
+          "offset": 1102,
+          "length": 37
+         }
+        ],
+        "confidence": 0.728,
+        "source": "D(1,0.9852,0.8697,3.7582,0.8688,3.7583,1.0278,0.9853,1.0287);D(1,0.9904,1.3105,6.3420,1.3168,6.3418,1.4869,0.9902,1.4806);D(1,0.9883,1.5361,4.7356,1.5371,4.7356,1.7106,0.9883,1.7096);D(1,0.9883,1.7547,6.6034,1.7567,6.6033,1.9295,0.9882,1.9275);D(1,0.9987,2.1956,6.6076,2.2025,6.6074,2.3741,0.9985,2.3671);D(1,0.9836,2.6463,6.3794,2.6539,6.3792,2.8276,0.9834,2.8200);D(1,0.9883,3.0897,6.2257,3.0916,6.2256,3.2689,0.9882,3.2670);D(1,0.9852,3.3073,3.8517,3.3084,3.8516,3.4913,0.9851,3.4901);D(2,0.9852,0.8685,5.0557,0.8810,5.0552,1.0444,0.9847,1.0319);D(2,0.9904,1.3164,6.6366,1.3185,6.6365,1.4844,0.9903,1.4822);D(2,0.9842,1.5406,4.9598,1.5438,4.9597,1.7095,0.9841,1.7063);D(2,0.9816,1.9754,4.7523,1.9774,4.7522,2.1480,0.9815,2.1460);D(2,0.9862,2.4265,1.9369,2.4307,1.9362,2.5955,0.9855,2.5914);D(2,3.1605,2.4244,5.3043,2.4255,5.3042,2.5893,3.1604,2.5882);D(2,0.9836,2.6524,3.2062,2.6456,3.2067,2.8125,0.9841,2.8193);D(2,3.6188,2.6519,6.0139,2.6477,6.0142,2.8164,3.6191,2.8206)"
+       },
+       "Conditions": {
+        "type": "string",
+        "confidence": 0.614
+       },
+       "Clause": {
+        "type": "string",
+        "confidence": 0.614
+       }
+      }
+     },
+     "Right_Destruction": {
+      "type": "object",
+      "valueObject": {
+       "Judgment": {
+        "type": "string",
+        "valueString": "Conditional",
+        "spans": [
+         {
+          "offset": 797,
+          "length": 98
+         },
+         {
+          "offset": 896,
+          "length": 70
+         }
+        ],
+        "confidence": 0.874,
+        "source": "D(2,0.9904,1.3164,6.6366,1.3185,6.6365,1.4844,0.9903,1.4822);D(2,0.9842,1.5406,4.9598,1.5438,4.9597,1.7095,0.9841,1.7063)"
+       },
+       "Conditions": {
+        "type": "string",
+        "valueString": "After the retention period, Vizient shall destroy the Data upon written request.",
+        "spans": [
+         {
+          "offset": 797,
+          "length": 98
+         },
+         {
+          "offset": 896,
+          "length": 70
+         }
+        ],
+        "confidence": 0.874,
+        "source": "D(2,0.9904,1.3164,6.6366,1.3185,6.6365,1.4844,0.9903,1.4822);D(2,0.9842,1.5406,4.9598,1.5438,4.9597,1.7095,0.9841,1.7063)"
+       },
+       "Clause": {
+        "type": "string",
+        "valueString": "Vizient may retain the Data for the term of this SOW and for ninety (90) days after expiration, after which Vizient shall destroy it upon written request.",
+        "spans": [
+         {
+          "offset": 812,
+          "length": 83
+         },
+         {
+          "offset": 896,
+          "length": 70
+         }
+        ],
+        "confidence": 0.875,
+        "source": "D(2,1.7803,1.3167,6.6366,1.3185,6.6365,1.4844,1.7802,1.4825);D(2,0.9842,1.5406,4.9598,1.5438,4.9597,1.7095,0.9841,1.7063)"
+       }
+      }
+     },
+     "Right_Geographic": {
+      "type": "object",
+      "valueObject": {
+       "Judgment": {
+        "type": "string",
+        "valueString": "Not Addressed",
+        "spans": [
+         {
+          "offset": 0,
+          "length": 34
+         },
+         {
+          "offset": 36,
+          "length": 90
+         },
+         {
+          "offset": 127,
+          "length": 64
+         },
+         {
+          "offset": 193,
+          "length": 88
+         },
+         {
+          "offset": 283,
+          "length": 93
+         },
+         {
+          "offset": 378,
+          "length": 92
+         },
+         {
+          "offset": 472,
+          "length": 95
+         },
+         {
+          "offset": 568,
+          "length": 50
+         },
+         {
+          "offset": 721,
+          "length": 74
+         },
+         {
+          "offset": 797,
+          "length": 98
+         },
+         {
+          "offset": 896,
+          "length": 70
+         },
+         {
+          "offset": 968,
+          "length": 55
+         },
+         {
+          "offset": 1025,
+          "length": 13
+         },
+         {
+          "offset": 1039,
+          "length": 26
+         },
+         {
+          "offset": 1067,
+          "length": 33
+         },
+         {
+          "offset": 1102,
+          "length": 37
+         }
+        ],
+        "confidence": 0.728,
+        "source": "D(1,0.9852,0.8697,3.7582,0.8688,3.7583,1.0278,0.9853,1.0287);D(1,0.9904,1.3105,6.3420,1.3168,6.3418,1.4869,0.9902,1.4806);D(1,0.9883,1.5361,4.7356,1.5371,4.7356,1.7106,0.9883,1.7096);D(1,0.9883,1.7547,6.6034,1.7567,6.6033,1.9295,0.9882,1.9275);D(1,0.9987,2.1956,6.6076,2.2025,6.6074,2.3741,0.9985,2.3671);D(1,0.9836,2.6463,6.3794,2.6539,6.3792,2.8276,0.9834,2.8200);D(1,0.9883,3.0897,6.2257,3.0916,6.2256,3.2689,0.9882,3.2670);D(1,0.9852,3.3073,3.8517,3.3084,3.8516,3.4913,0.9851,3.4901);D(2,0.9852,0.8685,5.0557,0.8810,5.0552,1.0444,0.9847,1.0319);D(2,0.9904,1.3164,6.6366,1.3185,6.6365,1.4844,0.9903,1.4822);D(2,0.9842,1.5406,4.9598,1.5438,4.9597,1.7095,0.9841,1.7063);D(2,0.9816,1.9754,4.7523,1.9774,4.7522,2.1480,0.9815,2.1460);D(2,0.9862,2.4265,1.9369,2.4307,1.9362,2.5955,0.9855,2.5914);D(2,3.1605,2.4244,5.3043,2.4255,5.3042,2.5893,3.1604,2.5882);D(2,0.9836,2.6524,3.2062,2.6456,3.2067,2.8125,0.9841,2.8193);D(2,3.6188,2.6519,6.0139,2.6477,6.0142,2.8164,3.6191,2.8206)"
+       },
+       "Conditions": {
+        "type": "string",
+        "confidence": 0.614
+       },
+       "Clause": {
+        "type": "string",
+        "confidence": 0.614
+       }
+      }
+     }
+    }
+   }
+  ]
+ }
+}

@@ -1,0 +1,632 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        },
+        "connection": {
+          "connectionReferenceLogicalName": "vz_dataverse"
+        },
+        "impersonation": {},
+        "runtimeSource": "embedded"
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "actions": {
+        "Catch": {
+          "actions": {
+            "Fail_the_run": {
+              "inputs": {
+                "runError": {
+                  "code": "ContractFlowFailed",
+                  "message": "@outputs('Failure_text')"
+                },
+                "runStatus": "Failed"
+              },
+              "runAfter": {
+                "Mark_contract_failed": [
+                  "Succeeded",
+                  "Failed",
+                  "TimedOut"
+                ]
+              },
+              "type": "Terminate"
+            },
+            "Failed_steps": {
+              "inputs": {
+                "from": "@result('Try')",
+                "where": "@equals(item()?['status'], 'Failed')"
+              },
+              "runAfter": {},
+              "type": "Query"
+            },
+            "Failure_detail": {
+              "inputs": "@concat('The analysis flow failed. Step: ', coalesce(first(body('Failed_steps'))?['name'], 'unknown'), '. ', coalesce(first(body('Failed_steps'))?['error']?['message'], ''), ' ', string(coalesce(first(body('Failed_steps'))?['outputs'], '')), ' (flow run ', workflow()?['run']?['name'], ')')",
+              "runAfter": {
+                "Failed_steps": [
+                  "Succeeded"
+                ]
+              },
+              "type": "Compose"
+            },
+            "Failure_text": {
+              "inputs": "@substring(outputs('Failure_detail'), 0, min(length(outputs('Failure_detail')), 9500))",
+              "runAfter": {
+                "Failure_detail": [
+                  "Succeeded"
+                ]
+              },
+              "type": "Compose"
+            },
+            "Mark_contract_failed": {
+              "inputs": {
+                "authentication": "@parameters('$authentication')",
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "UpdateOnlyRecord"
+                },
+                "parameters": {
+                  "entityName": "vz_contracts",
+                  "item/vz_errormessage": "@outputs('Failure_text')",
+                  "item/vz_status": 651200005,
+                  "recordId": "@triggerOutputs()?['body/vz_contractid']"
+                }
+              },
+              "runAfter": {
+                "Failure_text": [
+                  "Succeeded"
+                ]
+              },
+              "type": "OpenApiConnection"
+            }
+          },
+          "runAfter": {
+            "Try": [
+              "Failed",
+              "TimedOut"
+            ]
+          },
+          "type": "Scope"
+        },
+        "Init_pollStatus": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "pollStatus",
+                "type": "integer",
+                "value": 0
+              }
+            ]
+          },
+          "runAfter": {},
+          "type": "InitializeVariable"
+        },
+        "Init_pollText": {
+          "inputs": {
+            "variables": [
+              {
+                "name": "pollText",
+                "type": "string",
+                "value": ""
+              }
+            ]
+          },
+          "runAfter": {
+            "Init_pollStatus": [
+              "Succeeded"
+            ]
+          },
+          "type": "InitializeVariable"
+        },
+        "Maps": {
+          "inputs": {
+            "documentType": {
+              "Amendment": 651200002,
+              "BAA": 651200005,
+              "DUA": 651200004,
+              "MSA": 651200000,
+              "NDA": 651200006,
+              "Order Form": 651200003,
+              "Other": 651200007,
+              "SOW": 651200001
+            },
+            "judgment": {
+              "Conditional": 651200002,
+              "N/A": 651200004,
+              "Not Addressed": 651200003,
+              "Permitted": 651200000,
+              "Prohibited": 651200001
+            },
+            "presence": {
+              "Found": 651200000,
+              "Not Found": 651200001,
+              "Unclear": 651200002
+            }
+          },
+          "runAfter": {
+            "Init_pollText": [
+              "Succeeded"
+            ]
+          },
+          "type": "Compose"
+        },
+        "Try": {
+          "actions": {
+            "Check_analysis": {
+              "actions": {
+                "Add_findings": {
+                  "actions": {
+                    "Add_finding": {
+                      "inputs": {
+                        "authentication": "@parameters('$authentication')",
+                        "host": {
+                          "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                          "connectionName": "shared_commondataserviceforapps",
+                          "operationId": "CreateRecord"
+                        },
+                        "parameters": {
+                          "entityName": "vz_findings",
+                          "item/vz_aiconditions": "@items('Add_findings')?['conditions']",
+                          "item/vz_aijudgment": "@if(empty(items('Add_findings')?['judgment']), null, outputs('Maps')?['judgment']?[string(items('Add_findings')?['judgment'])])",
+                          "item/vz_aivalue": "@items('Add_findings')?['value']",
+                          "item/vz_checklistitem@odata.bind": "vz_checklistitems(vz_key='@{items('Add_findings')?['key']}')",
+                          "item/vz_clause": "@items('Add_findings')?['clause']",
+                          "item/vz_confidence": "@items('Add_findings')?['confidence']",
+                          "item/vz_contract@odata.bind": "@{concat('vz_contracts(', triggerOutputs()?['body/vz_contractid'], ')')}",
+                          "item/vz_name": "@substring(concat(triggerOutputs()?['body/vz_name'], ' - ', items('Add_findings')?['key']), 0, min(length(concat(triggerOutputs()?['body/vz_name'], ' - ', items('Add_findings')?['key'])), 400))",
+                          "item/vz_page": "@items('Add_findings')?['page']",
+                          "item/vz_presence": "@coalesce(outputs('Maps')?['presence']?[string(items('Add_findings')?['presence'])], 651200002)",
+                          "item/vz_sourceregions": "@string(coalesce(items('Add_findings')?['sourceRegions'], json('[]')))"
+                        }
+                      },
+                      "runAfter": {},
+                      "type": "OpenApiConnection"
+                    }
+                  },
+                  "foreach": "@outputs('Parsed_result')?['findings']",
+                  "runAfter": {
+                    "Update_contract": [
+                      "Succeeded"
+                    ]
+                  },
+                  "runtimeConfiguration": {
+                    "concurrency": {
+                      "repetitions": 10
+                    }
+                  },
+                  "type": "Foreach"
+                },
+                "Mark_ready": {
+                  "inputs": {
+                    "authentication": "@parameters('$authentication')",
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "UpdateOnlyRecord"
+                    },
+                    "parameters": {
+                      "entityName": "vz_contracts",
+                      "item/vz_status": 651200002,
+                      "recordId": "@triggerOutputs()?['body/vz_contractid']"
+                    }
+                  },
+                  "runAfter": {
+                    "Add_findings": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "OpenApiConnection"
+                },
+                "Parsed_result": {
+                  "inputs": "@json(variables('pollText'))",
+                  "runAfter": {},
+                  "type": "Compose"
+                },
+                "Update_contract": {
+                  "inputs": {
+                    "authentication": "@parameters('$authentication')",
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "UpdateOnlyRecord"
+                    },
+                    "parameters": {
+                      "entityName": "vz_contracts",
+                      "item/vz_completeness": "@outputs('Parsed_result')?['contract']?['completeness']",
+                      "item/vz_contractidentifier": "@if(empty(outputs('Parsed_result')?['contract']?['contractIdentifier']), null, substring(string(outputs('Parsed_result')?['contract']?['contractIdentifier']), 0, min(length(string(outputs('Parsed_result')?['contract']?['contractIdentifier'])), 200)))",
+                      "item/vz_documenttext": "@outputs('Parsed_result')?['indexing']?['documentText']",
+                      "item/vz_documenttype": "@coalesce(outputs('Maps')?['documentType']?[string(coalesce(outputs('Parsed_result')?['contract']?['documentType'], 'Other'))], 651200007)",
+                      "item/vz_effectivedate": "@if(equals(length(string(outputs('Parsed_result')?['contract']?['effectiveDate'])), 10), if(and(equals(substring(string(outputs('Parsed_result')?['contract']?['effectiveDate']), 4, 1), '-'), equals(substring(string(outputs('Parsed_result')?['contract']?['effectiveDate']), 7, 1), '-')), string(outputs('Parsed_result')?['contract']?['effectiveDate']), null), null)",
+                      "item/vz_expirationdate": "@if(equals(length(string(outputs('Parsed_result')?['contract']?['expirationDate'])), 10), if(and(equals(substring(string(outputs('Parsed_result')?['contract']?['expirationDate']), 4, 1), '-'), equals(substring(string(outputs('Parsed_result')?['contract']?['expirationDate']), 7, 1), '-')), string(outputs('Parsed_result')?['contract']?['expirationDate']), null), null)",
+                      "item/vz_foundcount": "@outputs('Parsed_result')?['contract']?['foundCount']",
+                      "item/vz_hasparentreference": "@equals(outputs('Parsed_result')?['contract']?['hasParentReference'], true)",
+                      "item/vz_indexerror": "@outputs('Parsed_result')?['indexing']?['error']",
+                      "item/vz_indexstatus": "@if(equals(outputs('Parsed_result')?['indexing']?['status'], 'Queued'), 651200001, 651200003)",
+                      "item/vz_indexversion": "",
+                      "item/vz_processedon": "@utcNow()",
+                      "item/vz_rawresult": "@if(less(length(string(outputs('Parsed_result')?['raw'])), 1048076), string(outputs('Parsed_result')?['raw']), null)",
+                      "item/vz_totalcount": "@outputs('Parsed_result')?['contract']?['totalCount']",
+                      "item/vz_vendor": "@if(empty(outputs('Parsed_result')?['contract']?['vendor']), null, substring(string(outputs('Parsed_result')?['contract']?['vendor']), 0, min(length(string(outputs('Parsed_result')?['contract']?['vendor'])), 200)))",
+                      "item/vz_viziententity": "@if(empty(outputs('Parsed_result')?['contract']?['vizientEntity']), null, substring(string(outputs('Parsed_result')?['contract']?['vizientEntity']), 0, min(length(string(outputs('Parsed_result')?['contract']?['vizientEntity'])), 200)))",
+                      "recordId": "@triggerOutputs()?['body/vz_contractid']"
+                    }
+                  },
+                  "runAfter": {
+                    "Parsed_result": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "OpenApiConnection"
+                }
+              },
+              "else": {
+                "actions": {
+                  "Describe_analysis_failure": {
+                    "inputs": "@if(equals(variables('pollStatus'), 202), 'Timed out waiting for the analysis to finish.', concat('The analysis failed with HTTP ', string(variables('pollStatus')), ': ', substring(variables('pollText'), 0, min(length(variables('pollText')), 2000))))",
+                    "runAfter": {},
+                    "type": "Compose"
+                  },
+                  "Fail_after_analysis": {
+                    "inputs": {
+                      "runError": {
+                        "code": "AnalysisFailed",
+                        "message": "@outputs('Describe_analysis_failure')"
+                      },
+                      "runStatus": "Failed"
+                    },
+                    "runAfter": {
+                      "Mark_analysis_failed": [
+                        "Succeeded",
+                        "Failed",
+                        "TimedOut"
+                      ]
+                    },
+                    "type": "Terminate"
+                  },
+                  "Mark_analysis_failed": {
+                    "inputs": {
+                      "authentication": "@parameters('$authentication')",
+                      "host": {
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                        "connectionName": "shared_commondataserviceforapps",
+                        "operationId": "UpdateOnlyRecord"
+                      },
+                      "parameters": {
+                        "entityName": "vz_contracts",
+                        "item/vz_errormessage": "@concat(outputs('Describe_analysis_failure'), ' (flow run ', workflow()?['run']?['name'], ')')",
+                        "item/vz_status": 651200005,
+                        "recordId": "@triggerOutputs()?['body/vz_contractid']"
+                      }
+                    },
+                    "runAfter": {
+                      "Describe_analysis_failure": [
+                        "Succeeded"
+                      ]
+                    },
+                    "type": "OpenApiConnection"
+                  }
+                }
+              },
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@variables('pollStatus')",
+                      200
+                    ]
+                  }
+                ]
+              },
+              "runAfter": {
+                "Wait_for_the_analysis": [
+                  "Succeeded",
+                  "Failed",
+                  "TimedOut"
+                ]
+              },
+              "type": "If"
+            },
+            "Check_document_size": {
+              "actions": {},
+              "else": {
+                "actions": {
+                  "Fail_document_too_large": {
+                    "inputs": {
+                      "runError": {
+                        "code": "DocumentTooLarge",
+                        "message": "The document is 4 MB or larger. This version of the flow reads at most the first 4 MB of the document column, so it was not analyzed."
+                      },
+                      "runStatus": "Failed"
+                    },
+                    "runAfter": {
+                      "Mark_document_too_large": [
+                        "Succeeded",
+                        "Failed",
+                        "TimedOut"
+                      ]
+                    },
+                    "type": "Terminate"
+                  },
+                  "Mark_document_too_large": {
+                    "inputs": {
+                      "authentication": "@parameters('$authentication')",
+                      "host": {
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                        "connectionName": "shared_commondataserviceforapps",
+                        "operationId": "UpdateOnlyRecord"
+                      },
+                      "parameters": {
+                        "entityName": "vz_contracts",
+                        "item/vz_errormessage": "The document is 4 MB or larger. This version of the flow reads at most the first 4 MB of the document column, so it was not analyzed.",
+                        "item/vz_status": 651200005,
+                        "recordId": "@triggerOutputs()?['body/vz_contractid']"
+                      }
+                    },
+                    "runAfter": {},
+                    "type": "OpenApiConnection"
+                  }
+                }
+              },
+              "expression": {
+                "and": [
+                  {
+                    "less": [
+                      "@length(coalesce(body('Download_document')?['$content'], ''))",
+                      5592405
+                    ]
+                  }
+                ]
+              },
+              "runAfter": {
+                "Download_document": [
+                  "Succeeded"
+                ]
+              },
+              "type": "If"
+            },
+            "Delete_old_findings": {
+              "actions": {
+                "Delete_old_finding": {
+                  "inputs": {
+                    "authentication": "@parameters('$authentication')",
+                    "host": {
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "DeleteRecord"
+                    },
+                    "parameters": {
+                      "entityName": "vz_findings",
+                      "recordId": "@items('Delete_old_findings')?['vz_findingid']"
+                    }
+                  },
+                  "runAfter": {},
+                  "type": "OpenApiConnection"
+                }
+              },
+              "foreach": "@outputs('Find_old_findings')?['body/value']",
+              "runAfter": {
+                "Find_old_findings": [
+                  "Succeeded"
+                ]
+              },
+              "runtimeConfiguration": {
+                "concurrency": {
+                  "repetitions": 10
+                }
+              },
+              "type": "Foreach"
+            },
+            "Download_document": {
+              "inputs": {
+                "authentication": "@parameters('$authentication')",
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "GetEntityFileImageFieldContent"
+                },
+                "parameters": {
+                  "entityName": "vz_contracts",
+                  "fileImageFieldName": "vz_document",
+                  "recordId": "@triggerOutputs()?['body/vz_contractid']"
+                }
+              },
+              "runAfter": {
+                "Delete_old_findings": [
+                  "Succeeded"
+                ]
+              },
+              "type": "OpenApiConnection"
+            },
+            "Find_old_findings": {
+              "inputs": {
+                "authentication": "@parameters('$authentication')",
+                "host": {
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "ListRecords"
+                },
+                "parameters": {
+                  "$filter": "_vz_contract_value eq @{triggerOutputs()?['body/vz_contractid']}",
+                  "$select": "vz_findingid",
+                  "entityName": "vz_findings"
+                }
+              },
+              "runAfter": {},
+              "type": "OpenApiConnection"
+            },
+            "Submit_analysis": {
+              "inputs": {
+                "body": {
+                  "contractId": "@triggerOutputs()?['body/vz_contractid']",
+                  "fileBase64": "@{body('Download_document')?['$content']}",
+                  "fileName": "@triggerOutputs()?['body/vz_name']"
+                },
+                "headers": {
+                  "Accept": "application/json",
+                  "Content-Type": "application/json",
+                  "x-functions-key": "@parameters('Function Key (vz_FunctionKey)')"
+                },
+                "method": "POST",
+                "retryPolicy": {
+                  "count": 3,
+                  "interval": "PT15S",
+                  "type": "fixed"
+                },
+                "uri": "@{parameters('Function Base URL (vz_FunctionBaseUrl)')}/api/contracts/analyze"
+              },
+              "operationOptions": "DisableAsyncPattern",
+              "runAfter": {
+                "Check_document_size": [
+                  "Succeeded"
+                ]
+              },
+              "runtimeConfiguration": {
+                "secureData": {
+                  "properties": [
+                    "inputs"
+                  ]
+                }
+              },
+              "type": "Http"
+            },
+            "Wait_for_the_analysis": {
+              "actions": {
+                "Poll_analysis": {
+                  "inputs": {
+                    "headers": {
+                      "Accept": "application/json",
+                      "x-functions-key": "@parameters('Function Key (vz_FunctionKey)')"
+                    },
+                    "method": "GET",
+                    "retryPolicy": {
+                      "type": "none"
+                    },
+                    "uri": "@{parameters('Function Base URL (vz_FunctionBaseUrl)')}/api/contracts/analyze/@{body('Submit_analysis')?['operationId']}"
+                  },
+                  "operationOptions": "DisableAsyncPattern",
+                  "runAfter": {
+                    "Wait_before_polling": [
+                      "Succeeded"
+                    ]
+                  },
+                  "runtimeConfiguration": {
+                    "secureData": {
+                      "properties": [
+                        "inputs"
+                      ]
+                    }
+                  },
+                  "type": "Http"
+                },
+                "Record_poll_body": {
+                  "inputs": {
+                    "name": "pollText",
+                    "value": "@string(coalesce(actions('Poll_analysis')?['outputs']?['body'], ''))"
+                  },
+                  "runAfter": {
+                    "Record_poll_status": [
+                      "Succeeded"
+                    ]
+                  },
+                  "type": "SetVariable"
+                },
+                "Record_poll_status": {
+                  "inputs": {
+                    "name": "pollStatus",
+                    "value": "@int(coalesce(actions('Poll_analysis')?['outputs']?['statusCode'], 503))"
+                  },
+                  "runAfter": {
+                    "Poll_analysis": [
+                      "Succeeded",
+                      "Failed",
+                      "TimedOut"
+                    ]
+                  },
+                  "type": "SetVariable"
+                },
+                "Wait_before_polling": {
+                  "inputs": {
+                    "interval": {
+                      "count": 5,
+                      "unit": "Second"
+                    }
+                  },
+                  "runAfter": {},
+                  "type": "Wait"
+                }
+              },
+              "expression": "@or(equals(variables('pollStatus'), 200), and(greaterOrEquals(variables('pollStatus'), 400), not(contains(createArray(429, 503, 504), variables('pollStatus')))))",
+              "limit": {
+                "count": 180,
+                "timeout": "PT25M"
+              },
+              "runAfter": {
+                "Submit_analysis": [
+                  "Succeeded"
+                ]
+              },
+              "type": "Until"
+            }
+          },
+          "runAfter": {
+            "Maps": [
+              "Succeeded"
+            ]
+          },
+          "type": "Scope"
+        }
+      },
+      "contentVersion": "1.0.0.0",
+      "outputs": {},
+      "parameters": {
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        },
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "Function Base URL (vz_FunctionBaseUrl)": {
+          "defaultValue": "",
+          "metadata": {
+            "schemaName": "vz_FunctionBaseUrl"
+          },
+          "type": "String"
+        },
+        "Function Key (vz_FunctionKey)": {
+          "defaultValue": "",
+          "metadata": {
+            "schemaName": "vz_FunctionKey"
+          },
+          "type": "String"
+        }
+      },
+      "triggers": {
+        "When_a_contract_is_queued": {
+          "inputs": {
+            "authentication": "@parameters('$authentication')",
+            "host": {
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger"
+            },
+            "parameters": {
+              "subscriptionRequest/entityname": "vz_contract",
+              "subscriptionRequest/filterexpression": "vz_status eq 651200001",
+              "subscriptionRequest/filteringattributes": "vz_status",
+              "subscriptionRequest/message": 3,
+              "subscriptionRequest/scope": 4
+            }
+          },
+          "type": "OpenApiConnectionWebhook"
+        }
+      }
+    },
+    "templateName": null
+  },
+  "schemaVersion": "1.0.0.0"
+}

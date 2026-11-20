@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+# Function app layout adapted from Azure-Samples/functions-quickstart-python-http-azd v1.0.1 (MIT).
+# See infra/LICENSE-functions-quickstart.txt.
+name: vizient-contract-intelligence
+services:
+  api:
+    project: ./function
+    language: python
+    host: function
