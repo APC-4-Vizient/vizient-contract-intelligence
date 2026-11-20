@@ -411,15 +411,17 @@ pa app push --solution-id <solution-id>           # never push without the solut
 Pop-Location
 ```
 
-`pa app init` writes `power.config.json` and `.power/`, which hold the environment and are git-ignored. Until they exist,
-`npx tsc -b` and `npm run build` stop with TS2307 on `.power/schemas/appschemas/dataSourcesInfo`, so run the gates after the
-data-source commands. The app's typed
-Dataverse services in `src/generated/` come from the `add data-source` commands; after any schema change run
-`pa app refresh data-source`. The unpacked folder `dataverse/solution/` leaves out the app package (it is git-ignored), so it
+`pa app init` writes `power.config.json`, which holds the environment and the app's id and is git-ignored; it stops if one already
+exists in the folder. The data-source commands write the rest of `.power/` (also git-ignored) and the typed Dataverse services in
+`src/generated/`, which are committed. One file under `.power/` is committed on purpose:
+`.power/schemas/appschemas/dataSourcesInfo.ts`. It lists the data sources the app reads (the four project tables and the system user table) and holds no identifiers, so `npx tsc -b` and `npm run build`
+pass on a fresh clone before any of these commands has run. After any schema change run `pa app refresh data-source`. The unpacked folder
+`dataverse/solution/` leaves out the app package (it is git-ignored), so it
 cannot be packed back into an importable solution, and `pa app push` deploys the app. The solution file in 5.10 does contain the
 app package. Microsoft Learn says a code app that is in a solution moves with an exported and imported solution
 ([Microsoft Learn](https://learn.microsoft.com/power-apps/developer/code-apps/how-to/alm)); that route was not tested here.
-**Unverified:** `pa app init` and the data-source commands against a fresh environment from this existing source tree.
+**Unverified:** `pa app init` and the data-source commands against a fresh environment from this existing source tree. The Power Apps CLI
+(1.0.2) is written to merge into an existing `dataSourcesInfo.ts` rather than refuse, but that was read from its code and not run.
 
 ### 5.9 Give people access
 

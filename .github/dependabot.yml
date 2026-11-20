@@ -1,0 +1,74 @@
+version: 2
+
+# Minor and patch updates arrive as one pull request per package manager, so the first run on a new repository is a handful of pull requests,
+# not dozens. Major updates of npm and Python packages are left out on purpose: they change an API and need a planned change, so remove the
+# `ignore` block for a package when you are ready to move it. Security updates are not affected by `ignore`. Python requirements written as
+# ranges (requirements-tools.txt, requirements-dev.txt) change only when a release falls outside the range; the exact pins in
+# function/requirements.txt are updated by every release.
+updates:
+  - package-ecosystem: npm
+    directory: /contract-review
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    groups:
+      fluentui:
+        patterns:
+          - "@fluentui/*"
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
+    commit-message:
+      prefix: "app"
+
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    versioning-strategy: increase-if-necessary
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
+    commit-message:
+      prefix: "tools"
+
+  - package-ecosystem: pip
+    directory: /function
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    versioning-strategy: increase-if-necessary
+    groups:
+      minor-and-patch:
+        update-types:
+          - minor
+          - patch
+    ignore:
+      - dependency-name: "*"
+        update-types:
+          - version-update:semver-major
+    commit-message:
+      prefix: "function"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: "ci"

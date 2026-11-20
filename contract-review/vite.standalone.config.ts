@@ -7,6 +7,8 @@ import { defineConfig } from 'vite';
 import type { Plugin } from 'vite';
 import { inlineAssets } from './src/standalone/inlineHtml';
 import type { BuiltFile } from './src/standalone/inlineHtml';
+import { bundledPackages, renderNotices } from './src/standalone/notices';
+import type { NoticeData } from './src/standalone/notices';
 
 /*
   Builds the "How it works" diagram as one HTML file with its code and styles inside, so it opens from a folder or an
@@ -16,14 +18,22 @@ import type { BuiltFile } from './src/standalone/inlineHtml';
 
   It needs neither the Power Platform sign-in nor `pa app init`: the page reads no data. The page carries a build-info
   block that lists every source file it was built from and each file's hash, and tests/test_architecture_page.py fails
-  while any of them has changed, so a change to the diagram cannot ship without a rebuild.
+  while any of them has changed, so a change to the diagram cannot ship without a rebuild. It also prints the open-source
+  notices of the packages that went into it (from src/standalone/third-party.json), and the build stops when a package
+  has no notice.
 */
 
 const projectRoot = fileURLToPath(new URL('.', import.meta.url));
 const OUTPUT = resolve(projectRoot, '..', 'docs', 'architecture-3d.html');
 
 // Files that shape the page without being part of its module graph.
-const ALSO_HASHED = ['standalone.html', 'vite.standalone.config.ts', 'src/standalone/inlineHtml.ts'];
+const ALSO_HASHED = [
+  'standalone.html',
+  'vite.standalone.config.ts',
+  'src/standalone/inlineHtml.ts',
+  'src/standalone/notices.ts',
+  'src/standalone/third-party.json',
+];
 
 // Libraries whose versions end up inside the page.
 const PACKAGES = ['react', 'react-dom', 'three', '@fluentui/react-icons', '@fluentui/react-components'];
@@ -52,6 +62,15 @@ function buildInfo(moduleIds: Iterable<string>): string {
   return `<script type="application/json" id="build-info">\n${JSON.stringify({ builtFrom, packages }, null, 2)}\n</script>\n`;
 }
 
+/** The notices of every package that went into the page, put before the closing body tag (the last one: the code may spell it out in a string). */
+function withNotices(html: string, moduleIds: Iterable<string>): string {
+  const noticeData = JSON.parse(readFileSync(resolve(projectRoot, 'src/standalone/third-party.json'), 'utf8')) as NoticeData;
+  const bundled = bundledPackages(moduleIds, (folder) => (JSON.parse(readFileSync(resolve(folder, 'package.json'), 'utf8')) as { version: string }).version);
+  const at = html.lastIndexOf('</body>');
+  if (at < 0) throw new Error('The page has no closing body tag to put the notices before.');
+  return html.slice(0, at) + renderNotices(bundled, noticeData) + html.slice(at);
+}
+
 function standalonePage(): Plugin {
   return {
     name: 'standalone-architecture-page',
@@ -76,7 +95,8 @@ function standalonePage(): Plugin {
           else files.push({ name, content: text });
         }
         if (page === null) this.error('The build produced no HTML page.');
-        const html = inlineAssets(page, files).replace('</head>', () => `${buildInfo(this.getModuleIds())}</head>`);
+        const withInfo = inlineAssets(page, files).replace('</head>', () => `${buildInfo(this.getModuleIds())}</head>`);
+        const html = withNotices(withInfo, this.getModuleIds());
         mkdirSync(dirname(OUTPUT), { recursive: true });
         writeFileSync(OUTPUT, html);
         this.info(`Wrote ${slashes(relative(resolve(projectRoot, '..'), OUTPUT))}: ${Buffer.byteLength(html).toLocaleString('en-US')} bytes.`);

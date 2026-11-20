@@ -16,21 +16,19 @@ when a Dataverse row is deleted. Sign-in comes from the verified Azure CLI accou
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import os
 import subprocess
 import sys
-from collections import Counter, defaultdict
+from collections import defaultdict
 from collections.abc import Iterable, Mapping
-from pathlib import Path
 from typing import Any
 from uuid import UUID
 
 import az
 from dvweb import Dataverse, signed_in_account
+from loadscript import load_script
 
-ROOT = Path(__file__).resolve().parent.parent
 BATCH = 500
 
 
@@ -77,10 +75,7 @@ def main(argv: list[str] | None = None) -> int:
     except ValueError:
         parser.error("--contract needs a GUID")
 
-    spec = importlib.util.spec_from_file_location("run_local", ROOT / "scripts" / "run-local.py")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
+    module = load_script("run-local.py", "run_local")
     env = module.load_settings()
 
     def cli(*words: str) -> Any:

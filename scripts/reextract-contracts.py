@@ -12,16 +12,14 @@ by the deployed flows, as at first upload; this script never reads a PDF or any 
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import sys
 import time
 from collections.abc import Iterable, Mapping
-from pathlib import Path
 from typing import Any
 
 from dvweb import Dataverse, signed_in_account
+from loadscript import load_script
 
-ROOT = Path(__file__).resolve().parent.parent
 EXTRACTING, NOT_INDEXED = 651200001, 651200000
 CLEAR = {"vz_documenttext": "", "vz_indexstatus": NOT_INDEXED, "vz_indexversion": "", "vz_indexerror": ""}
 
@@ -48,10 +46,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--wait", action="store_true", help="wait until no selected contract is extracting")
     parser.add_argument("--name", action="append", default=[], help="limit to a contract file name (repeatable)")
     args = parser.parse_args(argv)
-    spec = importlib.util.spec_from_file_location("run_local", ROOT / "scripts" / "run-local.py")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
+    module = load_script("run-local.py", "run_local")
     env = module.load_settings()
     dv = Dataverse("dv-data", solution="VizientContractPOC")
     if signed_in_account(dv).lower() != env["AZURE_ACCOUNT"].lower():

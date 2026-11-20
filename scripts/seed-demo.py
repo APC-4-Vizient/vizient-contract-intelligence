@@ -22,13 +22,12 @@ signed in as AZURE_ACCOUNT from .env, or the script stops before it reads anythi
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import os
 import sys
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -37,6 +36,7 @@ import checklistlib
 import flowlib
 import schemalib
 from dvweb import Dataverse, DataverseError, entity_id, signed_in_account
+from loadscript import load_script
 
 SCRIPTS = Path(__file__).resolve().parent
 ROOT = SCRIPTS.parent
@@ -131,10 +131,10 @@ def compact(value: Any) -> str:
 
 
 def finding_row(contract_name: str, finding: Mapping[str, Any], rules: Rules) -> dict[str, Any]:
-    key, judgment = finding["key"], finding.get("judgment")
+    key, judgment, presence = finding["key"], finding.get("judgment"), finding.get("presence")
     return {
         "vz_name": f"{contract_name} - {key}"[:rules.name_length],
-        "vz_presence": rules.presence.get(finding.get("presence"), rules.presence["Unclear"]),
+        "vz_presence": rules.presence["Unclear"] if presence is None else rules.presence.get(presence, rules.presence["Unclear"]),
         "vz_aivalue": finding.get("value"),
         "vz_aiconditions": finding.get("conditions"),
         "vz_clause": finding.get("clause"),
@@ -187,15 +187,11 @@ def build_sample(name: str, pdf: bytes, saved: Any, keys: Sequence[str], rules: 
 # --- the files -------------------------------------------------------------------------------------------------------
 
 def load_run_local() -> Any:
-    spec = importlib.util.spec_from_file_location("run_local", SCRIPTS / "run-local.py")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module  # a dataclass resolves its string annotations through sys.modules
-    spec.loader.exec_module(module)
-    return module
+    return load_script("run-local.py", "run_local")
 
 
 def utc_now() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def load_samples(directory: Path, keys: Sequence[str], rules: Rules, processed_on: str) -> list[Sample]:
@@ -249,7 +245,7 @@ def survey(dv: Dataverse) -> State:
     return State({name: tuple(rows) for name, rows in held.items()}, frozenset(keys.values()))
 
 
-def decide(sample: Sample, held: Sequence[Held], rules: Rules, *, reset: bool) -> Step:
+def decide(sample: Sample, held: tuple[Held, ...], rules: Rules, *, reset: bool) -> Step:
     if reset:
         replaced = f"replaces {len(held)} existing contract(s)" if held else f"{len(sample.findings)} findings"
         return Step(sample, "replace" if held else "create", tuple(held), replaced)
@@ -297,9 +293,9 @@ def write(dv: Dataverse, step: Step, rules: Rules, log: Callable[[str], None] = 
         has_document, written = False, frozenset()
     if not has_document:
         dv.upload_file(contract, "vz_document", sample.name, sample.pdf)
-    for key, row in sample.findings.items():
+    for key, finding in sample.findings.items():
         if key not in written:
-            dv.request("POST", FINDINGS, body={**row, "vz_contract@odata.bind": contract})
+            dv.request("POST", FINDINGS, body={**finding, "vz_contract@odata.bind": contract})
     dv.request("PATCH", contract, body=sample.finished, headers=IF_MATCH)
     log(f"  wrote {sample.name}: {len(sample.findings)} findings, {rules.status_label(sample.finished['vz_status'])}")
 

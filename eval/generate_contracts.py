@@ -236,7 +236,7 @@ def make_flowables(block: tuple[str, ...]) -> list[Flowable]:
         return [PageBreak()]
     if kind == "signer":
         names = ["sigparty", "sigby", "sigline", "sigline", "sigline"]
-        return [Paragraph(escape(line), STYLES[name]) for line, name in zip(signer_lines(block[1:]), names)]
+        return [Paragraph(escape(line), STYLES[name]) for line, name in zip(signer_lines(block[1:]), names, strict=True)]
     lead, text = parts(block)
     return [Paragraph((f"<b>{escape(lead)}</b> " if lead else "") + escape(text), STYLES[kind])]
 

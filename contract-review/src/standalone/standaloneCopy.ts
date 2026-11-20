@@ -15,4 +15,4 @@ export const SCOPE_NOTE =
 export const STEPS_TITLE = 'The journey, step by step';
 
 export const ABOUT_THIS_PAGE =
-  'This page is one self-contained file. It runs in your browser, needs no sign-in, loads nothing from the internet and stores nothing. It is built from the same source as the How it works page of the Contract Review app.';
+  'This page is one self-contained file. It runs in your browser, needs no sign-in, loads nothing from the internet and stores nothing. It is built from the same source as the How it works page of the Contract Review app. The open-source notices for the libraries it contains are at the bottom of the page.';

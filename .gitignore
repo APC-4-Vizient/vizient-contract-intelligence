@@ -26,7 +26,7 @@ eval/gold/*
 # The one zip that is committed: the importable solution export that scripts/pull-solution.py writes, without its
 # environment variable values.
 !dataverse/VizientContractPOC_unmanaged.zip
-# Customer source snapshots cut by scripts/make-snapshot.py.
+# Source snapshots cut for delivery.
 snapshot/
 # Environment variable values hold the Function key and tenant-specific addresses; scripts/pull-solution.py deletes them.
 **/environmentvariablevalues.json
@@ -35,13 +35,23 @@ snapshot/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.coverage.*
 .venv/
 node_modules/
 dist/
 coverage/
-# Code App: environment and app ids are written here by `pa app init` and the data-source commands.
+# Code App: environment and app ids are written here by `pa app init` and the data-source commands. Only the list of data sources, which holds
+# table names and keys and no ids, is committed, so that a clean clone type-checks and builds without running them.
 contract-review/power.config.json
-contract-review/.power/
+contract-review/.power/*
+!contract-review/.power/schemas/
+contract-review/.power/schemas/*
+!contract-review/.power/schemas/appschemas/
+contract-review/.power/schemas/appschemas/*
+!contract-review/.power/schemas/appschemas/dataSourcesInfo.ts
 # The solution export carries the pushed Code App bundle; contract-review/ is its source, so it is not committed.
 dataverse/solution/CanvasApps/*_CodeAppPackages/
 

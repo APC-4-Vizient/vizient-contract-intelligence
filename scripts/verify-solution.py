@@ -39,7 +39,8 @@ import time
 import xml.etree.ElementTree as ET
 import zipfile
 from collections.abc import Callable, Collection
-from typing import Any, TypeVar
+from functools import partial
+from typing import Any
 
 import flowlib
 import schemalib
@@ -56,8 +57,6 @@ PROBE = "vz_zzGuardProbe"  # the throwaway environment variable that --self-test
 # export held them. A short answer is therefore re-read, with growing pauses, before it counts.
 METADATA_READS = 4
 METADATA_PAUSE = 2.0  # seconds; doubled after every short answer
-
-T = TypeVar("T")
 
 # entity set, primary entity (for the dynamic component type lookup), id column, label column,
 # created-on column, creator column, fallback component type
@@ -147,7 +146,7 @@ def check_solution(dv: Dataverse, name: str, schema: dict[str, Any], report: Rep
     return sol
 
 
-def read_metadata(dv: Dataverse, report: Report, what: str, read: Callable[[], T], complete: Callable[[T], bool]) -> T:
+def read_metadata[T](dv: Dataverse, report: Report, what: str, read: Callable[[], T], complete: Callable[[T], bool]) -> T:
     """Read metadata; while the answer lacks something expected, re-read it through a fresh session."""
     result = read()
     rereads = 0
@@ -229,8 +228,8 @@ def check_declared(dv: Dataverse, schema: dict[str, Any], cov: Coverage, report:
         wanted_keys = [k for k in schema["keys"] if k["table"] == name]
         wanted_rels = [r for r in schema["relationships"] if r["referencing"] == name]
         attrs, keys, rels = read_metadata(
-            dv, report, name, lambda: read_table_metadata(dv, name),
-            lambda found: table_complete(found, wanted, wanted_keys, wanted_rels))
+            dv, report, name, partial(read_table_metadata, dv, name),
+            partial(table_complete, columns=wanted, keys=wanted_keys, rels=wanted_rels))
         problems = 0
         for column in wanted:
             if column not in attrs:

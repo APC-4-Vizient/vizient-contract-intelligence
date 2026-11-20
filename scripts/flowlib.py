@@ -337,8 +337,8 @@ def analysis_definition(schema: Mapping[str, Any]) -> dict[str, Any]:
         }
     }
 
-    too_large = (f"The document is 4 MB or larger. This version of the flow reads at most the first 4 MB of the "
-                 f"document column, so it was not analyzed.")
+    too_large = ("The document is 4 MB or larger. This version of the flow reads at most the first 4 MB of the "
+                 "document column, so it was not analyzed.")
     add_finding = dataverse("CreateRecord", {
         "entityName": findings,
         "item/vz_name": "@" + cut("concat(" + trigger_field("vz_name") + ", ' - ', " + finding("key") + ")",
@@ -707,7 +707,7 @@ _LOOKUP_FILTER = re.compile(r"\b(_\w+_value)\b")
 RUN_AFTER_OUTCOMES = frozenset({"Succeeded", "Failed", "Skipped", "TimedOut"})
 
 
-def walk_actions(actions: Mapping[str, Any]) -> Iterator[tuple[Mapping[str, Any], str, Mapping[str, Any]]]:
+def walk_actions(actions: Mapping[str, Any]) -> Iterator[tuple[Mapping[str, Any], str, dict[str, Any]]]:
     """(the dict that holds the action, its name, the action) for every action, nested ones included."""
     for name, action in actions.items():
         yield actions, name, action

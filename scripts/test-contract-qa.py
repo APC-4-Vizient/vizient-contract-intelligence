@@ -6,7 +6,6 @@ Never downloads a PDF or reads existing user-uploaded contract text.
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import os
 import subprocess
@@ -18,10 +17,11 @@ from uuid import uuid4
 
 import az
 from dvweb import Dataverse, entity_id, signed_in_account
+from loadscript import load_script
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "function"))
-import contract_qa
+import contract_qa  # noqa: E402
 
 
 def main() -> int:
@@ -36,10 +36,7 @@ def main() -> int:
     args = parser.parse_args()
     if args.ingest_fixture and (args.direct or args.index_fixture):
         parser.error("--ingest-fixture cannot be combined with --direct or --index-fixture")
-    spec = importlib.util.spec_from_file_location("run_local", ROOT / "scripts" / "run-local.py")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
+    module = load_script("run-local.py", "run_local")
     env = module.load_settings()
     raw = (ROOT / "tests" / "fixtures" / "cu_result_sow.json").read_text()
     contract_qa.source_pages(raw)
@@ -47,10 +44,10 @@ def main() -> int:
                "context": raw, "history": [], "question": args.question}
     if args.direct:
         from azure.ai.projects import AIProjectClient
-        from azure.identity import AzureCliCredential
-        from azure.identity import get_bearer_token_provider
+        from azure.identity import AzureCliCredential, get_bearer_token_provider
         from azure.search.documents import SearchClient
         from openai import AzureOpenAI
+
         import contract_search
 
         base = [*az.az_command()]

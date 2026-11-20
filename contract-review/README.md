@@ -20,8 +20,8 @@ Dataverse. It is desktop-first and uses the vizient.com theme (`src/theme/`).
 - **Ask this contract:** an additive Foundry chat drawer for ready contracts. It searches only the open contract's
   full extracted text, cites verified page quotes, and can open them in the existing PDF viewer. It never changes
   findings or reviewer decisions. Conversation stays with the open record and resets on navigation/re-extraction.
-  Real contracts are accepted while the Function setting `ALLOW_REAL_CONTRACTS=true` is on; mock mode explicitly refuses to simulate answers.
-  See the root README for the agent, indexing, solution-owned question flow and deployment commands.
+  Real contracts are accepted only while the Function setting `ALLOW_REAL_CONTRACTS` is `true` (the default is `false`); mock mode explicitly refuses to simulate answers.
+  See [Ask this contract](../docs/ask-this-contract.md) for the agent, indexing, solution-owned question flow and deployment commands.
   Q&A readiness is separate from review readiness. Ingestion indexes full page-grounded document text in Azure AI
   Search; the button stays disabled while Not Indexed/Queued/Failed, with an explicit indexing status/error.
   Questions use `vz_documenttext`, never the reduced `vz_rawresult` debugging snapshot.
@@ -32,7 +32,7 @@ The review writes the status, the found count and the completeness back to the c
 
 Two read-only pages sit beside the review screens in the header (`src/about/`, routes `#/how-it-works` and `#/cost`).
 
-- **How it works:** an animated 3D diagram of the pipeline (SharePoint, the two flows, Dataverse, the Azure Function,
+- **How it works:** an animated 3D diagram of the pipeline (SharePoint, the Intake and Analysis flows, Dataverse, the Azure Function,
   Content Understanding, this app and the reviewer). **Follow a contract** plays a document through the eight steps;
   the step cards, the dots and the arrows jump to one step; clicking a part opens what it does. A clock under the
   caption shows how far into the processing the current step falls (the chips choose which timed run it follows), and
@@ -82,7 +82,7 @@ npm run build:standalone   # writes ..\docs\architecture-3d.html, the 3D diagram
 
 `dev:mock` is available only on the dev server. A production build contains none of the mock code. Generate
 the synthetic contracts first with `python ..\eval\generate_contracts.py`, then analyze them with
-`python ..\scripts\run-local.py` (see the root README).
+`python ..\scripts\run-local.py` (see [Working in this repository](../docs/development.md)).
 
 ## Layout
 
@@ -154,7 +154,7 @@ and stops when the Analysis flow sets the status to Ready for Review; a person's
 put a document through and read three sources:
 
 - the file's saved time in SharePoint, which is the start (to the second),
-- the run history of both flows, through the Power Automate flow API (when each run started and ended),
+- the run history of the Intake and Analysis flows, through the Power Automate flow API (when each run started and ended),
 - the Azure Function's own log in Application Insights (when it took the document and when the result was read).
 
 Pair the Intake run with its Analysis run by the contract's id, not by time. Split the total into the six stages at the

@@ -43,8 +43,14 @@ def chunks(contract_id: str, pages: Mapping[int, str]) -> list[dict[str, Any]]:
 
 def index_schema(name: str) -> Any:
     from azure.search.documents.indexes.models import (
-        HnswAlgorithmConfiguration, SearchField, SearchFieldDataType, SearchIndex,
-        SearchableField, SimpleField, VectorSearch, VectorSearchProfile,
+        HnswAlgorithmConfiguration,
+        SearchableField,
+        SearchField,
+        SearchFieldDataType,
+        SearchIndex,
+        SimpleField,
+        VectorSearch,
+        VectorSearchProfile,
     )
 
     return SearchIndex(name=name, fields=[

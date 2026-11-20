@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>vz_vizientcontractreview_8e465</Name>
-  <AppVersion>2026-11-19T01:59:56Z</AppVersion>
+  <AppVersion>2026-11-20T02:47:02Z</AppVersion>
   <Status>Ready</Status>
   <CreatedByClientVersion>0.0.0.0</CreatedByClientVersion>
   <MinClientVersion>0.0.0.0</MinClientVersion>
@@ -28,15 +28,16 @@
   <IsCustomizable>1</IsCustomizable>
   <CodeAppPackageUris>
     <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/index.html_ContentType_text/html</CodeAppPackageUri>
-    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/CostScreen-C-2C9kj3.js_ContentType_application/javascript</CodeAppPackageUri>
-    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/HowItWorksScreen-CwgCLy_9.js_ContentType_application/javascript</CodeAppPackageUri>
-    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/about-DvAPclMI.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/THIRD-PARTY-NOTICES.txt_ContentType_text/plain</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/CostScreen-BRvH8l5E.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/HowItWorksScreen-D-04cncs.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/about-DTEPczb7.js_ContentType_application/javascript</CodeAppPackageUri>
     <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/about-Dx-95mwh.css_ContentType_text/css</CodeAppPackageUri>
-    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/dataverseRepo-BbgHNsBd.js_ContentType_application/javascript</CodeAppPackageUri>
-    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/engine-SlTVRoje.js_ContentType_application/javascript</CodeAppPackageUri>
-    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/index-CS6EXFId.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/dataverseRepo-BX6r42Gd.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/engine-DIZt_WHg.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/index-B3Rl_j2e.js_ContentType_application/javascript</CodeAppPackageUri>
     <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/index-y-yHGkGn.css_ContentType_text/css</CodeAppPackageUri>
     <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/pdf-CfhDiWmk.js_ContentType_application/javascript</CodeAppPackageUri>
-    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/pdf.worker.min-DPZ1Y1U-.js_ContentType_application/javascript</CodeAppPackageUri>
+    <CodeAppPackageUri>/CanvasApps/vz_vizientcontractreview_8e465_CodeAppPackages/assets/pdf.worker.min-BOUybWNu.js_ContentType_application/javascript</CodeAppPackageUri>
   </CodeAppPackageUris>
 </CanvasApp>

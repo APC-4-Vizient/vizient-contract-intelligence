@@ -30,3 +30,34 @@
 .muted {
   color: var(--vz-text-muted);
 }
+
+/* The open-source notices the build adds below the page. */
+.notices {
+  max-inline-size: 72rem;
+  margin: 2rem auto 3rem;
+  padding: 0 1rem;
+  color: var(--vz-text-muted);
+  font-size: var(--vz-text-sm);
+}
+.notices summary {
+  color: var(--vz-text);
+  cursor: pointer;
+  font-weight: 600;
+}
+.notices table {
+  inline-size: 100%;
+  margin-block: 0.75rem;
+  border-collapse: collapse;
+}
+.notices th,
+.notices td {
+  padding: 0.25rem 0.5rem;
+  border-block-end: 1px solid var(--vz-border);
+  text-align: start;
+  vertical-align: top;
+}
+.notices pre {
+  font-size: var(--vz-text-xs);
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}

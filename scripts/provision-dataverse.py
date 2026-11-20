@@ -13,6 +13,7 @@ from __future__ import annotations
 import argparse
 import sys
 import time
+from functools import partial
 from typing import Any
 
 import schemalib
@@ -205,7 +206,7 @@ class Provisioner:
                 continue
             self.create("EntityDefinitions", self.table_payload(table), f"table {name}")
             if not self.dry_run:
-                wait_for(lambda: self.dv.exists(path), f"table {name}")
+                wait_for(partial(self.dv.exists, path), f"table {name}")
                 time.sleep(5)
 
     def columns(self) -> None:
@@ -228,6 +229,12 @@ class Provisioner:
                 return str(row["EntityKeyIndexStatus"])
         return "Missing"
 
+    def key_active(self, key: dict[str, Any]) -> bool:
+        status = self.key_status(key)
+        if status == "Failed":
+            raise RuntimeError(f"Alternate key {key['name']} index build failed")
+        return status == "Active"
+
     def keys(self) -> None:
         print("Alternate keys")
         for key in self.schema["keys"]:
@@ -240,14 +247,7 @@ class Provisioner:
                 self.create(path, body, f"key {key['name']}")
             if self.dry_run:
                 continue
-
-            def active() -> bool:
-                status = self.key_status(key)
-                if status == "Failed":
-                    raise RuntimeError(f"Alternate key {key['name']} index build failed")
-                return status == "Active"
-
-            wait_for(active, f"alternate key {key['name']} index", timeout=300, interval=5)
+            wait_for(partial(self.key_active, key), f"alternate key {key['name']} index", timeout=300, interval=5)
             self.log("active", f"key {key['name']}")
 
     def relationships(self) -> None:

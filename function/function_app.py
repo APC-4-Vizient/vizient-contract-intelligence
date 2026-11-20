@@ -17,11 +17,11 @@ from collections.abc import Callable
 
 import azure.functions as func
 
+import contract_qa
+import contract_search
 import cu_client
 import mapping
 import routes
-import contract_qa
-import contract_search
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.FUNCTION)
 

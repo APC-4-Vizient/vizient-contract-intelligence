@@ -19,21 +19,19 @@ Dataverse must be signed in as AZURE_ACCOUNT from .env, or the script stops befo
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import os
 import re
 import sys
 from collections.abc import Callable, Iterable, Mapping
 from dataclasses import dataclass, field
-from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
 import flowlib
 import schemalib
 from dvweb import Dataverse, DataverseError, entity_id, signed_in_account, wait_for
+from loadscript import load_script
 
-SCRIPTS = Path(__file__).resolve().parent
 GUID = re.compile(r"[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}")
 CONNECTION_NAME = re.compile(r"[A-Za-z0-9-]{8,80}")
 REQUIRED = ("SHAREPOINT_SITE_URL", "SHAREPOINT_LIBRARY_ID", "SHAREPOINT_INTAKE_FOLDER",
@@ -213,7 +211,7 @@ def describe(found: Survey, log: Callable[[str], None] = print) -> None:
         for key, _row_id, _row, changed in plan.update:
             log(f"  update  {plan.what} {key}  ({', '.join(changed)})")
         log(f"{plan.what}: {len(plan.create)} to create, {len(plan.update)} to update, {plan.unchanged} unchanged")
-    for spec, state, _row in found.flows:
+    for spec, state, _current in found.flows:
         if state != "ok":
             log(f"  {state:<7} flow {spec.name}")
     log(f"flows: {sum(state == 'ok' for _spec, state, _row in found.flows)} of {len(found.flows)} current and on")
@@ -242,6 +240,7 @@ def write_flow(dv: Dataverse, spec: flowlib.FlowSpec, state: str, current: Mappi
     if state == "create":
         flow_id = entity_id(dv.request("POST", FLOWS, body=spec.row, solution=True))
     else:
+        assert current is not None, "flow_state reports create for a flow that has no row, and nothing else"
         flow_id = current[FLOW_ID]
         if state == "update":
             if current.get("statecode") == 1:  # a flow that is on cannot be rewritten
@@ -304,11 +303,7 @@ def checked_specs(schema: Mapping[str, Any]) -> list[flowlib.FlowSpec]:
 
 def load_run_local() -> Any:
     """scripts/run-local.py, which already knows how to find the Function and read its key."""
-    spec = importlib.util.spec_from_file_location("run_local", SCRIPTS / "run-local.py")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
-    return module
+    return load_script("run-local.py", "run_local")
 
 
 def connect_settings() -> Settings:

@@ -182,9 +182,10 @@ data-zone SKU would change it, and that has not been tested with Content Underst
 
 ## 9. What is not built
 
-Retention and deletion, least-privilege reviewer roles and a non-administrator test, alerts, a CI pipeline and promotion between
-environments, key storage beyond a text variable, a work queue with retries, reviewer assignment, and paging past the newest 200
-contracts. Operations runbook section 6 tracks them, and the guide's sections 6 and 7 say what each costs at volume.
+Retention and deletion, least-privilege reviewer roles and a non-administrator test, alerts, a deployment pipeline and promotion between
+environments (the repository's CI workflow builds and tests only), key storage beyond a text variable, a work queue with retries, reviewer
+assignment, and paging past the newest 200 contracts. Operations runbook section 6 tracks them, and the guide's sections 6 and 7 say what
+each costs at volume.
 
 ## 10. Where to change what
 
@@ -198,4 +199,4 @@ contracts. Operations runbook section 6 tracks them, and the guide's sections 6 
 | The 3D architecture view (its text, parts or scene) | `contract-review/src/about/` | `npm run build:standalone` in `contract-review/` rebuilds `docs/architecture-3d.html`; a test fails while that page is older than its sources, or states a number the code no longer matches |
 | Azure resources | `infra/` | `azd provision --preview`, read it, then provision |
 
-More detail is in the [README](../README.md) and operations runbook 3.10.
+More detail is in [Working in this repository](development.md), [Ask this contract](ask-this-contract.md) and operations runbook 3.10.

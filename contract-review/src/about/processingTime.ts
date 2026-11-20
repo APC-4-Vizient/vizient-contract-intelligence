@@ -4,7 +4,7 @@
   The clock starts when a PDF is saved in the SharePoint intake folder and stops when the Analysis flow sets the
   contract's status to Ready for Review. Three documents went through the live system from start to finish on
   22 October 2026. Their times come from three places: the saved time of the file in SharePoint (to the second), the
-  Power Automate run history of both flows and the Azure Function's own log. The six stages split each total at points
+  Power Automate run history of the Intake and Analysis flows and the Azure Function's own log. The six stages split each total at points
   those sources agree on, so every stage lines up with one step of the "How it works" diagram and the stages add up to
   the total. Nothing is simulated.
 
@@ -255,7 +255,7 @@ export function processingMethod(snapshot: ProcessingSnapshot = PROCESSING): Met
     },
     {
       term: 'The sources.',
-      text: 'The saved time of each file in SharePoint, the Power Automate run history of both flows and the Azure Function\u2019s own log. Nothing is estimated or simulated. Figures are rounded, so the stages can differ from the total by a second.',
+      text: 'The saved time of each file in SharePoint, the Power Automate run history of the Intake and Analysis flows and the Azure Function\u2019s own log. Nothing is estimated or simulated. Figures are rounded, so the stages can differ from the total by a second.',
     },
     {
       term: 'Waiting.',

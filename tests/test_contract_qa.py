@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import copy
 import json
-import hashlib
 import sys
 from pathlib import Path
 from types import SimpleNamespace as NS
@@ -13,9 +12,9 @@ import pytest
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "function"))
 sys.path.insert(0, str(ROOT / "scripts"))
-import contract_qa as qa
-import flowlib
-import schemalib
+import contract_qa as qa  # noqa: E402
+import flowlib  # noqa: E402
+import schemalib  # noqa: E402
 
 
 def payload() -> dict:
@@ -151,8 +150,6 @@ def test_questions_never_create_a_document_index_or_upload_files() -> None:
 def completed_client() -> tuple[qa.Client, Mock, dict]:
     request = payload()
     pages = qa.source_pages(request["context"])
-    document = "\n\n".join(f"PAGE {number}\n{text}" for number, text in pages.items())
-    binding = {"contract": request["contractId"], "sha256": hashlib.sha256(document.encode()).hexdigest()}
     project = Mock()
     api = project.get_openai_client.return_value.with_options.return_value
     api.responses.create.return_value = NS(

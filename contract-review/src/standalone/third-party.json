@@ -1,0 +1,557 @@
+{
+ "generatedBy": "python scripts/gen-notices.py",
+ "packages": {
+  "@babel/runtime@7.29.10": {
+   "copyright": "Copyright (c) 2014-present Sebastian McKenzie and other contributors",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@emotion/hash@0.9.2": {
+   "copyright": "Copyright (c) Emotion team and other contributors",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@floating-ui/core@1.8.0": {
+   "copyright": "Copyright (c) 2021-present Floating UI contributors",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@floating-ui/devtools@0.2.3": {
+   "copyright": "Copyright (c) 2021-present Floating UI contributors",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@floating-ui/dom@1.8.0": {
+   "copyright": "Copyright (c) 2021-present Floating UI contributors",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@floating-ui/utils@0.2.12": {
+   "copyright": "Copyright (c) 2021-present Floating UI contributors",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/keyboard-keys@9.0.9": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/priority-overflow@9.4.3": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-accordion@9.12.5": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-alert@9.0.2-beta.1": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-aria@9.17.16": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-avatar@9.11.9": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-badge@9.5.7": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-breadcrumb@9.4.8": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-button@9.11.3": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-card@9.7.4": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-carousel@9.9.16": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-checkbox@9.6.6": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-color-picker@9.3.3": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-combobox@9.17.8": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-components@9.74.11": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-context-selector@9.2.21": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-dialog@9.18.6": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-divider@9.7.6": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-drawer@9.13.5": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-field@9.5.6": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-icons@2.0.344": {
+   "copyright": "Not stated in the package",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-image@9.4.6": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-infobutton@9.0.1-beta.1": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-infolabel@9.4.28": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-input@9.8.8": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-jsx-runtime@9.4.7": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-label@9.4.6": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-link@9.8.6": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-list@9.7.0": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-menu@9.25.7": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-message-bar@9.7.9": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-motion-components-preview@0.15.10": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-motion@9.16.5": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-nav@9.4.9": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-overflow@9.9.5": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-persona@9.7.11": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-popover@9.14.10": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-portal@9.8.17": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-positioning@9.23.4": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-progress@9.5.7": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-provider@9.22.22": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-radio@9.6.7": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-rating@9.4.7": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-search@9.4.8": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-select@9.5.7": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-shared-contexts@9.26.4": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-skeleton@9.7.7": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-slider@9.6.8": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-spinbutton@9.6.8": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-spinner@9.8.7": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-swatch-picker@9.6.3": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-switch@9.7.7": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-table@9.19.23": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-tabs@9.12.6": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-tabster@9.26.19": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-tag-picker@9.10.6": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-tags@9.9.8": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-teaching-popover@9.7.9": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-text@9.6.21": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-textarea@9.7.8": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-theme@9.2.2": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-toast@9.8.5": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-toolbar@9.8.7": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-tooltip@9.10.8": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-tree@9.16.10": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-utilities@9.27.0": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/react-virtualizer@9.0.0-alpha.116": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@fluentui/tokens@1.0.0-alpha.24": {
+   "copyright": "Copyright (c) Microsoft Corporation",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@griffel/core@1.21.4": {
+   "copyright": "Copyright (c) Microsoft Corporation.",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@griffel/react@1.7.8": {
+   "copyright": "Copyright (c) Microsoft Corporation.",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@griffel/style-types@1.4.3": {
+   "copyright": "Copyright (c) Microsoft Corporation.",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@microsoft/power-apps@1.5.0": {
+   "copyright": "Not stated in the package",
+   "license": "Microsoft Software License Terms",
+   "text": "8ca743ae"
+  },
+  "@napi-rs/canvas-android-arm64@1.0.11": {
+   "copyright": "Copyright (c) 2020 lynweklm@gmail.com",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@napi-rs/canvas-darwin-arm64@1.0.11": {
+   "copyright": "Copyright (c) 2020 lynweklm@gmail.com",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@napi-rs/canvas-darwin-x64@1.0.11": {
+   "copyright": "Copyright (c) 2020 lynweklm@gmail.com",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@napi-rs/canvas-linux-arm-gnueabihf@1.0.11": {
+   "copyright": "Copyright (c) 2020 lynweklm@gmail.com",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@napi-rs/canvas-linux-arm64-gnu@1.0.11": {
+   "copyright": "Copyright (c) 2020 lynweklm@gmail.com",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@napi-rs/canvas-linux-arm64-musl@1.0.11": {
+   "copyright": "Copyright (c) 2020 lynweklm@gmail.com",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@napi-rs/canvas-linux-riscv64-gnu@1.0.11": {
+   "copyright": "Copyright (c) 2020 lynweklm@gmail.com",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@napi-rs/canvas-linux-x64-gnu@1.0.11": {
+   "copyright": "Copyright (c) 2020 lynweklm@gmail.com",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@napi-rs/canvas-linux-x64-musl@1.0.11": {
+   "copyright": "Copyright (c) 2020 lynweklm@gmail.com",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@napi-rs/canvas-win32-arm64-msvc@1.0.11": {
+   "copyright": "Copyright (c) 2020 lynweklm@gmail.com",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@napi-rs/canvas-win32-x64-msvc@1.0.11": {
+   "copyright": "Not stated in the package",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@napi-rs/canvas@1.0.11": {
+   "copyright": "Copyright (c) 2020 lynweklm@gmail.com",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "@swc/helpers@0.5.23": {
+   "copyright": "Not stated in the package (author: 강동윤 <kdy1997.dev@gmail.com>)",
+   "license": "Apache-2.0",
+   "text": "b75061f9"
+  },
+  "csstype@3.2.3": {
+   "copyright": "Copyright (c) 2017-2018 Fredrik Nicol",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "embla-carousel-autoplay@8.6.0": {
+   "copyright": "Not stated in the package (author: David Jerleke)",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "embla-carousel-fade@8.6.0": {
+   "copyright": "Not stated in the package (author: David Jerleke)",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "embla-carousel@8.6.0": {
+   "copyright": "Not stated in the package (author: David Jerleke)",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "keyborg@3.498.0": {
+   "copyright": "Copyright (c) Microsoft Corporation.",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "pdfjs-dist@6.4.299": {
+   "copyright": "Not stated in the package",
+   "license": "Apache-2.0",
+   "text": "aaeba880"
+  },
+  "react-dom@19.3.1": {
+   "copyright": "Copyright (c) Meta Platforms, Inc. and affiliates.",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "react@19.3.1": {
+   "copyright": "Copyright (c) Meta Platforms, Inc. and affiliates.",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "rtl-css-js@1.16.1": {
+   "copyright": "Copyright (c) 2017 Kent C. Dodds",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "scheduler@0.28.0": {
+   "copyright": "Copyright (c) Meta Platforms, Inc. and affiliates.",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "stylis@4.4.0": {
+   "copyright": "Copyright (c) 2016-present Sultan Tarimo",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "tabster@8.8.1": {
+   "copyright": "Copyright (c) Microsoft Corporation.",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "three@0.186.1": {
+   "copyright": "Copyright © 2010-2026 three.js authors",
+   "license": "MIT",
+   "text": "standard-mit"
+  },
+  "tslib@2.8.1": {
+   "copyright": "Copyright (c) Microsoft Corporation.",
+   "license": "0BSD",
+   "text": "945ea5f4"
+  },
+  "use-sync-external-store@1.7.0": {
+   "copyright": "Copyright (c) Meta Platforms, Inc. and affiliates.",
+   "license": "MIT",
+   "text": "standard-mit"
+  }
+ },
+ "texts": {
+  "8ca743ae": {
+   "label": "Microsoft Software License Terms",
+   "text": "MICROSOFT SOFTWARE LICENSE TERMS\nMICROSOFT POWER PLATFORM – @MICROSOFT/POWER-APPS\n\nAugust 2025\nThese license terms are an agreement between you and Microsoft Corporation (or one of its affiliates). They\napply to the software named above and any Microsoft services or software updates (except to the extent such\nservices or updates are accompanied by new or additional terms, in which case those different terms apply\nprospectively and do not alter your or Microsoft's rights relating to pre-updated software or services). IF YOU\nCOMPLY WITH THESE LICENSE TERMS, YOU HAVE THE RIGHTS BELOW.  BY USING THE SOFTWARE, YOU\nACCEPT THESE TERMS.\n1.\tINSTALLATION AND USE RIGHTS.\na)\tGeneral. You may install and use any number of copies of the software to develop and test your\napplications.\nb)\tThird Party Components. The software may include third party components with separate legal\nnotices or governed by other agreements, as may be described in the ThirdPartyNotices file(s)\naccompanying the software.\nc)\tWork or School Accounts. You can sign into the software with a work or school email address. If\nyou do, you agree that the owner of the domain associated with your email address may control and\nadminister your account, and access and process your data, including the contents of your\ncommunications and files. You further agree that your use of the software may be subject to: i) your\norganization's guidelines and policies regarding the use of the software; and ii) the agreements\nMicrosoft has with you or your organization, and in such case these terms may not apply.  If you\nalready have a Microsoft account and you use a separate work or school email address to access the\nsoftware, you may be prompted to update the email address associated with your Microsoft account to\ncontinue accessing the software.\n2.\tSCOPE OF LICENSE. The software is licensed, not sold. Microsoft reserves all other rights. Unless\napplicable law gives you more rights despite this limitation, you will not (and have no right to):\na)\twork around any technical limitations in the software that only allow you to use it in certain ways;\nb)\treverse engineer, decompile or disassemble the software, or otherwise attempt to derive the source\ncode for the software, except and to the extent required by third party licensing terms governing use\nof certain open source components that may be included in the software;\nc)\tremove, minimize, block, or modify any notices of Microsoft or its suppliers in the software;\nd)\tuse the software in any way that is against the law or to create or propagate malware; or\ne)\tshare, publish, distribute, or lease the software (except for any distributable code, subject to the\nterms above), provide the software as a stand-alone offering for others to use, or transfer the\nsoftware or this agreement to any third party.\n3.\tDATA.\na)\tData Collection. The software may collect information about you and your use of the software, and\nsend that to Microsoft. Microsoft may use this information to provide services and improve our\nproducts and services. You may opt-out of many of these scenarios, but not all, as described in the\nproduct documentation.  There are also some features in the software that may enable you to collect\ndata from users of your applications. If you use these features to enable data collection in your\napplications, you must comply with applicable law, including providing appropriate notices to users of\nyour applications. You can learn more about data collection and use in the help documentation and\nthe privacy statement at https://go.microsoft.com/fwlink/?linkid=521839. Your use of the software\noperates as your consent to these practices.\nb)\tProcessing of Personal Data. To the extent Microsoft is a processor or subprocessor of personal\ndata in connection with the software, Microsoft makes the commitments in the European Union\nGeneral Data Protection Regulation Terms of the Microsoft Products and Services Data Protection\nAddendum to all customers effective May 25, 2018, at\nhttps://go.microsoft.com/fwlink/?linkid=2135030.\n4.\tCOMPLIANCE WITH TRADE LAWS. Microsoft products, software, technology, and services (\"Items\")\nmay be subject to U.S. and other countries' export jurisdictions.  Each party will comply with all laws and\nregulations applicable to the import or export of the Items, including, without limitation, trade laws of the\nU.S., EU, and UK, such as the U.S. Export Administration Regulations, sanctions regulations administered\nby the U.S. Office of Foreign Assets Control, the EU Dual Use Regulation 2021/821, and/or other end-user,\nend use, and destination restrictions (\"Trade Laws\") as well as the global legal compliance standards\ndetailed in the Microsoft Standards of Business Conduct.  Customer will not, and will ensure its Affiliates\nwill not, take any action that causes Microsoft to violate applicable Trade Laws.  Microsoft may suspend or\nterminate this agreement immediately without notice to the extent that Microsoft reasonably believes that\nperformance would cause it to violate Trade Laws or put it at risk of becoming subject to sanctions and\npenalties under such laws.  Customer remains responsible for its and for its Affiliates' compliance with this\nsection and, to the extent applicable, the Regional Trade Compliance Addendum incorporated herein by\nreference.\n5.\tSUPPORT SERVICES. Microsoft is not obligated under this agreement to provide any support services for\nthe software. Any support provided is \"as is\", \"with all faults\", and without warranty of any kind.\n6.\tENTIRE AGREEMENT. This agreement, and any other terms Microsoft may provide for supplements,\nupdates, or third-party applications, is the entire agreement for the software.\n7.\tAPPLICABLE LAW AND PLACE TO RESOLVE DISPUTES. If you acquired the software in the United\nStates or Canada, the laws of the state or province where you live (or, if a business, where your principal\nplace of business is located) govern the interpretation of this agreement, claims for its breach, and all\nother claims (including consumer protection, unfair competition, and tort claims), regardless of conflict of\nlaws principles. If you acquired the software in any other country, its laws apply. If U.S. federal jurisdiction\nexists, you and Microsoft consent to exclusive jurisdiction and venue in the federal court in King County,\nWashington for all disputes heard in court. If not, you and Microsoft consent to exclusive jurisdiction and\nvenue in the Superior Court of King County, Washington for all disputes heard in court.\n8.\tCONSUMER RIGHTS; REGIONAL VARIATIONS. This agreement describes certain legal rights. You\nmay have other rights, including consumer rights, under the laws of your state or country. Separate and\napart from your relationship with Microsoft, you may also have rights with respect to the party from which\nyou acquired the software. This agreement does not change those other rights if the laws of your state or\ncountry do not permit it to do so. For example, if you acquired the software in one of the below regions, or\nmandatory country law applies, then the following provisions apply to you:\na)\tAustralia. You have statutory guarantees under the Australian Consumer Law and nothing in this\nagreement is intended to affect those rights.\nb)\tCanada. If you acquired this software in Canada, you may stop receiving updates by turning off the\nautomatic update feature, disconnecting your device from the Internet (if and when you re-connect to\nthe Internet, however, the software will resume checking for and installing updates), or uninstalling\nthe software. The product documentation, if any, may also specify how to turn off updates for your\nspecific device or software.\nc)\tGermany and Austria.\ni.\tWarranty. The properly licensed software will perform substantially as described in any Microsoft\nmaterials that accompany the software. However, Microsoft gives no contractual guarantee in\nrelation to the licensed software.\nii.\tLimitation of Liability. In case of intentional conduct, gross negligence, claims based on the\nProduct Liability Act, as well as, in case of death or personal or physical injury, Microsoft is liable\naccording to the statutory law.\nSubject to the foregoing clause ii., Microsoft will only be liable for slight negligence if Microsoft is in\nbreach of such material contractual obligations, the fulfillment of which facilitate the due performance\nof this agreement, the breach of which would endanger the purpose of this agreement and the\ncompliance with which a party may constantly trust in (so-called \"cardinal obligations\"). In other cases\nof slight negligence, Microsoft will not be liable for slight negligence.\n9.\tDISCLAIMER OF WARRANTY. THE SOFTWARE IS LICENSED \"AS IS.\" YOU BEAR THE RISK OF\nUSING IT. MICROSOFT GIVES NO EXPRESS WARRANTIES, GUARANTEES, OR CONDITIONS.\nTO THE EXTENT PERMITTED UNDER APPLICABLE LAWS, MICROSOFT EXCLUDES ALL IMPLIED\nWARRANTIES, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND\nNON-INFRINGEMENT.\n10.\tLIMITATION ON AND EXCLUSION OF DAMAGES. IF YOU HAVE ANY BASIS FOR RECOVERING\nDAMAGES DESPITE THE PRECEDING DISCLAIMER OF WARRANTY, YOU CAN RECOVER FROM\nMICROSOFT AND ITS SUPPLIERS ONLY DIRECT DAMAGES UP TO U.S. $5.00. YOU CANNOT\nRECOVER ANY OTHER DAMAGES, INCLUDING CONSEQUENTIAL, LOST PROFITS, SPECIAL,\nINDIRECT, OR INCIDENTAL DAMAGES.\nThis limitation applies to (a) anything related to the software, services, content (including\ncode) on third party Internet sites, or third party applications; and (b) claims for breach of\ncontract, warranty, guarantee, or condition; strict liability, negligence, or other tort; or any\nother claim; in each case to the extent permitted by applicable law.\nIt also applies even if Microsoft knew or should have known about the possibility of the\ndamages. The above limitation or exclusion may not apply to you because your state,\nprovince, or country may not allow the exclusion or limitation of incidental, consequential, or\nother damages.\n\nPlease note: As this software is distributed in Canada, some of the clauses in this agreement are\nprovided below in French.\nRemarque: Ce logiciel étant distribué au Canada, certaines des clauses dans ce contrat sont\nfournies ci-dessous en français.\nEXONÉRATION DE GARANTIE. Le logiciel visé par une licence est offert « tel quel ». Toute\nutilisation de ce logiciel est à votre seule risque et péril. Microsoft n'accorde aucune autre\ngarantie expresse. Vous pouvez bénéficier de droits additionnels en vertu du droit local sur la\nprotection des consommateurs, que ce contrat ne peut modifier. La ou elles sont permises par le\ndroit locale, les garanties implicites de qualité marchande, d'adéquation à un usage particulier et\nd'absence de contrefaçon sont exclues.\nLIMITATION DES DOMMAGES-INTÉRÊTS ET EXCLUSION DE RESPONSABILITÉ POUR LES\nDOMMAGES. Vous pouvez obtenir de Microsoft et de ses fournisseurs une indemnisation en cas de\ndommages directs uniquement à hauteur de 5,00 $ US. Vous ne pouvez prétendre à aucune\nindemnisation pour les autres dommages, y compris les dommages spéciaux, indirects ou\naccessoires et pertes de bénéfices.\nCette limitation concerne:\n•\ttout ce qui est relié au logiciel, aux services ou au contenu (y compris le code) figurant sur\ndes sites Internet tiers ou dans des programmes tiers; et\n•\tles réclamations au titre de violation de contrat ou de garantie, ou au titre de responsabilité\nstricte, de négligence ou d'une autre faute dans la limite autorisée par la loi en vigueur.\nElle s'applique également, même si Microsoft connaissait ou devrait connaître l'éventualité d'un\ntel dommage. Si votre pays n'autorise pas l'exclusion ou la limitation de responsabilité pour les\ndommages indirects, accessoires ou de quelque nature que ce soit, il se peut que la limitation ou\nl'exclusion ci-dessus ne s'appliquera pas à votre égard.\nEFFET JURIDIQUE. Le présent contrat décrit certains droits juridiques. Vous pourriez avoir\nd'autres droits prévus par les lois de votre pays. Le présent contrat ne modifie pas les droits que\nvous confèrent les lois de votre pays si celles-ci ne le permettent pas.\n\n\nDWT 28909173v1 0085000-001126\n\n\nDWT 28909173v1 0085000-001126\n"
+  },
+  "945ea5f4": {
+   "label": "0BSD",
+   "text": "Copyright (c) the holders named in the table above\n\nPermission to use, copy, modify, and/or distribute this software for any\npurpose with or without fee is hereby granted.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH\nREGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY\nAND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,\nINDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM\nLOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR\nOTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR\nPERFORMANCE OF THIS SOFTWARE.\n"
+  },
+  "aaeba880": {
+   "label": "Apache-2.0",
+   "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n"
+  },
+  "b75061f9": {
+   "label": "Apache-2.0",
+   "text": "                              Apache License\n                        Version 2.0, January 2004\n                     http://www.apache.org/licenses/\n\nTERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n1. Definitions.\n\n   \"License\" shall mean the terms and conditions for use, reproduction,\n   and distribution as defined by Sections 1 through 9 of this document.\n\n   \"Licensor\" shall mean the copyright owner or entity authorized by\n   the copyright owner that is granting the License.\n\n   \"Legal Entity\" shall mean the union of the acting entity and all\n   other entities that control, are controlled by, or are under common\n   control with that entity. For the purposes of this definition,\n   \"control\" means (i) the power, direct or indirect, to cause the\n   direction or management of such entity, whether by contract or\n   otherwise, or (ii) ownership of fifty percent (50%) or more of the\n   outstanding shares, or (iii) beneficial ownership of such entity.\n\n   \"You\" (or \"Your\") shall mean an individual or Legal Entity\n   exercising permissions granted by this License.\n\n   \"Source\" form shall mean the preferred form for making modifications,\n   including but not limited to software source code, documentation\n   source, and configuration files.\n\n   \"Object\" form shall mean any form resulting from mechanical\n   transformation or translation of a Source form, including but\n   not limited to compiled object code, generated documentation,\n   and conversions to other media types.\n\n   \"Work\" shall mean the work of authorship, whether in Source or\n   Object form, made available under the License, as indicated by a\n   copyright notice that is included in or attached to the work\n   (an example is provided in the Appendix below).\n\n   \"Derivative Works\" shall mean any work, whether in Source or Object\n   form, that is based on (or derived from) the Work and for which the\n   editorial revisions, annotations, elaborations, or other modifications\n   represent, as a whole, an original work of authorship. For the purposes\n   of this License, Derivative Works shall not include works that remain\n   separable from, or merely link (or bind by name) to the interfaces of,\n   the Work and Derivative Works thereof.\n\n   \"Contribution\" shall mean any work of authorship, including\n   the original version of the Work and any modifications or additions\n   to that Work or Derivative Works thereof, that is intentionally\n   submitted to Licensor for inclusion in the Work by the copyright owner\n   or by an individual or Legal Entity authorized to submit on behalf of\n   the copyright owner. For the purposes of this definition, \"submitted\"\n   means any form of electronic, verbal, or written communication sent\n   to the Licensor or its representatives, including but not limited to\n   communication on electronic mailing lists, source code control systems,\n   and issue tracking systems that are managed by, or on behalf of, the\n   Licensor for the purpose of discussing and improving the Work, but\n   excluding communication that is conspicuously marked or otherwise\n   designated in writing by the copyright owner as \"Not a Contribution.\"\n\n   \"Contributor\" shall mean Licensor and any individual or Legal Entity\n   on behalf of whom a Contribution has been received by Licensor and\n   subsequently incorporated within the Work.\n\n2. Grant of Copyright License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   copyright license to reproduce, prepare Derivative Works of,\n   publicly display, publicly perform, sublicense, and distribute the\n   Work and such Derivative Works in Source or Object form.\n\n3. Grant of Patent License. Subject to the terms and conditions of\n   this License, each Contributor hereby grants to You a perpetual,\n   worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n   (except as stated in this section) patent license to make, have made,\n   use, offer to sell, sell, import, and otherwise transfer the Work,\n   where such license applies only to those patent claims licensable\n   by such Contributor that are necessarily infringed by their\n   Contribution(s) alone or by combination of their Contribution(s)\n   with the Work to which such Contribution(s) was submitted. If You\n   institute patent litigation against any entity (including a\n   cross-claim or counterclaim in a lawsuit) alleging that the Work\n   or a Contribution incorporated within the Work constitutes direct\n   or contributory patent infringement, then any patent licenses\n   granted to You under this License for that Work shall terminate\n   as of the date such litigation is filed.\n\n4. Redistribution. You may reproduce and distribute copies of the\n   Work or Derivative Works thereof in any medium, with or without\n   modifications, and in Source or Object form, provided that You\n   meet the following conditions:\n\n   (a) You must give any other recipients of the Work or\n       Derivative Works a copy of this License; and\n\n   (b) You must cause any modified files to carry prominent notices\n       stating that You changed the files; and\n\n   (c) You must retain, in the Source form of any Derivative Works\n       that You distribute, all copyright, patent, trademark, and\n       attribution notices from the Source form of the Work,\n       excluding those notices that do not pertain to any part of\n       the Derivative Works; and\n\n   (d) If the Work includes a \"NOTICE\" text file as part of its\n       distribution, then any Derivative Works that You distribute must\n       include a readable copy of the attribution notices contained\n       within such NOTICE file, excluding those notices that do not\n       pertain to any part of the Derivative Works, in at least one\n       of the following places: within a NOTICE text file distributed\n       as part of the Derivative Works; within the Source form or\n       documentation, if provided along with the Derivative Works; or,\n       within a display generated by the Derivative Works, if and\n       wherever such third-party notices normally appear. The contents\n       of the NOTICE file are for informational purposes only and\n       do not modify the License. You may add Your own attribution\n       notices within Derivative Works that You distribute, alongside\n       or as an addendum to the NOTICE text from the Work, provided\n       that such additional attribution notices cannot be construed\n       as modifying the License.\n\n   You may add Your own copyright statement to Your modifications and\n   may provide additional or different license terms and conditions\n   for use, reproduction, or distribution of Your modifications, or\n   for any such Derivative Works as a whole, provided Your use,\n   reproduction, and distribution of the Work otherwise complies with\n   the conditions stated in this License.\n\n5. Submission of Contributions. Unless You explicitly state otherwise,\n   any Contribution intentionally submitted for inclusion in the Work\n   by You to the Licensor shall be under the terms and conditions of\n   this License, without any additional terms or conditions.\n   Notwithstanding the above, nothing herein shall supersede or modify\n   the terms of any separate license agreement you may have executed\n   with Licensor regarding such Contributions.\n\n6. Trademarks. This License does not grant permission to use the trade\n   names, trademarks, service marks, or product names of the Licensor,\n   except as required for reasonable and customary use in describing the\n   origin of the Work and reproducing the content of the NOTICE file.\n\n7. Disclaimer of Warranty. Unless required by applicable law or\n   agreed to in writing, Licensor provides the Work (and each\n   Contributor provides its Contributions) on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n   implied, including, without limitation, any warranties or conditions\n   of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n   PARTICULAR PURPOSE. You are solely responsible for determining the\n   appropriateness of using or redistributing the Work and assume any\n   risks associated with Your exercise of permissions under this License.\n\n8. Limitation of Liability. In no event and under no legal theory,\n   whether in tort (including negligence), contract, or otherwise,\n   unless required by applicable law (such as deliberate and grossly\n   negligent acts) or agreed to in writing, shall any Contributor be\n   liable to You for damages, including any direct, indirect, special,\n   incidental, or consequential damages of any character arising as a\n   result of this License or out of the use or inability to use the\n   Work (including but not limited to damages for loss of goodwill,\n   work stoppage, computer failure or malfunction, or any and all\n   other commercial damages or losses), even if such Contributor\n   has been advised of the possibility of such damages.\n\n9. Accepting Warranty or Additional Liability. While redistributing\n   the Work or Derivative Works thereof, You may choose to offer,\n   and charge a fee for, acceptance of support, warranty, indemnity,\n   or other liability obligations and/or rights consistent with this\n   License. However, in accepting such obligations, You may act only\n   on Your own behalf and on Your sole responsibility, not on behalf\n   of any other Contributor, and only if You agree to indemnify,\n   defend, and hold each Contributor harmless for any liability\n   incurred by, or claims asserted against, such Contributor by reason\n   of your accepting any such warranty or additional liability.\n\nEND OF TERMS AND CONDITIONS\n\nAPPENDIX: How to apply the Apache License to your work.\n\n   To apply the Apache License to your work, attach the following\n   boilerplate notice, with the fields enclosed by brackets \"[]\"\n   replaced with your own identifying information. (Don't include\n   the brackets!)  The text should be enclosed in the appropriate\n   comment syntax for the file format. We also recommend that a\n   file or class name and description of purpose be included on the\n   same \"printed page\" as the copyright notice for easier\n   identification within third-party archives.\n\nCopyright 2024 SWC contributors.\n\nLicensed under the Apache License, Version 2.0 (the \"License\");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n\thttp://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an \"AS IS\" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n"
+  },
+  "standard-mit": {
+   "label": "MIT",
+   "text": "MIT License\n\nCopyright (c) the holders named in the table above\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n"
+  }
+ }
+}

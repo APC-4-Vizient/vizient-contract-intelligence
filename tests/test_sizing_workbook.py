@@ -87,11 +87,13 @@ def test_inputs_that_copy_code_constants_match_the_code(book: Book) -> None:
 
 def test_prices_and_measured_samples_match_the_pricing_module(book: Book) -> None:
     costs = (ROOT / "contract-review" / "src" / "about" / "processingCost.ts").read_text(encoding="utf-8")
-    rates = {key: (float(usd), number(per)) for key, usd, per in re.findall(r"id: '(reading|context|input|cached|output)'.*?usd: ([\d.]+), per: ([\d_]+)", costs)}
+    rates = {key: (float(usd), number(per))
+             for key, usd, per in re.findall(r"id: '(reading|context|input|cached|output)'.*?usd: ([\d.]+), per: ([\d_]+)", costs)}
     names = {"reading": "in_p_read", "context": "in_p_ctx", "input": "in_p_in", "cached": "in_p_cached", "output": "in_p_out"}
 
     assert {key: usd for key, (usd, _) in rates.items()} == {key: book.value(name) for key, name in names.items()}
-    assert {key: per for key, (_, per) in rates.items()} == {"reading": 1_000, "context": 1_000_000, "input": 1_000_000, "cached": 1_000_000, "output": 1_000_000}
+    assert {key: per for key, (_, per) in rates.items()} == {
+        "reading": 1_000, "context": 1_000_000, "input": 1_000_000, "cached": 1_000_000, "output": 1_000_000}
     assert book.value("in_actions_intake") == number(re.search(r"intake: (\d+)", costs).group(1))
 
     cells = book.sheets["Per contract"]
@@ -101,5 +103,5 @@ def test_prices_and_measured_samples_match_the_pricing_module(book: Book) -> Non
             rows.setdefault(text, ref[1:])
     measured = re.findall(r"pages: (\d+), contextTokens: [\d_]+, inputTokens: ([\d_]+), cachedInputTokens: ([\d_]+), outputTokens: ([\d_]+)", costs)
     assert len(measured) == len(SAMPLES)
-    for label, sample in zip(SAMPLES, measured):
+    for label, sample in zip(SAMPLES, measured, strict=True):
         assert [cells[f"{col}{rows[label]}"] for col in "BCDE"] == [number(value) for value in sample]

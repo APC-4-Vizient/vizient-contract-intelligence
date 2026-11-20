@@ -73,7 +73,9 @@ def map_result(operation: Mapping[str, Any], items: Sequence[Mapping[str, Any]],
     fields = content.get("fields")
     if not isinstance(fields, Mapping) or not fields:
         raise MappingError("the analyzer result has no fields. Is the analyzer the checklist analyzer?")
-    markdown = content.get("markdown") if isinstance(content.get("markdown"), str) else ""
+    markdown = content.get("markdown")
+    if not isinstance(markdown, str):
+        markdown = ""
     findings = []
     for item in items:
         build = _right if item["group"] == RIGHT_GROUP else _detail
@@ -121,7 +123,8 @@ def _right(key: str, field: Any, markdown: str, high_conf: float) -> dict[str, A
     if not regions and judgment:
         regions = parse_source(judgment_field.get("source"))
     confidences = [_confidence(judgment_field)] + ([_confidence(clause_field)] if clause else [])
-    confidence = None if None in confidences else min(confidences)
+    known = [score for score in confidences if score is not None]
+    confidence = min(known) if len(known) == len(confidences) else None
     found = bool(judgment and clause and regions) and _trusted(confidence, high_conf)
     return _finding(key, FOUND if found else UNCLEAR, value=conditions, judgment=judgment, conditions=conditions,
                     clause=clause, regions=regions, confidence=confidence)

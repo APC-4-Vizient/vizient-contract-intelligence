@@ -65,7 +65,8 @@ def main() -> int:
     clean, dropped = strip_zip_values(data)
     zip_path = TARGET.parent / f"{name}_unmanaged.zip"
     zip_path.write_bytes(clean)
-    print(f"Wrote {zip_path.relative_to(schemalib.ROOT)} ({len(clean):,} bytes, {dropped} environment variable value entr{'y' if dropped == 1 else 'ies'} removed)")
+    print(f"Wrote {zip_path.relative_to(schemalib.ROOT)} ({len(clean):,} bytes, "
+          f"{dropped} environment variable value entr{'y' if dropped == 1 else 'ies'} removed)")
     with tempfile.TemporaryDirectory(prefix="vz-solution-", ignore_cleanup_errors=True) as scratch:
         archive = Path(scratch) / f"{name}.zip"
         archive.write_bytes(data)

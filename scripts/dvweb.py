@@ -12,7 +12,7 @@ import os
 import sys
 import time
 from collections.abc import Callable, Iterator
-from typing import Any
+from typing import Any, Literal, overload
 from urllib.parse import quote
 
 import requests
@@ -134,6 +134,16 @@ class Dataverse:
             raise ValueError("No solution configured: refusing to create metadata outside a solution.")
         return self.solution
 
+    @overload
+    def request(self, method: str, path: str, *, body: Any = ..., params: dict[str, Any] | None = ..., solution: bool = ...,
+                headers: dict[str, str] | None = ..., ok: tuple[int, ...] = ..., missing_ok: Literal[False] = ...,
+                retries: int = ..., data: bytes | None = ...) -> requests.Response: ...
+
+    @overload
+    def request(self, method: str, path: str, *, body: Any = ..., params: dict[str, Any] | None = ..., solution: bool = ...,
+                headers: dict[str, str] | None = ..., ok: tuple[int, ...] = ..., missing_ok: bool,
+                retries: int = ..., data: bytes | None = ...) -> requests.Response | None: ...
+
     def request(
         self,
         method: str,
@@ -173,6 +183,12 @@ class Dataverse:
                 continue
             raise _as_error(resp, method, path)
         raise AssertionError("unreachable")
+
+    @overload
+    def get(self, path: str, params: dict[str, Any] | None = ..., *, missing_ok: Literal[False] = ...) -> dict[str, Any]: ...
+
+    @overload
+    def get(self, path: str, params: dict[str, Any] | None = ..., *, missing_ok: bool) -> dict[str, Any] | None: ...
 
     def get(self, path: str, params: dict[str, Any] | None = None, *, missing_ok: bool = False) -> dict[str, Any] | None:
         resp = self.request("GET", path, params=params, missing_ok=missing_ok)

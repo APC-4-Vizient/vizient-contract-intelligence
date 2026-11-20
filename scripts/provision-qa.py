@@ -8,7 +8,6 @@ ALLOW_REAL_CONTRACTS is an infrastructure setting owned by infra/main.bicep; thi
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import os
 import subprocess
@@ -17,10 +16,11 @@ from pathlib import Path
 from typing import Any
 
 import az
+from loadscript import load_script
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "function"))
-import contract_qa
+import contract_qa  # noqa: E402
 
 
 def deployment_parameters(function_principal_id: str, deployer_id: str, search_location: str | None) -> tuple[str, ...]:
@@ -39,10 +39,7 @@ def main() -> int:
     mode.add_argument("--validate", action="store_true", help="validate infrastructure only; create nothing")
     mode.add_argument("--agent-only", action="store_true", help="publish agent definition without changing infrastructure")
     args = parser.parse_args()
-    spec = importlib.util.spec_from_file_location("run_local", ROOT / "scripts" / "run-local.py")
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[spec.name] = module
-    spec.loader.exec_module(module)
+    module = load_script("run-local.py", "run_local")
     env = module.load_settings()
     sub, tenant = env["AZURE_SUBSCRIPTION_ID"], env["TENANT_ID"]
 
@@ -108,6 +105,7 @@ def main() -> int:
     name = values["FOUNDRY_QA_AGENT"]
     if not args.status:
         from azure.search.documents.indexes import SearchIndexClient
+
         import contract_search
 
         if not values.get("AZURE_SEARCH_ENDPOINT"):
@@ -115,14 +113,14 @@ def main() -> int:
         indexes = SearchIndexClient(values["AZURE_SEARCH_ENDPOINT"], AzureCliCredential(tenant_id=tenant))
         indexes.create_or_update_index(contract_search.index_schema(values.get("AZURE_SEARCH_INDEX", "contract-chunks")))
         print("Contract chunk index schema: ready.")
-        agent = client.agents.create_version(
+        created = client.agents.create_version(
             agent_name=name, definition=PromptAgentDefinition(
                 model=values["FOUNDRY_QA_MODEL"], instructions=contract_qa.INSTRUCTIONS),
             description="Answers from server-filtered Azure AI Search passages for the authorized contract version.")
-        print(f"Foundry agent {agent.name}, version {agent.version}: created.")
+        print(f"Foundry agent {created.name}, version {created.version}: created.")
     else:
-        agent = client.agents.get(name)
-        print(f"Foundry agent {agent.name}: present.")
+        present = client.agents.get(name)
+        print(f"Foundry agent {present.name}: present.")
     return 0
 
 

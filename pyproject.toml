@@ -1,0 +1,44 @@
+# Quality tooling, run from the repository root with no flags:
+#
+#   ruff check scripts function analyzer eval tests
+#   mypy
+#   python -m pytest --cov
+#
+# pytest is configured in pytest.ini. The tools are listed in requirements-tools.txt.
+
+[tool.ruff]
+target-version = "py312"
+line-length = 160
+# The modules in scripts/, function/, analyzer/ and eval/ import one another by plain name, so import sorting
+# treats them as the project's own code and keeps them apart from third-party packages.
+src = [".", "scripts", "function", "analyzer", "eval"]
+# These two scripts are copies of the Microsoft Dataverse-skills plugin's helpers (version 1.16.1).
+# They are kept unchanged so they stay easy to compare with the plugin, so they are left out of every check.
+extend-exclude = ["scripts/auth.py", "scripts/enable-mcp-client.py"]
+force-exclude = true
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.12"
+files = ["scripts", "function", "analyzer", "eval"]
+exclude = ["^scripts/auth\\.py$", "^scripts/enable-mcp-client\\.py$"]
+ignore_missing_imports = true
+check_untyped_defs = true
+
+# auth.py is still read when another module imports it; its errors are not ours to fix.
+[[tool.mypy.overrides]]
+module = ["auth"]
+ignore_errors = true
+
+[tool.coverage.run]
+source = ["scripts", "function", "analyzer", "eval"]
+# The vendored plugin helpers: not ours to test.
+omit = ["*/scripts/auth.py", "*/scripts/enable-mcp-client.py"]
+
+[tool.coverage.report]
+show_missing = true
+# The offline suite covered 86% when this floor was set. The sign-in scripts that talk to Azure and Dataverse are exercised by hand, so the
+# floor sits below that to leave room for a platform whose tests skip a few lines; raise it as tests are added.
+fail_under = 80

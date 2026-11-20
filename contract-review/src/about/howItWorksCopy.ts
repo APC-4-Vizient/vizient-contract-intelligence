@@ -11,7 +11,7 @@ export const HOW_IT_WORKS_LEAD =
 export const BIG_PICTURE: readonly string[] = [
   'Nine of the twenty questions are about the contract itself (who the parties are, the dates, the renewal and termination terms) and eleven are about data rights, such as whether the vendor may use the data for analytics, share it with third parties or move it offshore.',
   'For each question the AI returns an answer, a confidence and the proof: the quote, the page and the box on the page. The reviewer sees the answer and the evidence side by side, which turns reading a contract into checking one.',
-  'The pieces are deliberately ordinary. A SharePoint folder, two Power Automate flows, three Dataverse tables, one small Azure Function, one Content Understanding analyzer and one Code App. None of them is clever on its own; the value is in how cleanly they hand work to each other.',
+  'The pieces are deliberately ordinary. A SharePoint folder, two Power Automate flows, one small Azure Function, one Content Understanding analyzer, a Dataverse solution and one Code App. None of them is clever on its own; the value is in how cleanly they hand work to each other. Asking a question of a contract adds two more flows, a search index and an AI agent; this page follows the review path.',
 ];
 
 export interface DesignChoice {
@@ -34,7 +34,7 @@ export const DESIGN_CHOICES: readonly DesignChoice[] = [
   },
   {
     title: 'One solution, one unit',
-    text: 'The tables, both flows, their connection references, the environment variables and the Code App live in a single Dataverse solution, so they move between environments together.',
+    text: 'The tables, the flows, their connection references, the environment variables and the Code App live in a single Dataverse solution, so they move between environments together.',
   },
   {
     title: 'Infrastructure as code',
@@ -55,7 +55,7 @@ export interface Placement {
 export const WHERE_IT_LIVES: readonly Placement[] = [
   { piece: 'Intake folder', lives: 'SharePoint', builtWith: 'Microsoft 365' },
   { piece: 'Intake and Analysis flows', lives: 'The Dataverse solution', builtWith: 'Power Automate' },
-  { piece: 'Contracts, findings and checklist', lives: 'The Dataverse solution (3 tables)', builtWith: 'Dataverse' },
+  { piece: 'Contracts, findings, checklist and questions', lives: 'The Dataverse solution (4 tables)', builtWith: 'Dataverse' },
   { piece: 'Review app', lives: 'The Dataverse solution', builtWith: 'Power Apps Code App (React and Fluent UI)' },
   { piece: 'Analysis API', lives: 'Azure', builtWith: 'Azure Functions, Flex Consumption, Python 3.12' },
   {

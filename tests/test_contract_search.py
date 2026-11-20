@@ -10,8 +10,8 @@ import pytest
 
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "function"))
-import contract_search as search
-from contract_qa import QaError, source_pages
+import contract_search as search  # noqa: E402
+from contract_qa import QaError, source_pages  # noqa: E402
 
 CONTRACT = "63abf974-20ea-472f-981a-8d42e67861cc"
 RAW = (ROOT / "tests" / "fixtures" / "cu_result_sow.json").read_text()

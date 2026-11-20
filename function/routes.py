@@ -21,9 +21,9 @@ from urllib.parse import urlsplit
 
 import azure.functions as func
 
+import contract_qa
 import cu_client
 import mapping
-import contract_qa
 
 MAX_PDF_BYTES = 32 * 1024 * 1024
 MAX_BASE64_CHARS = -(-MAX_PDF_BYTES // 3) * 4

@@ -32,7 +32,8 @@ Do not invent confidence, coordinates, terms, or legal advice. Explain qualifica
 """
 MAX_CONTEXT = 1_048_000
 MAX_QUESTION = 4000
-NO_EVIDENCE = "Not Addressed in the retrieved passages. This does not establish that the entire contract is silent. Silence is not permission; ask Legal if clarification is needed."
+NO_EVIDENCE = ("Not Addressed in the retrieved passages. This does not establish that the entire contract is silent. "
+               "Silence is not permission; ask Legal if clarification is needed.")
 
 
 class QaError(ValueError):
