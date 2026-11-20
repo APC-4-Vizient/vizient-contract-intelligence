@@ -5,6 +5,6 @@
 azure-functions==1.26.0
 azure-identity==1.27.0
 requests==2.34.2
-azure-ai-projects==2.4.0
+azure-ai-projects==2.11.0
 openai==2.54.0
 azure-search-documents==11.6.0
